@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Register</title>
+</head>
+<body>
+    <header>
+        <h1>Register</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Let's get you signed up!</h2>
+            <p>Enter required information</p>
+            <form action="/submit_registration" method="post">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+                
+                <label for="type">Type:</label>
+                <select id="type" name="type" required>
+                    <option value="student">Student</option>
+                    <option value="non_student">Non-Student</option>
+                </select><br><br>
+                
+                <button type="next">NEXT</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
