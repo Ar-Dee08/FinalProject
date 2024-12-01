@@ -2,7 +2,7 @@
 
 session_start();
 
-if (isset($_POST['uname']) && isset($_POST['password'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
     function verify($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -11,18 +11,19 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     }
 }
 
-$uname = verify($_POST['uname']);
+$uname = verify($_POST['username']);
 $pass = verify($_POST['password']);
-$setname = "admin";
+//FOR ADMIN ONLY
+$setname = "admin"; 
 $setpass = "pass";
 
-if (empty($uname)) {
-    header("Location: index.php?error=User Name is required");
-    exit();
-} else if(empty($pass)) {
-    header("Location: index.php?error=Password is required");
-    exit();
-}
+// if (empty($uname)) {
+//     header("Location: ../adminside/index.php?error=User Name is required");
+//     exit();
+// } else if(empty($pass)) {
+//     header("Location: ../adminside/index.php?error=Password is required");
+//     exit();
+// }
 
 // $sql = "SELECT * FROM assess5 WHERE user_name = '$uname' AND password = '$pass';";
 
@@ -52,8 +53,8 @@ if ($uname === $setname && $pass === $setpass) {
     $_SESSION['user_name'] = $uname;
     $_SESSION['password'] = $pass;
 
-    header("Location: admin.php");    
+    header("Location: ../adminside/adminmain.php");    //IF ADMIN, SHOULD PROMPT IF AS CUSTOMER OR ADMIN
 } else {
-    header("Location: wronglog.php");
+    header("Location: ../adminside/index.php");
     exit();
 }
