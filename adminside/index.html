@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<header>
+    <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
+    <h1>REGISTER</h1>
+</header>
+<body>
+    <div class="ssite">
+        <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
+        <p>Order your merchandise now!</p>
+    </div>
+        <div class="login-container">
+         <h2>Log In</h2>
+         <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="username">Username / Email:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">LOG IN</button>
+         <button onclick="href='create_account.php'">CREATE ACCOUNT</button>
+        </form>
+        </div>
+</body>
+</html>

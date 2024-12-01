@@ -79,3 +79,79 @@ button:hover {
     background-color: #1E4A50;
     transition: background-color 0.6s ease;
 }
+
+/* CSS LOGIN */
+.ssite {
+    text-align: left;
+    text-align: center;
+    margin: 20px 0;
+    color: #285963;
+    background-color: #163A3E;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 320px; /* Changed to a more standard unit */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box-shadow for better visual effect */
+}
+
+.ssite img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.ssite p {
+    color: #F9F6F6;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-container {
+    background-color: #285963;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    color: #F9F6F6;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-container .form-group {
+    margin-bottom: 15px;
+}
+
+.login-container label {
+    font-family: 'Inter', sans-serif;
+    color: #F9F6F6;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #F9F6F6;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-container button {
+    width: 100%;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 10px;
+}
+
+.login-container button:hover {
+    background-color: #163A3E;
+    transition: background-color 0.6s ease;
+}
