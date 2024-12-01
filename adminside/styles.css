@@ -1,0 +1,74 @@
+header {
+    background-color: #CEDFE3;
+    color: #285963;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 100%;
+    font-family: Inter, ;
+}
+
+header img {
+    width: 70px;
+    height: auto;
+}
+
+header h1 {
+    margin: 0;
+}
+section {
+    background-color: #458D9E;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 25px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: #F9F6F6;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+section p {
+    color: #F9F6F6;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 5px;
+    color: #F9F6F6;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #F9F6F6;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    padding: 10px;
+    background-color: #285963;
+    color: #DCEEF2;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+button:hover {
+    background-color: #1E4A50;
+    transition: background-color 1.2s ease;
+}
