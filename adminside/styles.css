@@ -83,28 +83,14 @@ button:hover {
 /* CSS LOGIN */
 .ssite {
     text-align: left;
-    text-align: center;
     margin: 20px 0;
     color: #285963;
     background-color: #163A3E;
     padding: 20px;
     border-radius: 8px;
-    max-width: 320px; /* Changed to a more standard unit */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box-shadow for better visual effect */
+    max-width: 20rem;
 }
 
-.ssite img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.ssite p {
-    color: #F9F6F6;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-    margin-top: 10px;
-}
 
 .login-container {
     background-color: #285963;
