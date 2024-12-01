@@ -1,111 +1,59 @@
-*{
+/* Universal Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-header {
-    background-color: #CEDFE3;
+/* Body Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F9F6F6;
     color: #285963;
-    padding: 20px 0;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    max-width: auto;
-    font-family: Inter;
-    font-size: large;
-    font-style: bold;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
-header img {
-    width: 70px;
+/* SSITE Section */
+.ssite {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.ssite img {
+    width: 100px;
     height: auto;
 }
 
-header h1 {
-    margin: 20px;
-}
-section {
-    background-color: #458D9E;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 60rem;
-    margin: 25px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-section h2 {
-    color: #F9F6F6;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-}
-
-section p {
-    color: #F9F6F6;
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-label {
-    font-family: 'Inter', sans-serif;
-    margin-bottom: 5px;
-    color: #ced3e2;
-}
-
-input, select {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #F9F6F6;
-    border-radius: 10px;
-    font-family: 'Inter', sans-serif;
-}
-
-button {
-    padding: 10px;
-    background-color: #285963;
-    color: #DCEEF2;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-}
-
-button:hover {
-    background-color: #1E4A50;
-    transition: background-color 0.6s ease;
-}
-
-/* CSS LOGIN */
-.ssite {
-    text-align: left;
-    margin: 20px 0;
+.ssite p {
+    font-size: 1.2rem;
+    margin-top: 10px;
     color: #285963;
-    background-color: #163A3E;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 20rem;
 }
 
-
+/* Login Container */
 .login-container {
     background-color: #285963;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 12px;
     max-width: 400px;
     margin: 50px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 .login-container h2 {
     color: #F9F6F6;
-    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .login-container .form-group {
@@ -113,31 +61,198 @@ button:hover {
 }
 
 .login-container label {
-    font-family: 'Inter', sans-serif;
-    color: #F9F6F6;
-    display: block;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #CEDFE3;
 }
 
 .login-container input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px;
     border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
     font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.login-container input:focus {
+    border-color: #DCEEF2;
+    outline: none;
+    background-color: #163A3E;
 }
 
 .login-container button {
     width: 100%;
-    background-color: #1E4A50;
-    color: #DCEEF2;
+    padding: 12px;
+    background-color: #458D9E;
+    color: #F9F6F6;
     border: none;
-    cursor: pointer;
+    border-radius: 8px;
     font-family: 'Inter', sans-serif;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .login-container button:hover {
+    background-color: #285963;
+    transform: translateY(-2px);
+}
+
+/* Header Section */
+header {
+    background-color: #CEDFE3;
+    color: #285963;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-bottom: 2px solid #285963;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header img {
+    width: 60px;
+    height: auto;
+    margin-right: 15px;
+}
+
+header h1 {
+    font-size: 1.75rem;
+}
+
+/* Uniform Section Styling */
+section {
+    background-color: #285963;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 50rem;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', sans-serif;
+    color: #F9F6F6;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+section p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 1rem;
+    color: #CEDFE3;
+}
+
+input, select {
+    padding: 12px;
+    border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #DCEEF2;
+    outline: none;
     background-color: #163A3E;
-    transition: background-color 0.6s ease;
+}
+
+/* Buttons */
+button {
+    padding: 12px;
+    background-color: #458D9E;
+    color: #F9F6F6;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #285963;
+    transform: translateY(-2px);
+}
+
+/* Login and Register Container */
+.container {
+    background-color: #285963;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 380px;
+    margin: 50px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Uniform Heading */
+.container h2 {
+    color: #F9F6F6;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Inputs and Buttons in Container */
+.container input, 
+.container button {
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 90%;
+    }
 }
