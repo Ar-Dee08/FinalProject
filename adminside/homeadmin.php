@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['password']) && isset($_SESSION['user_name'])) { //CHECK IF USER IS ADMIN, will be updated
+if (isset($_SESSION['signedin_pass']) && isset($_SESSION['signedin_email'])) { //CHECK IF USER IS ADMIN, will be updated
 
     ?>
 
