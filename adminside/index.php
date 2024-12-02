@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <header>
     <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
@@ -17,7 +18,12 @@
     </div>
         <div class="login-container">
          <h2>Log In</h2>
-         <form action="login.php" method="post">
+            <?php
+                if (isset($_GET['error'])) {
+                    echo '<p class="error-login">' . $_GET['error'] . '</p>';
+                }            
+            ?>
+         <form action="../vscode/userlogin.php" method="post">
             <div class="form-group">
                 <label for="username">Username / Email:</label>
                 <input type="text" id="username" name="username" required>
@@ -27,8 +33,8 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">LOG IN</button>
-        <button type="button" onclick="window.location.href='register.html'">CREATE ACCOUNT</button>
-        </form>
+            <button type="button" onclick="window.location.href='register.html'">CREATE ACCOUNT</button>
+            </form>
         </div>
 </body>
 </html>
