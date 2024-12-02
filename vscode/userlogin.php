@@ -1,5 +1,7 @@
 <?php
 
+require "dbcon.php";
+
 session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -16,6 +18,9 @@ $pass = verify($_POST['password']);
 //FOR ADMIN ONLY
 $setname = "admin"; 
 $setpass = "pass";
+
+//FOR USERS
+$userIsRegistered = checkUser("user_information",$con,$email);
 
 // if (empty($uname)) {
 //     header("Location: ../adminside/index.php?error=User Name is required");
@@ -57,4 +62,17 @@ if ($uname === $setname && $pass === $setpass) {
 } else {
     header("Location: ../adminside/index.php");
     exit();
+}
+
+function CheckUser($table, $con, $email)
+{
+    $check_email = "SELECT * FROM user_information WHERE email='$email'";
+    $results = $con->query($check_email);
+    if ($results->num_rows > 0) {
+        echo "Email Address already Exists";
+        return true;
+    } else {
+        return false;
+    }
+    // return False;
 }

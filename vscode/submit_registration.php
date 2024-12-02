@@ -4,9 +4,8 @@ require 'dbcon.php';
 
 if (isset($_POST['signUp'])) {
 
-    // $isadmin = False;
     $email = $_POST['email'];
-    $emailAlreadyExists = CheckEmail("user_information", $con, $email);
+    $emailAlreadyExists = CheckEmail($con, $email);
     $firstpass = $_POST['password'];
     $confirmpass = $_POST['confirm_password'];
 
@@ -23,11 +22,9 @@ if (isset($_POST['signUp'])) {
         $contactnum = $_POST['mobile'];
         $account_status = "Active";
         $mem_status = 1; //unidentified
-
-        //check if verified email
+        $password = $firstpass;
 
         //checks type converts to id
-
         $val_custype = $_POST['type'];
         if ($val_custype == "student") {
             $customertype_id = 1;
@@ -37,6 +34,7 @@ if (isset($_POST['signUp'])) {
             $customertype_id = 0;
         }
 
+        //check for student number if student
         if ($customertype_id == 1) {
             $studentnum = $_POST['student_number'];
         } else {
@@ -45,48 +43,50 @@ if (isset($_POST['signUp'])) {
 
         $custype_verif_id = 1; //pending
         $uid = (TableRowCount("user_information", $con)) + 1;
-
-        echo $uid . $firstName . $lastName . $gender . $bday . $contactnum . $account_status . $mem_status . $email . $customertype_id . $studentnum . $custype_verif_id;
+        $ucredid = (TableRowCount("user_credentials",$con)) + 1;
+        // echo $uid . $firstName . $lastName . $gender . $bday . $contactnum . $account_status . $mem_status . $email . $customertype_id . $studentnum . $custype_verif_id;
 
         $registerquery = "INSERT INTO user_information(userinfo_id, firstname, lastname, gender, bday, student_number, contact_number,email,account_status,memstatus_id,customertype_id,custype_verif_id,account_created)
         VALUES(" . $uid . ",'" . $firstName . "','" . $lastName . "','" . $gender . "','" . $bday . "','" . $studentnum . "','" . $contactnum . "','" . $email . "','" . $account_status . "'," . $mem_status . "," . $customertype_id . "," . $custype_verif_id . ", NOW());";
 
-        if (mysqli_query($con,$registerquery)) {
-            echo "New record created successfully";
+        $credquery = "INSERT INTO user_credentials(usercred_id, email,password,userinfo_id,usertype_id) VALUES(". $ucredid .", '" . $email . "','" . $password . "',". $uid .",1);";
+
+        $SuccessRegisterInfo = InsertRecord($registerquery, $con);
+        $SuccessRegisterCred = InsertRecord($credquery,$con);
+
+        if($SuccessRegister && $SuccessRegisterCred){
+            header("Location: ../adminside/homeadmin.php");
+
         } else {
-            echo "Error: " . $registerquery . "<br>" . mysqli_error($con);
+            header("Location: ../adminside/register.php?error=Registration Unsuccessful. Report issue with SSITE.");
         }
-
-        // firstname    /
-        // middlename    /
-        // lastname    /
-        // sex/
-        //     bday /
-        //     student_number     -
-        //     contact_number /
-        //         email
-        //             account_status/
-        //                 memstatus_id /
-        //                     customertype_id /
-        //                         custype_verif_id /
-
-        header("Location: ../adminside/homeadmin.php");
     }
 }
 
 function TableRowCount(string $table, $con)
 {
-    $query = "SELECT * FROM " . $table;
+    $query = "SELECT COUNT(*) AS total FROM " . $table;
     $count = 0;
 
     if ($results = mysqli_query($con, $query)) {
-        $count = mysqli_fetch_assoc($results);
+        $row = mysqli_fetch_assoc($results);
+        $count = $row['total'];
     }
 
     return $count;
 }
 
-function CheckEmail($table, $con, $email)
+function InsertRecord($query,$con){
+    if (mysqli_query($con,$query)) {
+        echo "New record created successfully";
+        return true;
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($con);
+        return false;
+    }
+}
+
+function CheckEmail( $con, $email)
 {
     $check_email = "SELECT * FROM user_information WHERE email='$email'";
     $results = $con->query($check_email);
