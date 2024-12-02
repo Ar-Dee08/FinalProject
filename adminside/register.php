@@ -11,6 +11,7 @@
 </head>
 <body>
     <header>
+        <a href="index.php">Back</a> <!--TEMPORARY-->          
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <h1>REGISTER</h1>
     </header>

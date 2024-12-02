@@ -12,7 +12,7 @@ if (isset($_SESSION['uid'])) { //CHECK IF USER IS ADMIN, will be updated
 
 <?php
 } else {
-    header("Location: index.php");
+    header("Location: ../adminside/index.php");
     exit();
 }
 

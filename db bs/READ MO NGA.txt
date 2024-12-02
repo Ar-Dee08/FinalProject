@@ -1,0 +1,15 @@
+- import to phpmysql
+- name should be :
+ssite-merch_db
+
+since yan nakalagay sa dbcon na name ng db (temporarily, maaayos pagka may time pa maging di local)
+
+Admin creds : 
+
+admin
+- e...d@gmail.com
+- ems
+
+customer
+- ass@gmail.com	
+- ass
