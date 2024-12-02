@@ -19,25 +19,25 @@
         <section>
             <h2>Let's get you signed up!</h2>
             <p>Enter required information</p>
-            <form action="../vscode/submit_registration.php" method="post">
-                <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required><br><br>
-                
-                <?php
+            <?php
                     if (isset($_GET['error'])) {
                         echo '<p class="error-login">' . $_GET['error'] . '</p>';
                     }            
                 ?>
+            <form action="../vscode/submit_registration.php" method="post">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required><br><br>                                
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
                 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
                 
+                <p id="passwarning"><b>Password does NOT match</b></p>
                 <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required><br><br>
-                
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" onkeyup="confirmPass();" required><br><br>
+
                 <label for="type">Type:</label>
                 <select id="type" name="type" required> 
                     <!-- WILL BA MODIFIED WITH PHP LATER -->

@@ -53,7 +53,7 @@ if ($uname === $setname && $pass === $setpass) {
     $_SESSION['user_name'] = $uname;
     $_SESSION['password'] = $pass;
 
-    header("Location: ../adminside/adminmain.php");    //IF ADMIN, SHOULD PROMPT IF AS CUSTOMER OR ADMIN
+    header("Location: ../adminside/homeadmin.php");    //IF ADMIN, SHOULD PROMPT IF AS CUSTOMER OR ADMIN
 } else {
     header("Location: ../adminside/index.php");
     exit();
