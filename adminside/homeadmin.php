@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if (isset($_SESSION['signedin_pass']) && isset($_SESSION['signedin_email'])) { //CHECK IF USER IS ADMIN, will be updated
+
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +13,7 @@
     <title>Admin</title>
 </head>
 <body>
-    
+
 </body>
 </html>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -30,6 +37,15 @@
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Open Menu
 </button>
+<a href="../vscode/userlogout.php">Back</a>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php
+} else {
+    header("Location: index.php");
+    exit();
+}
+
+?>
