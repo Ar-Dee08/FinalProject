@@ -12,11 +12,9 @@ if(isset($_POST['signUp'])){
     $account_status = "Active";
     $mem_status = 1; //unidentified
 
-
-
     //check if verified email
     $email = $_POST['email'];
-    //check if student type
+    //checks type converts to id
 
     $val_custype = $_POST['type'];
     if($val_custype == "student"){
@@ -27,12 +25,17 @@ if(isset($_POST['signUp'])){
         $customertype_id = 0;
     }
 
-    $studentnum = $_POST['student_number'];
-    $custype_verif_id = 1;
+    if($customertype_id == 1){
+        $studentnum = $_POST['student_number'];
+    } else {
+        $studentnum = "-";
+    }
 
-    echo $firstName . $lastName . $gender . $bday . $contactnum . $account_status . $mem_status . $email . $customertype_id . $studentnum . $custype_verif_id ;
-    
-    $uid = (TableRowCount($con,"user_information")) + 1;
+    $custype_verif_id = 1; //pending
+    $uid = (TableRowCount("user_information",$con)) + 1;
+
+    echo $uid . $firstName . $lastName . $gender . $bday . $contactnum . $account_status . $mem_status . $email . $customertype_id . $studentnum . $custype_verif_id ;
+
     // CHECK ID 
 
 
@@ -51,13 +54,14 @@ if(isset($_POST['signUp'])){
 }
 
 function TableRowCount(string $table, $con) {
-    $query = "SELECT * FROM" . $table;
+    $query = "SELECT * FROM " . $table;
     $count = 0;
-    
+
     if ($results = mysqli_query($con,$query))
     $count = mysqli_fetch_assoc($results);
 
     return $count;
 }
+
 
 ?>
