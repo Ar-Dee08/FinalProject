@@ -33,9 +33,10 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">LOG IN</button>
-            <button type="button" onclick="window.location.href='register.html'">CREATE ACCOUNT</button>
-            <button type="button" onclick="window.location.href='forgotpassword.html'">FORGOT PASSWORD</button>
-            <button type="button" onclick="window.location.href='admin.html'">ADMIN</button>
+            <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
+            <!-- FORGOR PASS ADMEN BUTON -->
+            <!-- <button type="button" onclick="window.location.href='forgotpassword.html'">FORGOT PASSWORD</button>
+            <button type="button" onclick="window.location.href='admin.html'">ADMIN</button> -->
             </form>
         </div>
 </body>
