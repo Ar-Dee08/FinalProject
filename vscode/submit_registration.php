@@ -77,15 +77,15 @@ function TableRowCount(string $table, $con) {
 }
 
 function CheckEmail($table, $con,$email){
-    $check_email = "SELECT * FROM user_information WHERE email='$email'";
-    $results=$con->query($check_email);
-    if($results->num_rows>0){
-        echo "Email Address already Exists";
-        return True;
-    } else {
-        return False;
-    }
-    // return False;
+    // $check_email = "SELECT * FROM user_information WHERE email='$email'";
+    // $results=$con->query($check_email);
+    // if($results->num_rows>0){
+    //     echo "Email Address already Exists";
+    //     return True;
+    // } else {
+    //     return False;
+    // }
+    return False;
 }
 
 ?>
