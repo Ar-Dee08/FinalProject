@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <header>
     <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
@@ -34,6 +34,8 @@
             </div>
             <button type="submit">LOG IN</button>
             <button type="button" onclick="window.location.href='register.html'">CREATE ACCOUNT</button>
+            <button type="button" onclick="window.location.href='forgotpassword.html'">FORGOT PASSWORD</button>
+            <button type="button" onclick="window.location.href='admin.html'">ADMIN</button>
             </form>
         </div>
 </body>
