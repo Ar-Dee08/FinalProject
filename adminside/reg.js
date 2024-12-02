@@ -9,11 +9,10 @@
          studentNumberInput.disabled = true; // Disable input
          studentNumberInput.value = '';      // Clear the input value
          studentNumberInput.placeholder = "Not Applicable";
-         console.log(typeSelect.value);
 
      } else {
          studentNumberInput.disabled = false; // Enable input
-         console.log(typeSelect.value);
+         studentNumberInput.placeholder = "Enter your student number";
      }
  }
 

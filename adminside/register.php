@@ -23,6 +23,12 @@
                 <label for="mobile">Mobile Number:</label>
                 <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required><br><br>
                 
+                <?php
+                    if (isset($_GET['error'])) {
+                        echo '<p class="error-login">' . $_GET['error'] . '</p>';
+                    }            
+                ?>
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
                 
