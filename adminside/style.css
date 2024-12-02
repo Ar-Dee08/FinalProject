@@ -18,6 +18,12 @@ body {
 
 }
 
+#passwarning {
+    visibility: hidden;
+}
+
+
+
 /* SSITE Section */
 .ssite {
     display: flex;
