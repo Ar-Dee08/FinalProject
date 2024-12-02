@@ -252,7 +252,20 @@ button:hover {
 .container button {
     width: 100%;
 }
+/* Back Button Styling */
+a button img {
+    width: 30px;
+    height: auto;
+}
 
+a button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
