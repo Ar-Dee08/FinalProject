@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Register</title>
 </head>
 <body>
@@ -23,6 +23,12 @@
                 <label for="mobile">Mobile Number:</label>
                 <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required><br><br>
                 
+                <?php
+                    if (isset($_GET['error'])) {
+                        echo '<p class="error-login">' . $_GET['error'] . '</p>';
+                    }            
+                ?>
+
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email address" required><br><br>
                 
@@ -62,5 +68,7 @@
             </form>
         </section>
     </main>
+    <script src="reg.js" type="text/javascript"></script>
+
 </body>
 </html>
