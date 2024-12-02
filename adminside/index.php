@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <header>
@@ -25,13 +25,14 @@
             ?>
          <form action="../vscode/userlogin.php" method="post">
             <div class="form-group">
-                <label for="username">Username / Email:</label>
+                <label for="username">Email:</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <p><a href="adminLogin.php">Are you an admin? Log in here</a></p>
             <button type="submit">LOG IN</button>
             <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
             <!-- FORGOR PASS ADMEN BUTON -->
