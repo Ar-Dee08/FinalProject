@@ -22,6 +22,9 @@ body {
     visibility: hidden;
 }
 
+.error-login {
+    color: #CEDFE3;
+}
 
 
 /* SSITE Section */

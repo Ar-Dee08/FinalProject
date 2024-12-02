@@ -23,6 +23,11 @@ if (isset($_POST['signUp'])) {
         $account_status = "Active";
         $mem_status = 1; //unidentified
         $password = $firstpass;
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // $query = "INSERT INTO user_credentials (email, password) VALUES (?, ?)";
+        // $stmt = $con->prepare($query);
+        // $stmt->bind_param("ss", $email, $hashedPassword);
+        // $stmt->execute();
 
         //checks type converts to id
         $val_custype = $_POST['type'];
@@ -49,15 +54,15 @@ if (isset($_POST['signUp'])) {
         $registerquery = "INSERT INTO user_information(userinfo_id, firstname, lastname, gender, bday, student_number, contact_number,email,account_status,memstatus_id,customertype_id,custype_verif_id,account_created)
         VALUES(" . $uid . ",'" . $firstName . "','" . $lastName . "','" . $gender . "','" . $bday . "','" . $studentnum . "','" . $contactnum . "','" . $email . "','" . $account_status . "'," . $mem_status . "," . $customertype_id . "," . $custype_verif_id . ", NOW());";
 
-        $credquery = "INSERT INTO user_credentials(usercred_id, email,password,userinfo_id,usertype_id) VALUES(" . $ucredid . ", '" . $email . "','" . $password . "'," . $uid . ",1);";
+        $credquery = "INSERT INTO user_credentials(usercred_id, email,password,userinfo_id,usertype_id) VALUES(" . $ucredid . ", '" . $email . "','" . $hashedPassword . "'," . $uid . ",1);";
 
         $SuccessRegisterInfo = InsertRecord($registerquery, $con);
         $SuccessRegisterCred = InsertRecord($credquery, $con);
 
         if ($SuccessRegisterInfo && $SuccessRegisterCred) {
             echo 'Registered and Logged in!';
-            $_SESSION['signedin_email'] = $email;
-            $_SESSION['signedin_pass'] = $password;
+            // $_SESSION['signedin_email'] = $email;
+            // $_SESSION['signedin_pass'] = $password;
             header("Location: ../adminside/index.php");
 
         } else {
