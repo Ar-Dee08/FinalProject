@@ -3,21 +3,12 @@ session_start();
 
 if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER IS ADMIN, will be updated
 
-    include('includes/header.php');
-    ?>
+    include 'includes/header.php';
+?>
 
-<!-- CONTENT -->
+<!-- CONTENTS -->
 
-    <h1>HOME</h1>
-    <h1>HOME</h1>
-    <h1>HOME</h1>
-    <h1>HOME</h1>
-    <h1>HOME</h1>
-    <h1>HOME</h1>
-
-
-
-
+    <H1>HIIII CATEGORY</H1>
 
 
 
@@ -27,7 +18,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
 
 <!-- END OF CONTENTS -->
 </div>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

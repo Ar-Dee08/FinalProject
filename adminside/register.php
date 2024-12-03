@@ -10,8 +10,9 @@
     <link rel="icon" href="images/back-icon.png" type="image/png">
     <title>Register</title>
 </head>
-<body>
+<body class="login-bg">
     <header>
+        <a href="index.php">Back</a> <!--TEMPORARY-->          
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <h1>REGISTER</h1>
         <a href="index.php" style="position: absolute; left: 10px; top: 10px;">

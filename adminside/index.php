@@ -11,7 +11,7 @@
     <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
     <h1>LOGIN</h1>
 </header>
-<body>
+<body class="login-bg">
     <div class="ssite">
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <p>Order your merchandise now!</p>
