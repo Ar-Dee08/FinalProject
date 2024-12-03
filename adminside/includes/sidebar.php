@@ -16,6 +16,3 @@
     </div>
 </div>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    Open Menu
-</button>
