@@ -14,7 +14,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
     <title>Admin</title>
 </head>
 <body>
-<<<<<<< HEAD:adminside/homeadmin.html
 <header>
    
 </header>
@@ -34,7 +33,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
                 <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
                 <a href="#" class="list-group-item list-group-item-action">USERS</a>
             </div>
-=======
 
 </body>
 </html>
@@ -52,11 +50,9 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
             <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
             <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
             <a href="#" class="list-group-item list-group-item-action">USERS</a>
->>>>>>> 631ae2ed956d2a0753d31da3383ad4d066ab4e2f:adminside/homeadmin.php
         </div>
     </div>
 
-<<<<<<< HEAD:adminside/homeadmin.html
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -65,7 +61,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-=======
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Open Menu
 </button>
@@ -81,4 +76,3 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
 }
 
 ?>
->>>>>>> 631ae2ed956d2a0753d31da3383ad4d066ab4e2f:adminside/homeadmin.php
