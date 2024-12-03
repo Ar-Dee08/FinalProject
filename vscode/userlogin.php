@@ -15,50 +15,82 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 $uemail = verify($_POST['username']);
 $pass = verify($_POST['password']);
-//FOR ADMIN ONLY
-// $setname = "admin";
-// $setpass = "pass";
+$logintype = $_POST['logintype']; //=1 is customer, =2 is admin
 
 //FOR USERS
 $table = "user_credentials";
-$uidres = RetrieveUser($table,$con,$uemail);
+$uidres = RetrieveUser($table,$con,$uemail, "email");
 
 if(mysqli_num_rows($uidres)===1){
     $uinfo_row = mysqli_fetch_assoc($uidres);
     if($uinfo_row['email'] === $uemail && password_verify($pass, $uinfo_row['password'])) {
         $uid = $uinfo_row['userinfo_id'];
+        $ucred_id = $uinfo_row['usercred_id'];
+
         echo $uid;
         $aidres = RetrieveAdmin($con,$uid);
-        if(mysqli_num_rows($aidres)===1){
+        if(mysqli_num_rows($aidres)===1 && $logintype === "2"){           //verified user and is admin
             $admin_row = mysqli_fetch_assoc($aidres);
             $aid = $admin_row['admin_id'];
+            $usertype_id = 2; //admin id
             echo 'This is admin';
             $_SESSION['uid'] = $uid;
             $_SESSION['admin_id'] = $aid;
 
+            $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
+
             header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
             exit();
-        } else {
+        } else if($logintype === "1")        
+        {                                            //verified but customer only
             echo 'This is not admin';
+            $usertype_id = 1; //customer id
             $_SESSION['uid'] = $uid;
 
+            $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
+
             header("Location: ../customerside/homecustom.php");
+            exit();
+        } else {
+            echo 'user is not an admin and logged in in admin';
+            header("Location: ../adminside/adminLogin.php?error=You are not an Administrator.");
             exit();
         }
     }else {
         echo 'Invalid password.';
-        header("Location: ../adminside/index.php?error=Incorrect Password.");
-        exit();
+
+        if($logintype === "1"){
+            header("Location: ../adminside/index.php?error=Incorrect Password.");
+            exit();
+        } else if ($logintype === "2"){
+            header("Location: ../adminside/adminLogin.php?error=Incorrect Password.");
+            exit();
+        } else {
+            header("Location: ../adminside/index.php");
+            exit();
+        }
+
+       
     }
 } else {
     // $userIsRegistered = False;
     echo 'This user is not registered';
-    header("Location: ../adminside/index.php?error=Invalid Credentials.");
-    exit();
+
+    if($logintype === "1"){
+        header("Location: ../adminside/index.php?error=Invalid Credentials.");
+        exit();
+    } else if ($logintype === "2"){
+        header("Location: ../adminside/adminLogin.php?error=Invalid Credentials.");
+        exit();
+    } else {
+        header("Location: ../adminside/index.php");
+        exit();
+    }
+
 }
 
-function RetrieveUser($table, $con, $email) {
-    $retrievefield = "SELECT * FROM $table WHERE email = ?";
+function RetrieveUser($table, $con, $email, $conditionfield) {
+    $retrievefield = "SELECT * FROM $table WHERE $conditionfield = ?";
     $stmt = $con->prepare($retrievefield);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -73,87 +105,27 @@ function RetrieveAdmin($con, $uid) {
     return $stmt->get_result(); // Always return the result object
 }
 
-// function RetrieveUser($table,$con, $pass, $email)
-// {
-//     $retrievefield = "SELECT * FROM ".$table." WHERE email='".$email."' AND password= '".$pass."';";
-//     $results = $con->query($retrievefield);
-//     if ($results->num_rows > 0) {
-//         echo "Record already Exists";
-//         return $results;
-//     } else {
-//         return 0;
-//     }
-// }
+function InsertUserLog($con,$ucred_id,$usertype_id){
+    $userlogin_query = "INSERT INTO user_login(userlogin_id,usercred_id,logindate,usertype_id) VALUES (".(TableRowCount("user_login",$con)+1). ",".$ucred_id.",NOW(),".$usertype_id.")";
 
-// function RetrieveAdmin($con,$uid){
-//     $retrievefield = "SELECT * FROM admin WHERE userinfo_id=".$uid.";";
-//     $results = $con->query($retrievefield);
-//     if ($results->num_rows > 0) {
-//         echo "Record already Exists";
-//         return $results;
-//     } else {
-//         return 0;
-//     }
-// }
+    if (mysqli_query($con, $userlogin_query)) {
+        echo "New record created successfully";
+        return true;
+    } else {
+        echo "Error: " . $userlogin_query . "<br>" . mysqli_error($con);
+        return false;
+    }
+}
 
+function TableRowCount(string $table, $con)
+{
+    $query = "SELECT COUNT(*) AS total FROM " . $table;
+    $count = 0;
 
-// if (empty($uname)) {
-//     header("Location: ../adminside/index.php?error=User Name is required");
-//     exit();
-// } else if(empty($pass)) {
-//     header("Location: ../adminside/index.php?error=Password is required");
-//     exit();
-// }
+    if ($results = mysqli_query($con, $query)) {
+        $row = mysqli_fetch_assoc($results);
+        $count = $row['total'];
+    }
 
-// $sql = "SELECT * FROM assess5 WHERE user_name = '$uname' AND password = '$pass';";
-
-// $results = mysqli_query($conn, $sql);
-
-// // THIS IS IF IM GONNA SHOW VALIDATION SEPARATELY
-// // TEST THIS IN THE INDEX PHP IF IT WORKS
-
-// if (mysqli_num_rows($results) === 1) {
-//     $row = mysqli_fetch_assoc($results);
-//     if ($row['user_name'] == $uname && $row['password'] == $pass) {
-//         echo 'Logged In!';
-//         $_SESSION['user_name'] = $row['user_name'];
-//         $_SESSION['password'] = $row['password'];
-//         $_SESSION['id'] = $row['id'];
-//         header("Location: main.php");
-//         exit();
-//     }
-// }
-
-// } else {
-//     header("Location: index.php?error=Incorrect User Name or Password");
-//     exit();
-// }
-
-// if ($uname === $setname && $pass === $setpass) {
-//     echo 'Logged in!';
-//     $_SESSION['signedin_email'] = $uname;
-//     $_SESSION['signedin_pass'] = $pass;
-//     $_SESSION['userid'];
-
-//     //CHECK IF USER IS CUSTOMER OR ADMIN USING IF ELSE AND SETTING $_SESSION['user_type']
-
-//     header("Location: ../customerside/homecustom.php"); //IF NOT CUSTOMER OR ADMIN, SHOULD BE STRAIGHT TO HOME
-//     // header("Location: ../adminside/homeadmin.php");    //IF ADMIN, SHOULD PROMPT IF AS CUSTOMER OR ADMIN
-// } else {
-//     header("Location: ../adminside/index.php");
-//     exit();
-// }
-
-
-
-// function RetrieveFromOneField($table,$field, $con, $condition)
-// {
-//     $retrievefield = "SELECT ".$field." FROM ".$table." WHERE email='".$condition."'";
-//     $results = $con->query($retrievefield);
-//     if ($results->num_rows > 0) {
-//         echo "Record already Exists";
-//         return $results;
-//     } else {
-//         return 0;
-//     }
-// }
+    return $count;
+}

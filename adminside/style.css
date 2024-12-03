@@ -6,25 +6,29 @@
 }
 /* Body Styling */
 body {
-    font-family: 'Inter', sans-serif;
-    background-image: url('images/SSITE-LOGO.png');
-    background-color: #458D9E;
+    font-family: 'Inter', sans-serif;    
     background-size: 150px;
     background-position: center;
     color: #285963;
     line-height: 1.6;
     margin: 0;
     padding: 0;
+}
 
+.login-bg {
+    background-image: url('images/SSITE-LOGO.png');
+    background-size: 150px;
+    background-position: center;
+    background-color: #458D9E;
 }
 
 #passwarning {
     visibility: hidden;
 }
 
-.error-login {
+/* .error-login {
     color: #CEDFE3;
-}
+} */
 
 
 /* SSITE Section */
@@ -318,4 +322,56 @@ button:hover {
 
 .fa-arrow-left:hover {
     color: #458D9E;
+}
+
+/* ADMIN CONTAINER */
+.admin-container {
+    background-color: #CEDFE3;
+    padding: 30px;    
+    border-radius: 5px;
+    max-width: 80%;
+    /* max-height: fit-content; */
+    margin: 50px auto;    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* NAVBAR */
+
+.custom-nav, #admin-logout {
+    background-color: #285963; /* Replace with your hex code */
+    color: #f4f4f4; /* Text color */
+  }
+
+.custom-nav button {
+    background-color: #458D9E;
+    border-color: #DCEEF2;    
+    padding: .5% 3% .5% 3%;
+}
+
+.custom-nav button:hover{
+    background-color: #DCEEF2;
+    border-color: #1E4A50;    
+    color: #1E4A50;
+}
+
+.custom-nav .navbar-brand, 
+.custom-nav .nav-link,.custom-nav .nav-link .active {
+  color: #f4f4f4;
+}
+
+#home-admin, #admin-logout {
+    padding-left: 3vh;
+}
+
+/* Specific rules for Log Out link */
+.custom-nav #admin-logout .nav-link {
+    padding-right: 4vh;
+    color: #f4f4f4 !important; /* Override any other rules */
+}
+
+.custom-nav .nav-link:hover {
+    color: #DCEEF2;
 }

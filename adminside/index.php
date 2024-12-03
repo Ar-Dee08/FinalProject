@@ -11,7 +11,7 @@
     <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
     <h1>LOGIN</h1>
 </header>
-<body>
+<body class="login-bg">
     <div class="ssite">
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <p>Order your merchandise now!</p>
@@ -34,7 +34,8 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <p><a href="adminLogin.php">Are you an admin? Log in here</a></p>
-            <button type="submit">LOG IN</button>
+
+            <button type="submit" id="logintype" name="logintype" value="1">LOG IN</button>
             <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
             <!-- FORGOR PASS ADMEN BUTON -->
             <!-- <button type="button" onclick="window.location.href='forgotpassword.html'">FORGOT PASSWORD</button>

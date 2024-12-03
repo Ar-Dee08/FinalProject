@@ -10,7 +10,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Admin</title>
 </head>
 <body>
@@ -33,6 +32,7 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
             <a href="#" class="list-group-item list-group-item-action">USERS</a>
         </div>
     </div>
+</div>
 
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     Open Menu
@@ -43,8 +43,6 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php
-    include 'includes/footer.php';
-
 } else {
     header("Location: index.php");
     exit();
