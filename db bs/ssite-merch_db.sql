@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2024 at 06:28 PM
+-- Generation Time: Dec 03, 2024 at 01:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,8 +53,27 @@ CREATE TABLE `categories` (
   `cat_id` int(20) UNSIGNED NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `admin_creator` bigint(20) UNSIGNED NOT NULL,
-  `date_created` date NOT NULL
+  `date_created` date NOT NULL,
+  `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`cat_id`, `category_name`, `admin_creator`, `date_created`, `record_status`) VALUES
+(1, 'asd', 2, '2024-12-03', ''),
+(2, '', 2, '2024-12-03', ''),
+(3, 'asd', 2, '2024-12-03', ''),
+(4, '', 2, '2024-12-03', ''),
+(5, 'sad', 2, '2024-12-03', ''),
+(6, 'sad', 2, '2024-12-03', ''),
+(7, '', 2, '2024-12-03', ''),
+(8, '', 2, '2024-12-03', ''),
+(9, '', 2, '2024-12-03', ''),
+(10, '', 2, '2024-12-03', ''),
+(11, '', 2, '2024-12-03', ''),
+(12, 'sad', 2, '2024-12-03', '');
 
 -- --------------------------------------------------------
 
@@ -123,7 +142,8 @@ CREATE TABLE `items` (
   `item_price` decimal(10,0) NOT NULL,
   `cat_id` int(11) UNSIGNED NOT NULL,
   `admin_creator` bigint(20) UNSIGNED NOT NULL,
-  `date_created` date NOT NULL
+  `date_created` date NOT NULL,
+  `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -160,7 +180,8 @@ CREATE TABLE `news_update` (
   `post_url` text NOT NULL,
   `admin_id` bigint(11) UNSIGNED NOT NULL,
   `date_uploaded` date NOT NULL,
-  `date_webposted` date NOT NULL
+  `date_webposted` date NOT NULL,
+  `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -282,7 +303,35 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (7, 1, '2024-12-03 01:14:27', 2),
 (8, 1, '2024-12-03 01:16:36', 2),
 (9, 1, '2024-12-03 01:16:36', 2),
-(10, 1, '2024-12-03 01:24:19', 2);
+(10, 1, '2024-12-03 01:24:19', 2),
+(11, 1, '2024-12-03 10:28:43', 2),
+(12, 1, '2024-12-03 10:56:10', 2),
+(13, 1, '2024-12-03 11:37:57', 2),
+(14, 1, '2024-12-03 11:59:50', 2),
+(15, 4, '2024-12-03 12:03:48', 1),
+(16, 1, '2024-12-03 12:06:56', 2),
+(17, 1, '2024-12-03 12:17:40', 2),
+(18, 1, '2024-12-03 12:20:11', 2),
+(19, 1, '2024-12-03 12:20:40', 2),
+(20, 1, '2024-12-03 12:42:28', 2),
+(21, 4, '2024-12-03 13:08:21', 1),
+(22, 1, '2024-12-03 13:08:32', 2),
+(23, 1, '2024-12-03 13:59:00', 2),
+(24, 4, '2024-12-03 13:59:29', 1),
+(25, 1, '2024-12-03 13:59:38', 2),
+(26, 1, '2024-12-03 14:02:38', 2),
+(27, 4, '2024-12-03 14:13:51', 1),
+(28, 1, '2024-12-03 14:14:06', 1),
+(29, 1, '2024-12-03 14:15:13', 1),
+(30, 4, '2024-12-03 14:20:08', 1),
+(31, 1, '2024-12-03 14:20:15', 1),
+(32, 1, '2024-12-03 14:21:03', 2),
+(33, 1, '2024-12-03 14:36:19', 1),
+(34, 4, '2024-12-03 14:37:04', 1),
+(35, 1, '2024-12-03 14:38:48', 1),
+(36, 1, '2024-12-03 14:39:15', 2),
+(37, 1, '2024-12-03 17:57:15', 2),
+(38, 1, '2024-12-03 18:02:05', 2);
 
 -- --------------------------------------------------------
 
@@ -432,7 +481,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `customertype`
@@ -474,7 +523,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables

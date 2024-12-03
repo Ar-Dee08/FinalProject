@@ -2,6 +2,20 @@
 session_start();
 include 'admin_middleware.php';
 include 'includes/header.php';
+include '../vscode/dbcon.php';
+
+
+if(isset($_POST['cat-edit-btn'])){ //IF EDITING RECORD
+    if (isset($_GET['catidlabel'])) {
+        $catid = $_GET['catidlabel'];
+        $isEdit = True;
+
+    }                                     
+} else if (isset($_POST['cat-add-btn'])){ //IF NEW RECORD
+    $catid = TableRowCount("categories",$con)+1;
+    $isEdit = False;
+
+}
 
 ?>
 
@@ -19,25 +33,41 @@ include 'includes/header.php';
                 <form action="proc_category.php" method="POST">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="">
-                                Category Name
-                            </label>
-                            <input type="text" name="catname" placeholder="Enter Category Name" class="form-control">
+                            
+                            <?php
+                                if($isEdit){?>
+                                    <label for="">
+                                        Current Category Name
+                                    </label>
+                                    <input type="text" disabled value=$cat_name name="catname" placeholder="Enter Category Name" class="form-control" required>
+                                    <label for="">
+                                        New Category Name
+                                    </label>
+                                    <input type="text" name="catname" placeholder="Enter Category Name" class="form-control" required>
+                                    
+                                    <?php
+                                }else {?>
+                                    <label for="">
+                                        Category Name
+                                    </label>
+                                    <input type="text" name="catname" placeholder="Enter Category Name" class="form-control" required>                                
+                                    <?php
+                                }
+                            ?>
                         </div>
                         <div class="col-md-1">
                             <label for="">
                                 ID
                             </label>                            
-                            <?php
-                                if (isset($_GET['error'])) {
-                                    echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['error'] . '</p>';
-                                }            
+                            <?php                                
+                                echo '<p style="color: #CEDFE3;" class="cat-label" align="center">' . $catid . '</p>';
+                                       
                             ?>                            
                         </div>
                         <div>
                             <br>
-                            <button type="submit" name="cat-btn">Confirm</button>
-                            <button type="submit">Cancel</button>
+                            <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="cat-confirm-btn">Confirm</button>
+                            <button type="submit" name="cancel-btn" formnovalidate>Cancel</button>
                         </div>
                     </div>
                 </form>                
@@ -60,4 +90,19 @@ include 'includes/header.php';
 
 <?php
 include 'includes/footer.php';
+
+function TableRowCount(string $table, $con)
+{
+    $query = "SELECT COUNT(*) AS total FROM " . $table;
+    $count = 0;
+
+    if ($results = mysqli_query($con, $query)) {
+        $row = mysqli_fetch_assoc($results);
+        $count = $row['total'];
+    }
+
+    return $count;
+}
+
+
 ?>
