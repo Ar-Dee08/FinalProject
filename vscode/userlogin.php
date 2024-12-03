@@ -53,7 +53,7 @@ if(mysqli_num_rows($uidres)===1){
             exit();
         } else {
             echo 'user is not an admin and logged in in admin';
-            header("Location: ../adminside/adminLogin.php?error=You are not an Administrator.");
+            header("Location: ../adminside/adminLogin.php?error=You are not authorized to access the page.");
             exit();
         }
     }else {
