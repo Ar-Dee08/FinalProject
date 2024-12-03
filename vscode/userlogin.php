@@ -13,6 +13,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         return $data;
     }
 }
+
 $uemail = verify($_POST['username']);
 $pass = verify($_POST['password']);
 $logintype = $_POST['logintype']; //=1 is customer, =2 is admin
