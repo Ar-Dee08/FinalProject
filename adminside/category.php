@@ -7,7 +7,40 @@ include 'includes/header.php';
 
 <!-- CONTENTS -->
 
-    <H1>HIIII CATEGORY</H1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>
+                    Modify Category
+                </h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">
+                            Category Name
+                        </label>
+                        <input type="text" name="catname" placeholder="Enter Category Name" class="form-control">
+                    </div>
+                    <div class="col-md-1">
+                        <label for="">
+                            ID
+                        </label>
+                        <p>
+                            tempo ID
+                        </p>
+                    </div>
+                </div>
+                <br>
+
+                <button type="submit">Confirm</button>
+                <button type="submit">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -22,5 +55,5 @@ include 'includes/header.php';
 </body>
 
 <?php
-    include 'includes/footer.php';
+include 'includes/footer.php';
 ?>
