@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<nav class="navbar navbar-expand-lg shadow custom-nav">
   <div class="container-fluid ms-3">
     <a class="navbar-brand" href="../adminside/homeadmin.php"><b>SSITE Merchandise</b></a>
     
@@ -8,19 +8,22 @@
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <!-- SIDEBAR CALL -->
       <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        Menu
+        <b>Set Up</b>
       </button>
 
       <ul class="navbar-nav me-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="../adminside/homeadmin.php">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item active" id="home-admin">
+          <a class="nav-link" href="../adminside/homeadmin.php"><b>Home</b> <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active" id="home-admin">
+          <a class="nav-link" href="#"><b>Account</b> <span class="sr-only">(current)</span></a>
+        </li>
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
-        </li>
+        </li> -->
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item" id="admin-logout">
           <a class="nav-link active" href="../vscode/userlogout.php">Log Out</a>
         </li>
       </ul>

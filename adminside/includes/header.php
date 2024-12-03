@@ -11,8 +11,11 @@
 <body>
 
     <?php include('navbar.php'); ?>
+    <?php include('sidebar.php'); ?>
+
+    <div class="admin-container">
+
     <!-- <main>  -->
         <!-- CAN BE NOT <MAIN> -->
-        <?php include('sidebar.php'); ?>
 
     
