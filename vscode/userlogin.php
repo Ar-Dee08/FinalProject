@@ -15,9 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 $uemail = verify($_POST['username']);
 $pass = verify($_POST['password']);
-//FOR ADMIN ONLY
-// $setname = "admin";
-// $setpass = "pass";
+$logintype = $_POST['logintype']; //=1 is customer, =2 is admin
 
 //FOR USERS
 $table = "user_credentials";
@@ -31,7 +29,7 @@ if(mysqli_num_rows($uidres)===1){
 
         echo $uid;
         $aidres = RetrieveAdmin($con,$uid);
-        if(mysqli_num_rows($aidres)===1){           //verified user and is admin
+        if(mysqli_num_rows($aidres)===1 && $logintype === "2"){           //verified user and is admin
             $admin_row = mysqli_fetch_assoc($aidres);
             $aid = $admin_row['admin_id'];
             $usertype_id = 2; //admin id
@@ -43,7 +41,8 @@ if(mysqli_num_rows($uidres)===1){
 
             header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
             exit();
-        } else {                                            //verified but customer only
+        } else if($logintype === "1")        
+        {                                            //verified but customer only
             echo 'This is not admin';
             $usertype_id = 1; //customer id
             $_SESSION['uid'] = $uid;
@@ -52,17 +51,42 @@ if(mysqli_num_rows($uidres)===1){
 
             header("Location: ../customerside/homecustom.php");
             exit();
+        } else {
+            echo 'user is not an admin and logged in in admin';
+            header("Location: ../adminside/adminLogin.php?error=You are not an Administrator.");
+            exit();
         }
     }else {
         echo 'Invalid password.';
-        header("Location: ../adminside/index.php?error=Incorrect Password.");
-        exit();
+
+        if($logintype === "1"){
+            header("Location: ../adminside/index.php?error=Incorrect Password.");
+            exit();
+        } else if ($logintype === "2"){
+            header("Location: ../adminside/adminLogin.php?error=Incorrect Password.");
+            exit();
+        } else {
+            header("Location: ../adminside/index.php");
+            exit();
+        }
+
+       
     }
 } else {
     // $userIsRegistered = False;
     echo 'This user is not registered';
-    header("Location: ../adminside/index.php?error=Invalid Credentials.");
-    exit();
+
+    if($logintype === "1"){
+        header("Location: ../adminside/index.php?error=Invalid Credentials.");
+        exit();
+    } else if ($logintype === "2"){
+        header("Location: ../adminside/adminLogin.php?error=Invalid Credentials.");
+        exit();
+    } else {
+        header("Location: ../adminside/index.php");
+        exit();
+    }
+
 }
 
 function RetrieveUser($table, $con, $email, $conditionfield) {

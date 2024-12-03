@@ -24,7 +24,7 @@
          <h2>Log In</h2>
              <?php
                 if (isset($_GET['error'])) {
-                    echo '<p class="error-login">' . $_GET['error'] . '</p>';
+                    echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['error'] . '</p>';
                 }            
             ?> 
          <form action="../vscode/userlogin.php" method="post">
@@ -36,7 +36,7 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">LOG IN</button>
+            <button type="submit" id="logintype" name="logintype" value="2">LOG IN</button>
             <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
             </form>
         </div>
