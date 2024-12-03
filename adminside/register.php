@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/back-icon.png" type="image/png">
     <title>Register</title>
 </head>
 <body>
@@ -14,6 +15,11 @@
         <a href="index.php">Back</a> <!--TEMPORARY-->          
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <h1>REGISTER</h1>
+        <a href="index.php" style="position: absolute; left: 10px; top: 10px;">
+            <button style="background: none; border: none; cursor: pointer;">
+            <img src="images/back-icon.png" alt="Back" style="width:30px;height:auto;">
+            </button>
+        </a>
     </header>
 
     <main>
