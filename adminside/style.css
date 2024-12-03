@@ -124,7 +124,7 @@ body {
 }
 
 .login-container button:hover {
-    background-color: #285963;
+    background-color: #1E4A50;
     transform: translateY(-2px);
 }
 /* Admin Login Link Styling */
@@ -245,7 +245,7 @@ button {
 }
 
 button:hover {
-    background-color: #285963;
+    background-color: #1E4A50;
     transform: translateY(-2px);
 }
 
