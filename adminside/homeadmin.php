@@ -1,10 +1,9 @@
 <?php
 session_start();
+include 'admin_middleware.php';
+include 'includes/header.php';
 
-if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER IS ADMIN, will be updated
-
-    include('includes/header.php');
-    ?>
+?>
 
 <!-- CONTENT -->
 
@@ -34,10 +33,4 @@ if (isset($_SESSION['uid']) && isset($_SESSION['admin_id'])) { //CHECK IF USER I
 
 <?php
     include 'includes/footer.php';
-
-} else {
-    header("Location: index.php");
-    exit();
-}
-
 ?>
