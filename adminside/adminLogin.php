@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="icon" href="https://fontawesome.com/v4/icon/arrow-left">
-    <link rel="icon" href="images/back-icon.png" type="image/png"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
     </head>
     <header>
-        <a href="index.php"><button type="button" id="back-btn"><i class="fa-solid fa-right-from-bracket"></i></button></a> 
+        <a href="index.php"><button type="button" id="back-btn"><i class="fa-solid fa-arrow-left"></i></button></a> 
         <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
         <h1>ADMIN LOGIN</h1>
     </header>

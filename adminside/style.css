@@ -308,21 +308,6 @@ button:hover {
     color: #e0e9eb;
 }
 
-/* Font Awesome Icon Styling */
-.fa-arrow-left {
-    font-size: 1.5rem;
-    color: #F9F6F6;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.fa-arrow-left:hover {
-    color: #458D9E;
-}
-
 /* ADMIN CONTAINER */
 .admin-container {
     background-color: #CEDFE3;
