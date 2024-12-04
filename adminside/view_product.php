@@ -33,7 +33,7 @@ require "../vscode/dbcon.php";
                             <th style="text-align : center">Edit</th>
                         </tr>
                     </thead>
-                    <tbody class="item-img">
+                    <tbody class="record-img">
                             <!-- FETCHING DATA -->
                         <?php
                             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -85,15 +85,7 @@ require "../vscode/dbcon.php";
                     </tbody>
                 </table>
                 <div>
-                    <!-- <nav>
-                        <ul class="pagination">
-                            <?php for ($i = 1; $i <= $totalPages; $i++) {?>
-                                <li class="page-item <?=($page === $i) ? 'active' : ''?>">
-                                    <a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a>
-                                </li>
-                            <?php }?>
-                        </ul>
-                    </nav> -->
+               
 
                     <nav>
                         <ul class="pagination">
@@ -117,7 +109,7 @@ require "../vscode/dbcon.php";
                     </nav>
                     <div class="col-md-4 ms-auto">
                         <form action="mod_product.php?itemidlabel?=0" method="post">
-                            <button type="submit" name="item-add-btn">Add New Category</button>
+                            <button type="submit" name="item-add-btn">Add New Item</button>
 
                         </form>
                     </div>
@@ -173,7 +165,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM categories";
+    $totalQuery = "SELECT COUNT(*) as total FROM items";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

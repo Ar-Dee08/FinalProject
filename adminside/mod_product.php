@@ -13,7 +13,6 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
         $stmt = $con->prepare($getnamequery);
         $stmt->bind_param("s",$item_id);
         if ($stmt->execute()) {
-            // echo "Successful" . $item_id;
             $results = $stmt->get_result(); // Always return the result object        
             $item_row = mysqli_fetch_assoc($results);            
             $item_name = $item_row['item_name'];
@@ -22,7 +21,6 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
             $item_price = $item_row['item_price'];
             $category = $item_row['cat_id'];
             $item_stat = $item_row['record_status'];
-
             $item_img = $item_row['item_img'];
 
         } else {
@@ -57,8 +55,10 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                             <?php
                                 // IF EDIT RECORD
                                 if($isEdit){?> 
-                                    <div class="mod-img-preview">
-                                        <img src="item_images/<?=$item_img?>" alt="item image">
+                                    <input type="hidden" name="init_img"  value="<?=$item_img?>">
+
+                                    <div class="mod-img-preview" align="center">
+                                        <img src="item_images/<?=$item_img?>"  alt="item image">
                                     </div>
                                     <label for="">
                                         Current Item Name
@@ -92,7 +92,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                     <?php
                                         $catquery = "SELECT * FROM categories";
                                         $result = mysqli_query($con, $catquery);
-
+                                        
                                         // Check if there are any categories
                                         if (mysqli_num_rows($result) > 0) {
                                             $count = 0;
@@ -118,13 +118,9 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                     <label for="">
                                         Item Image
                                     </label>
-                                    <input type="file" name="item_img" accept=".jpg,.jpeg,.png,.gif" placeholder="Submit Image File" class="form-control" required> 
-
+                                    <input type="file" name="item_img" accept=".jpg,.jpeg,.png,.gif" placeholder="Submit Image File" class="form-control"> 
                                     
                                     <?php
-
-
-
 
                                 // IF NEW RECORD                                
                                 }else {?>
@@ -196,12 +192,12 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                             <?php 
                             if($isEdit){?> 
                                 <label for="">
-                                    Category Status
+                                    Item Status
                                 </label>
                                 <br>
                                 <select class="admin-sel" name="recstat" id="recstat">
                                     <?php
-                                    if($cat_stat == "Active"){
+                                    if($item_stat == "Active"){
                                         ?>
                                             <option value="Active">Active</option>
                                             <option value="Removed">Remove</option>

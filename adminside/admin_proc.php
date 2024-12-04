@@ -53,24 +53,43 @@ if(isset($_POST['cat-confirm-btn'])){
     $item_desc = $_POST['item_desc'];
     $item_price = $_POST['item_price'];
     $cat_id = $_POST['cat_id']; 
-
-    $item_img = $_FILES['item_img']['name'];
-    $path = "item_images/";
-    $item_img_ext = pathinfo($item_img,PATHINFO_EXTENSION);
-    $imgfile_name = $item_id."_".time(). '.' . $item_img_ext;
-    move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
-
+    
+    
     if($isEdit === "1"){
         $item_id = $_POST['item_id'];
         $item_recstat = $_POST['recstat'];
+        $init_img = $_POST['init_img'];
 
-        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price, cat_id, item_img, record_status = ? WHERE item_id = ?";
+
+        if (!empty($_FILES['item_img']['name'])) {
+            // New image uploaded
+            $item_img = $_FILES['item_img']['name'];
+            $path = "item_images/";
+            $item_img_ext = pathinfo($item_img, PATHINFO_EXTENSION);
+            $imgfile_name = $item_id . "_" . time() . '.' . $item_img_ext;
+            move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
+        } else {
+            // No new image uploaded, retain the existing one
+            $imgfile_name = $init_img;
+
+            $query = "SELECT item_img FROM items WHERE item_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $item_id);
+            if($stmt->execute()){
+                $imgres = $stmt->get_result();
+                $qrow = $imgres->fetch_assoc(); // Adjusted fetch method
+                $imgfile_name = $qrow['item_img'];
+            }
+        }
+        
+
+        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price=?, cat_id=?, item_img=?, record_status = ? WHERE item_id = ?";
         // 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("sssdsisi", $item_name,$item_spec, $item_desc, $item_price, $imgfile_name, $cat_id, $item_recstat, $item_id);
+        $stmt->bind_param("sssdissi", $item_name,$item_spec, $item_desc, $item_price, $cat_id, $imgfile_name, $item_recstat, $item_id);
 
         if ($stmt->execute()) {
-            header("Location: view_category.php");
+            header("Location: view_product.php");
             exit();
         } else {
             echo "Error: " . $stmt->error;
@@ -81,6 +100,14 @@ if(isset($_POST['cat-confirm-btn'])){
     } else if($isEdit === "0") {
         $item_id = TableRowCount("items",$con)+1;
         $admin_id = $_SESSION['admin_id'];
+        // $init_img = $_POST['item_img'];
+
+        $item_img = $_FILES['item_img']['name'];
+            $path = "item_images/";
+            $item_img_ext = pathinfo($item_img,PATHINFO_EXTENSION);
+            $imgfile_name = $item_id."_".time(). '.' . $item_img_ext;
+            move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
+            echo $imgfile_name;
 
         $query = "INSERT INTO items(item_id,item_name,item_spec,item_desc,item_price,cat_id,item_img,admin_creator,date_created,record_status)
         VALUES(?,?,?,?,?,?,?,?,NOW(),'Active');";
