@@ -36,6 +36,7 @@
             </div>
             <p><a href="index.php">Are you an awesome customer? Log in here</a></p>
             <button type="submit" id="logintype" name="logintype" value="2">LOG IN</button>
+            <br>
             <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
             </form>
         </div>

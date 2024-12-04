@@ -6,7 +6,7 @@
     <div class="offcanvas-body">
         <div class="list-group">
             <a href="view_category.php" class="list-group-item list-group-item-action">CATEGORIES</a>
-            <a href="mod_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
+            <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
             <a href="#" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
             <a href="#" class="list-group-item list-group-item-action">ACCOUNTS</a>
             <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>

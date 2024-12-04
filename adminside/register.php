@@ -42,7 +42,7 @@
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" onkeyup="confirmPass();" required><br><br>
 
                 <label for="type">Type:</label>
-                <select id="type" name="type" required> 
+                <select class="login-sel" id="type" name="type" required> 
                     <!-- WILL BA MODIFIED WITH PHP LATER -->
                     <option value="student">Student</option>
                     <option value="non_student">Non-Student</option>
@@ -55,7 +55,7 @@
                 <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required><br><br>
                 
                 <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
+                <select class="login-sel" id="gender" name="gender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
