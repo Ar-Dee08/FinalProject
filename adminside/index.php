@@ -36,6 +36,7 @@
             <p><a href="adminLogin.php">Are you an admin? Log in here</a></p>
 
             <button type="submit" id="logintype" name="logintype" value="1">LOG IN</button>
+            <br>
             <button type="button" onclick="window.location.href='register.php'">CREATE ACCOUNT</button>
             <!-- FORGOR PASS ADMEN BUTON -->
             <!-- <button type="button" onclick="window.location.href='forgotpassword.html'">FORGOT PASSWORD</button>

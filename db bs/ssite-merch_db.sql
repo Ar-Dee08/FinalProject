@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 01:23 PM
+-- Generation Time: Dec 04, 2024 at 12:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,7 +53,7 @@ CREATE TABLE `categories` (
   `cat_id` int(20) UNSIGNED NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `admin_creator` bigint(20) UNSIGNED NOT NULL,
-  `date_created` date NOT NULL,
+  `date_created` datetime NOT NULL,
   `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,18 +62,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `category_name`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'asd', 2, '2024-12-03', ''),
-(2, '', 2, '2024-12-03', ''),
-(3, 'asd', 2, '2024-12-03', ''),
-(4, '', 2, '2024-12-03', ''),
-(5, 'sad', 2, '2024-12-03', ''),
-(6, 'sad', 2, '2024-12-03', ''),
-(7, '', 2, '2024-12-03', ''),
-(8, '', 2, '2024-12-03', ''),
-(9, '', 2, '2024-12-03', ''),
-(10, '', 2, '2024-12-03', ''),
-(11, '', 2, '2024-12-03', ''),
-(12, 'sad', 2, '2024-12-03', '');
+(1, 'Clothing', 2, '2024-12-04 17:08:04', 'Removed'),
+(2, 'Miscellaneous', 2, '2024-12-04 17:08:12', 'Removed'),
+(3, 'Bag', 2, '2024-12-04 17:08:44', 'Active');
 
 -- --------------------------------------------------------
 
@@ -138,6 +129,7 @@ CREATE TABLE `items` (
   `item_id` bigint(20) UNSIGNED NOT NULL,
   `item_name` varchar(255) NOT NULL,
   `item_spec` text NOT NULL,
+  `item_desc` varchar(255) NOT NULL,
   `item_img` longblob NOT NULL,
   `item_price` decimal(10,0) NOT NULL,
   `cat_id` int(11) UNSIGNED NOT NULL,
@@ -145,6 +137,15 @@ CREATE TABLE `items` (
   `date_created` date NOT NULL,
   `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_img`, `item_price`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
+(1, 'TSHIRT', 'White', 'sadadsasdasdad', 0x617364616461, 300, 30, 2, '2024-12-04', 'Active'),
+(2, 'TOTE BAG', 'SMALL', 'WHITE', 0x312d31313339395f667265652d68656172742d636c69706172742d6c6f76652d68656172742d636c69706172742d7472616e73706172656e742d6261636b67726f756e642e706e67, 300, 3, 2, '2024-12-04', '<br />\r\n<b>Warning</b>:  '),
+(3, 'TSHIR', 'A', 'SD', 0x5f313733333331323131312e706e67, 43, 3, 2, '2024-12-04', 'Active');
 
 -- --------------------------------------------------------
 
@@ -331,7 +332,15 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (35, 1, '2024-12-03 14:38:48', 1),
 (36, 1, '2024-12-03 14:39:15', 2),
 (37, 1, '2024-12-03 17:57:15', 2),
-(38, 1, '2024-12-03 18:02:05', 2);
+(38, 1, '2024-12-03 18:02:05', 2),
+(39, 1, '2024-12-03 20:37:27', 2),
+(40, 1, '2024-12-03 20:49:37', 2),
+(41, 1, '2024-12-03 20:55:38', 2),
+(42, 1, '2024-12-04 01:19:26', 2),
+(43, 1, '2024-12-04 10:52:47', 2),
+(44, 1, '2024-12-04 14:27:22', 2),
+(45, 4, '2024-12-04 14:29:42', 1),
+(46, 1, '2024-12-04 14:31:37', 2);
 
 -- --------------------------------------------------------
 
@@ -481,7 +490,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customertype`
@@ -499,7 +508,7 @@ ALTER TABLE `item-orders`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mem_status`
@@ -523,7 +532,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables

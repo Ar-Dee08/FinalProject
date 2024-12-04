@@ -213,7 +213,7 @@ label {
     color: #CEDFE3;
 }
 
-input, select {
+input, .login-sel {
     padding: 12px;
     border: 1px solid #F9F6F6;
     border-radius: 8px;
@@ -224,7 +224,7 @@ input, select {
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-input:focus, select:focus {
+input:focus, .login-sel:focus {
     border-color: #DCEEF2;
     outline: none;
     background-color: #163A3E;
@@ -328,7 +328,7 @@ button:hover {
     background-color: #CEDFE3;
     padding: 30px;    
     border-radius: 5px;
-    max-width: 80%;
+    max-width: 90%;
     /* max-height: fit-content; */
     margin: 50px auto;    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -388,4 +388,32 @@ button:hover {
 
 #back-btn:hover {
     color: #458D9E;
+}
+
+/* CATEGORY */
+
+select.admin-sel {
+    /* margin-top: 5%; */
+    padding: 12px;
+    border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.admin-mod-text p, .admin-mod-text label{
+    color: #163A3E;
+}
+.card-body{
+    color: #163A3E;
+}
+
+.item-img img {
+    height: auto;
+    max-width: 8em;
+    max-height: 10em;
+    object-fit: cover !important; /* ensures the image covers the given area */
 }
