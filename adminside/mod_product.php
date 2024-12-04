@@ -58,7 +58,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                     <input type="hidden" name="init_img"  value="<?=$item_img?>">
 
                                     <div class="mod-img-preview" align="center">
-                                        <img src="item_images/<?=$item_img?>"  alt="item image">
+                                        <img src="record_images/item_images/<?=$item_img?>"  alt="item image">
                                     </div>
                                     <label for="">
                                         Current Item Name
