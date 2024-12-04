@@ -53,7 +53,6 @@ if(isset($_POST['cat-confirm-btn'])){
     $item_desc = $_POST['item_desc'];
     $item_price = $_POST['item_price'];
     $cat_id = $_POST['cat_id']; 
-    // $item_recstat = $_POST['item_rec'];
 
     $item_img = $_FILES['item_img']['name'];
     $path = "item_images/";
@@ -63,14 +62,25 @@ if(isset($_POST['cat-confirm-btn'])){
 
     if($isEdit === "1"){
         $item_id = $_POST['item_id'];
+        $item_recstat = $_POST['recstat'];
+
+        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price, cat_id, item_img, record_status = ? WHERE item_id = ?";
+        // 
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("sssdsisi", $item_name,$item_spec, $item_desc, $item_price, $imgfile_name, $cat_id, $item_recstat, $item_id);
+
+        if ($stmt->execute()) {
+            header("Location: view_category.php");
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
 
 
 
     } else if($isEdit === "0") {
         $item_id = TableRowCount("items",$con)+1;
         $admin_id = $_SESSION['admin_id'];
-
-
 
         $query = "INSERT INTO items(item_id,item_name,item_spec,item_desc,item_price,cat_id,item_img,admin_creator,date_created,record_status)
         VALUES(?,?,?,?,?,?,?,?,NOW(),'Active');";

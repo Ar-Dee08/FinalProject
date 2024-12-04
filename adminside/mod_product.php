@@ -11,16 +11,16 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
 
         $getnamequery = "SELECT * FROM items WHERE item_id = ?";
         $stmt = $con->prepare($getnamequery);
-        $stmt->bind_param("s",$itemid);
+        $stmt->bind_param("s",$item_id);
         if ($stmt->execute()) {
-            echo "Successful";
+            // echo "Successful" . $item_id;
             $results = $stmt->get_result(); // Always return the result object        
             $item_row = mysqli_fetch_assoc($results);            
             $item_name = $item_row['item_name'];
             $item_spec = $item_row['item_spec'];
             $item_desc = $item_row['item_desc'];
             $item_price = $item_row['item_price'];
-            $category = $item_row['category'];
+            $category = $item_row['cat_id'];
             $item_stat = $item_row['record_status'];
 
             $item_img = $item_row['item_img'];
@@ -32,7 +32,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
 
     }                                     
 } else if (isset($_POST['item-add-btn'])){ //IF NEW RECORD
-    $itemid = TableRowCount("items",$con)+1;
+    $item_id = TableRowCount("items",$con)+1;
     $isEdit = False;
 
 }
@@ -55,19 +55,78 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                         <div class="col-md-6">
                             <input type="hidden" name="item_id" value="<?= $item_id; ?>"> <!-- Pass the category ID -->
                             <?php
-                                
+                                // IF EDIT RECORD
                                 if($isEdit){?> 
+                                    <div class="mod-img-preview">
+                                        <img src="item_images/<?=$item_img?>" alt="item image">
+                                    </div>
                                     <label for="">
                                         Current Item Name
                                     </label>
-                                    <input type="text" disabled value="<?= $cat_name ?> "name="oldcatname" placeholder="Enter Category Name" class="form-control" required>
+                                    <input type="text" disabled value="<?= $item_name ?> "name="olditemname" placeholder="Enter Category Name" class="form-control" required>
                                     <label for="">
-                                        New Item Name
+                                    <label for="">
+                                        Item Name
                                     </label>
-                                    <input type="text" name="catname" placeholder="Enter Item Name" class="form-control" required>
+                                    <input type="text" value="<?= $item_name ?>" name="item_name" placeholder="Enter Item Name" class="form-control" required>  
+                                    <label for="">
+                                        Item Specification
+                                    </label>
+                                    <input type="text" value="<?= $item_spec ?>" name="item_spec" placeholder="Enter Item Specification" class="form-control" required> 
+                                    <label for="">
+                                        Item Description
+                                    </label>
+                                    <textarea name="item_desc" id="item_desc" placeholder="Enter Item Description" class="form-control" required> <?= $item_desc ?></textarea>
+                                    
+                                    <label for="">
+                                        Item Price
+                                    </label>
+                                    <input type="number" value="<?= $item_price ?>" name="item_price" placeholder="Enter Item Price" class="form-control" required step="0.01" min="0"> 
+                                    
+                                    <label for="">
+                                        Category
+                                    </label>
+                                    <br>
+                                    <select class="admin-sel" name="cat_id" id="">
+
+                                    <?php
+                                        $catquery = "SELECT * FROM categories";
+                                        $result = mysqli_query($con, $catquery);
+
+                                        // Check if there are any categories
+                                        if (mysqli_num_rows($result) > 0) {
+                                            $count = 0;
+                                            // Loop through the records and create options
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                if($row['record_status']=="Active"){
+                                                    echo '<option value="' . $row['cat_id'] . '">' . htmlspecialchars($row['category_name']) . '</option>';
+                                                $count++;
+                                                }
+                                            }
+                                            if($count=== 0){
+                                                echo '<option value="0">No categories available</option>';                                                
+                                            }
+                                        } else {
+                                            // If no categories exist, show a message
+                                            echo '<option value="0">No categories available</option>';
+                                        }                                    
+                                    ?>
+                                    
+                                    </select>
+                                    <br>
+                                    
+                                    <label for="">
+                                        Item Image
+                                    </label>
+                                    <input type="file" name="item_img" accept=".jpg,.jpeg,.png,.gif" placeholder="Submit Image File" class="form-control" required> 
+
                                     
                                     <?php
-                                
+
+
+
+
+                                // IF NEW RECORD                                
                                 }else {?>
                                     <label for="">
                                         Item Name
@@ -130,7 +189,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                         </div>
                         <div class="col-md-6">
                             <label for="" class="cat-label">
-                                Item ID : <?=$itemid?>
+                                Item ID : <?=$item_id?>
                             </label>        
                             <br>
                             <br>

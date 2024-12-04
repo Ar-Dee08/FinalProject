@@ -396,9 +396,16 @@ select.admin-sel {
     color: #163A3E;
 }
 
-.item-img img {
+.record-img img {
     height: auto;
     max-width: 8em;
     max-height: 10em;
+    object-fit: cover !important; /* ensures the image covers the given area */
+}
+
+.mod-img-preview img {
+    height: auto;
+    max-width: 10em;
+    max-height: 12em;
     object-fit: cover !important; /* ensures the image covers the given area */
 }
