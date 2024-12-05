@@ -17,7 +17,7 @@ body {
 
 .login-bg {
     background-image: url('images/SSITE-LOGO.png');
-    background-size: 150px;
+    background-size: 180px;
     background-position: center;
     background-color: #458D9E;
 }
@@ -453,6 +453,7 @@ select.admin-sel {
     border: none;
     cursor: pointer;
     transition: transform 0.3s ease;
+    padding-right: 30px;
 }
 
 #logo-ssite-1:hover {

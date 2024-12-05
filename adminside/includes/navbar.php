@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg shadow custom-nav">
   <div class="container-fluid ms-3">
-    <button id="logo-ssite-1">
+    <a id="logo-ssite-1" href="../adminside/homeadmin.php">
       <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
-    </button>
+      </a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

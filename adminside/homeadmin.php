@@ -11,11 +11,10 @@ include 'includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
-<body>
-    <h1>Home</h1>
-    <div class="logo-bg-2">
+<body class="login-bg">
+    <div>
         <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
-    </div>
+        <h1>Home</h1>
 
     <!-- Sidebar JS -->
     <div>
@@ -26,5 +25,6 @@ include 'includes/header.php';
     <?php
         include 'includes/footer.php';
     ?>
+    </div>
 </body>
 </html>
