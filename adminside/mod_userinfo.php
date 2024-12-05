@@ -5,21 +5,23 @@ include 'includes/header.php';
 include '../vscode/dbcon.php';
 
 
-if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
-    if (isset($_GET['postidlabel'])) {
-        $post_id = $_GET['postidlabel'];
+if(isset($_POST['ui-edit-btn'])){ //IF EDITING RECORD
+    if (isset($_GET['uiidlabel'])) {
+        $userinfo_id = $_GET['uiidlabel'];
 
-        $getnamequery = "SELECT * FROM news_update WHERE post_id = ?";
+        $getnamequery = "SELECT * FROM user_information WHERE userinfo_id = ?";
         $stmt = $con->prepare($getnamequery);
-        $stmt->bind_param("s",$post_id);
+        $stmt->bind_param("s",$userinfo_id);
         if ($stmt->execute()) {
             $results = $stmt->get_result(); // Always return the result object        
-            $post_row = mysqli_fetch_assoc($results);            
-            $post_title = $post_row['title'];
-            $post_caption = $post_row['caption'];
-            $post_img = $post_row['post_img'];
-            $post_url = $post_row['post_url'];
-            $post_stat = $post_row['record_status'];
+            $ui_row = mysqli_fetch_assoc($results);            
+            $user_full = $ui_row['firstname'] . ' '.$ui_row['lastname'];
+            $user_su = $ui_row['student_number'];
+            $user_sex = $ui_row['sex'];
+            $user_bday = $ui_row['bday'];
+            $user_contact = $ui_row['contact_number'];
+            $user_email = $ui_row['email'];
+            $acc_stat = $ui_row['account_status'];
 
         } else {
             echo "Error: " . $stmt->error;
@@ -27,8 +29,8 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
         $isEdit = True;
 
     }                                     
-} else if (isset($_POST['post-add-btn'])){ //IF NEW RECORD
-    $post_id = TableRowCount("news_update",$con)+1;
+} else if (isset($_POST['ui-add-btn'])){ //IF NEW RECORD
+    $post_id = TableRowCount("user_information",$con)+1;
     $isEdit = False;
 
 }
@@ -166,7 +168,6 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <footer>
-
 <?php
 include 'includes/footer.php';
 

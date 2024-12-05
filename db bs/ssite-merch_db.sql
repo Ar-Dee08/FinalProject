@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 07:49 PM
+-- Generation Time: Dec 05, 2024 at 11:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -180,9 +180,16 @@ CREATE TABLE `news_update` (
   `post_img` longblob NOT NULL,
   `post_url` text NOT NULL,
   `admin_id` bigint(11) UNSIGNED NOT NULL,
-  `date_webposted` date NOT NULL,
+  `date_webposted` datetime NOT NULL,
   `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `news_update`
+--
+
+INSERT INTO `news_update` (`post_id`, `title`, `caption`, `post_img`, `post_url`, `admin_id`, `date_webposted`, `record_status`) VALUES
+(1, 'SSITE Conversion Week 2024', '         🎶“𝐺𝑢𝑠𝑡𝑜 𝑘𝑜𝑛𝑔 𝑖𝑏𝑖𝑔𝑎𝑦 𝑎𝑛𝑔 𝑐𝑜𝑑𝑒 𝑛𝑎 𝑔𝑢𝑠𝑡𝑜 𝑚𝑜”🎶\r\n\r\nDecember 06 is coming, Peninsulares! Are you ready for some fun at the Treyd Fest 2024?💥📢\r\n\r\nDon’t miss out on this chance to get a discount when you purchase your tickets—just use our promo code, 𝗦𝗦𝗜𝗧𝗘𝟮𝟬𝟮𝟰 ✨ Malay mo, may makasama ka pa sa 711 after the event. 👀\r\n\r\nGrab your tickets now, and let\'s make this event unforgettable!🎉\r\n\r\n:pushpin: For ticket-selling instructions, click this link: https://www.facebook.com/share/p/19bQLNzAwJ/ \r\n\r\n:pushpin: Visit the page below for further updates and information regarding Treyd Fest 2024\r\nCampus Student Government- BPSU Main Campus : \r\nhttps://www.facebook.com/bpsuCSGmain\r\n@everyone\r\n\r\n#TreydFest2024\r\n#SSITE2024', 0x315f313733333337323235322e6a7067, 'https://www.facebook.com/', 2, '2024-12-05 00:00:00', 'Active');
 
 -- --------------------------------------------------------
 
@@ -246,7 +253,7 @@ CREATE TABLE `user_information` (
   `userinfo_id` bigint(20) UNSIGNED NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `gender` varchar(50) NOT NULL,
+  `sex` varchar(50) NOT NULL,
   `bday` date NOT NULL,
   `student_number` varchar(15) NOT NULL,
   `contact_number` varchar(15) NOT NULL,
@@ -262,7 +269,7 @@ CREATE TABLE `user_information` (
 -- Dumping data for table `user_information`
 --
 
-INSERT INTO `user_information` (`userinfo_id`, `firstname`, `lastname`, `gender`, `bday`, `student_number`, `contact_number`, `email`, `account_status`, `memstatus_id`, `customertype_id`, `custype_verif_id`, `account_created`) VALUES
+INSERT INTO `user_information` (`userinfo_id`, `firstname`, `lastname`, `sex`, `bday`, `student_number`, `contact_number`, `email`, `account_status`, `memstatus_id`, `customertype_id`, `custype_verif_id`, `account_created`) VALUES
 (1, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '22-05509', '09765868588', 'emmsumbad@bpsu.edu.ph', 'Active', 1, 1, 1, '2024-12-02 17:00:53'),
 (2, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '22-05509', '09765868588', 'eloisamariemsumbad@gmail.com', 'Active', 1, 1, 1, '2024-12-02 17:12:15'),
 (3, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '-', '09765868588', 'jayne.islyf@gmail.com', 'Active', 1, 2, 1, '2024-12-02 17:19:10'),
@@ -340,7 +347,12 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (44, 1, '2024-12-04 14:27:22', 2),
 (45, 4, '2024-12-04 14:29:42', 1),
 (46, 1, '2024-12-04 14:31:37', 2),
-(47, 1, '2024-12-04 22:14:10', 2);
+(47, 1, '2024-12-04 22:14:10', 2),
+(48, 4, '2024-12-05 10:27:15', 1),
+(49, 1, '2024-12-05 10:27:23', 2),
+(50, 1, '2024-12-05 16:05:02', 2),
+(51, 1, '2024-12-05 16:18:00', 1),
+(52, 1, '2024-12-05 16:18:07', 2);
 
 -- --------------------------------------------------------
 
@@ -520,7 +532,7 @@ ALTER TABLE `mem_status`
 -- AUTO_INCREMENT for table `news_update`
 --
 ALTER TABLE `news_update`
-  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -532,7 +544,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables

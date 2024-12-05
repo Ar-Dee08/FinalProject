@@ -32,89 +32,91 @@ if(isset($_POST['cat-edit-btn'])){ //IF EDITING RECORD
 ?>
 
 <!-- CONTENTS -->
+<div class="logo-bg-2"></div>
+<div class="admin-container">
 
-<div class="row admin-mod-text">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h2>
-                    Modify Category
-                </h2>
-            </div>
-            <div class="card-body">
-                <form action="admin_proc.php" method="POST">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="hidden" name="catid" value="<?= $catid; ?>"> <!-- Pass the category ID -->
-                            <?php
+    <div class="row admin-mod-text">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        Modify Category
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <form action="admin_proc.php" method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="hidden" name="catid" value="<?= $catid; ?>"> <!-- Pass the category ID -->
+                                <?php
+                                    
+                                    if($isEdit){?> 
+                                        <label for="">
+                                            Current Category Name
+                                        </label>
+                                        <input type="text" disabled value="<?= $cat_name ?> "name="oldcatname" placeholder="Enter Category Name" class="form-control" required>
+                                        <label for="">
+                                            New Category Name
+                                        </label>
+                                        <input type="text" value="<?= $cat_name ?>" name="catname" placeholder="Enter Category Name" class="form-control" required>
+                                        
+                                        
+
+                                        <?php
+                                    }else {?>
+                                        <label for="">
+                                            Category Name
+                                        </label>
+                                        <input type="text"  name="catname" placeholder="Enter Category Name" class="form-control" required>                                
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="cat-label">
+                                    Category ID : <?=$catid?>
+                                </label>        
+                                <br>
+                                <br>
+                                <?php 
                                 
                                 if($isEdit){?> 
                                     <label for="">
-                                        Current Category Name
+                                        Category Status
                                     </label>
-                                    <input type="text" disabled value="<?= $cat_name ?> "name="oldcatname" placeholder="Enter Category Name" class="form-control" required>
-                                    <label for="">
-                                        New Category Name
-                                    </label>
-                                    <input type="text" value="<?= $cat_name ?>" name="catname" placeholder="Enter Category Name" class="form-control" required>
+                                    <br>
+                                    <select class="admin-sel" name="recstat" id="recstat">
+                                        <?php
+                                        if($cat_stat == "Active"){
+                                            ?>
+                                                <option value="Active">Active</option>
+                                                <option value="Removed">Remove</option>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <option value="Removed">Remove</option>
+                                                <option value="Active">Active</option>
+                                            <?php
+                                        }
+                                        ?>
                                     
-                                    
-
-                                    <?php
-                                }else {?>
-                                    <label for="">
-                                        Category Name
-                                    </label>
-                                    <input type="text"  name="catname" placeholder="Enter Category Name" class="form-control" required>                                
-                                    <?php
+                                    </select>
+                                <?php
                                 }
-                            ?>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="" class="cat-label">
-                                Category ID : <?=$catid?>
-                            </label>        
-                            <br>
-                            <br>
-                            <?php 
-                            
-                            if($isEdit){?> 
-                                <label for="">
-                                    Category Status
-                                </label>
-                                <br>
-                                <select class="admin-sel" name="recstat" id="recstat">
-                                    <?php
-                                    if($cat_stat == "Active"){
-                                        ?>
-                                            <option value="Active">Active</option>
-                                            <option value="Removed">Remove</option>
-                                        <?php
-                                    } else {
-                                        ?>
-                                            <option value="Removed">Remove</option>
-                                            <option value="Active">Active</option>
-                                        <?php
-                                    }
-                                    ?>
-                                
-                                </select>
-                            <?php
-                            }
-                            ?>
+                                ?>
 
+                            </div>
+                            <div>
+                                <br>
+                                <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="cat-confirm-btn">Confirm</button>
+                                <button type="submit" name="cat-cancel-btn" formnovalidate>Cancel</button>
+                            </div>
                         </div>
-                        <div>
-                            <br>
-                            <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="cat-confirm-btn">Confirm</button>
-                            <button type="submit" name="cat-cancel-btn" formnovalidate>Cancel</button>
-                        </div>
-                    </div>
-                </form>                
+                    </form>                
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 

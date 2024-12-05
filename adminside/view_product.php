@@ -7,69 +7,72 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h2>
-                    Products
-                </h2>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Item Name</th>
-                            <th>Image</th>
-                            <th>Specification</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Date Created</th>
-                            <th>Creator Admin ID</th>
-                            <th>Record Status</th>
-                            <th style="text-align : center">Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody class="record-img">
-                            <!-- FETCHING DATA -->
-                        <?php
-                            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                            $page = max($page, 1); // Ensure page is at least 1
-                            [$limit, $totalPages] = pagination($con);
-                            $start = ($page - 1) * $limit;
-                            
-                            // Fetch records for the current page
-                            $itemrecords = RetrieveAll("items", $con, $start, $limit);
+<div class="logo-bg-2"></div>
+<div class="admin-container">
 
-                            if (mysqli_num_rows($itemrecords) > 0) {
-                                foreach ($itemrecords as $item) :
-                        ?>
-                                    <tr>
-                                        <td><?=$item['item_id']?> </td>
-                                        <td><?=$item['item_name']?> </td>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        Products
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Item Name</th>
+                                <th>Image</th>
+                                <th>Specification</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Category</th>
+                                <th>Date Created</th>
+                                <th>Creator Admin ID</th>
+                                <th>Record Status</th>
+                                <th style="text-align : center">Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="record-img">
+                                <!-- FETCHING DATA -->
+                            <?php
+                                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                                $page = max($page, 1); // Ensure page is at least 1
+                                [$limit, $totalPages] = pagination($con);
+                                $start = ($page - 1) * $limit;
+                                
+                                // Fetch records for the current page
+                                $itemrecords = RetrieveAll("items", $con, $start, $limit);
 
-                                        <td> 
-                                            <img  src="record_images/item_images/<?=$item['item_img'];?>" alt="item">
-                                        
-                                        
-                                        </td>
-                                        <td><?=$item['item_spec']?> </td>
-                                        <td><?=$item['item_desc']?> </td>
-                                        <td><?=$item['item_price']?> </td>
-                                        <td><?=$item['category']?> </td>
-                                        <td><?=$item['date_created']?> </td>
-                                        <td><?=$item['admin_creator']?> </td>
-                                        <td class="item-txt"><?=$item['record_status']?> </td>
-                                        <td>
-                                             <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                <form action="mod_product.php?itemidlabel=<?=$item['item_id']?>" method="post">
-                                                    <button type="submit" name="item-edit-btn">Edit Records</button>
-                                                </form>
-                                             </div>                                             
-                                        </td>
-                                    </tr>
+                                if (mysqli_num_rows($itemrecords) > 0) {
+                                    foreach ($itemrecords as $item) :
+                            ?>
+                                        <tr>
+                                            <td><?=$item['item_id']?> </td>
+                                            <td><?=$item['item_name']?> </td>
+
+                                            <td> 
+                                                <img  src="record_images/item_images/<?=$item['item_img'];?>" alt="item">
+                                            
+                                            
+                                            </td>
+                                            <td><?=$item['item_spec']?> </td>
+                                            <td><?=$item['item_desc']?> </td>
+                                            <td><?=$item['item_price']?> </td>
+                                            <td><?=$item['category']?> </td>
+                                            <td><?=$item['date_created']?> </td>
+                                            <td><?=$item['admin_creator']?> </td>
+                                            <td class="item-txt"><?=$item['record_status']?> </td>
+                                            <td>
+                                                <div class="col-md-15 ms-auto me-auto" style="text-align:center">
+                                                    <form action="mod_product.php?itemidlabel=<?=$item['item_id']?>" method="post">
+                                                        <button type="submit" name="item-edit-btn">Edit Records</button>
+                                                    </form>
+                                                </div>                                             
+                                            </td>
+                                        </tr>
 
                                 <?php
                                 endforeach;                                                                 
@@ -84,6 +87,8 @@ require "../vscode/dbcon.php";
                     </tbody>
                 </table>
                 <div>
+               
+
                     <nav>
                         <ul class="pagination">
                             <!-- Previous Button -->
@@ -91,30 +96,30 @@ require "../vscode/dbcon.php";
                                 <a class="page-link" href="?page=<?= $page - 1; ?>">Previous</a>
                             </li>
 
-                            <!-- Page Numbers -->
-                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                                <li class="page-item <?= ($page === $i) ? 'active' : ''; ?>">
-                                    <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                                <!-- Page Numbers -->
+                                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                                    <li class="page-item <?= ($page === $i) ? 'active' : ''; ?>">
+                                        <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                                    </li>
+                                <?php endfor; ?>
+
+                                <!-- Next Button -->
+                                <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : ''; ?>">
+                                    <a class="page-link" href="?page=<?= $page + 1; ?>">Next</a>
                                 </li>
-                            <?php endfor; ?>
+                            </ul>
+                        </nav>
+                        <div class="col-md-4 ms-auto">
+                            <form action="mod_product.php?itemidlabel?=0" method="post">
+                                <button type="submit" name="item-add-btn">Add New Item</button>
 
-                            <!-- Next Button -->
-                            <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : ''; ?>">
-                                <a class="page-link" href="?page=<?= $page + 1; ?>">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="col-md-4 ms-auto">
-                        <form action="mod_product.php?itemidlabel?=0" method="post">
-                            <button type="submit" name="item-add-btn">Add New Item</button>
+                            </form>
+                        </div>
 
-                        </form>
                     </div>
 
+
                 </div>
-
-
-            </div>
 
 
 <!-- END OF CONTENTS -->
