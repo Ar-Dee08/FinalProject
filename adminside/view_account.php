@@ -13,22 +13,29 @@ require "../vscode/dbcon.php";
         <div class="card">
             <div class="card-header">
                 <h2>
-                    Category
+                    User Account Records
                 </h2>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered custom-table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Category Name</th>
+                            <th>User Full Name</th>
+                            <th>Student Number</th>
+                            <th>Contact #</th>
+                            <th>Email</th>
+                            <th>Account Status</th>
+                            <th>Membership Status</th>
+                            <th>Customer Type</th>
+                            <th>User Verification Status</th>
                             <th>Date Created</th>
                             <th>Creator Admin ID</th>
                             <th>Record Status</th>
                             <th style="text-align : center">Edit</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="record-img">
                             <!-- FETCHING DATA -->
                         <?php
                             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -37,32 +44,31 @@ require "../vscode/dbcon.php";
                             $start = ($page - 1) * $limit;
                             
                             // Fetch records for the current page
-                            $categoryrecords = RetrieveAll("categories", $con, $start, $limit);
-                            // $categoryrecords = RetrieveAll("categories", $con);
-                            // $totalPages = pagination($con);
+                            $newsrecords = RetrieveAll("news_update", $con, $start, $limit);
 
-                            // function RetrieveAll($table, $con)
-                            // {
-                            //     $query = 'SELECT cat.cat_id, cat.category_name,cat.date_created, CONCAT("admin",cat.admin_creator," : ",us.firstname) AS admin_creator,cat.record_status FROM categories cat LEFT JOIN admin a ON cat.admin_creator = a.admin_id LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id;';
-                            //     $stmt = $con->prepare($query);
-                            //     $stmt->execute();
-                            //     return $stmt->get_result(); // Always return the result object
-                            // }
-
-                            if (mysqli_num_rows($categoryrecords) > 0) {
-                                foreach ($categoryrecords as $item) :
+                            if (mysqli_num_rows($newsrecords) > 0) {
+                                foreach ($newsrecords as $item) :
                         ?>
                                     <tr>
-                                        <td><?=$item['cat_id']?> </td>
-                                        <td><?=$item['category_name']?> </td>
-                                        <td><?=$item['date_created']?> </td>
-                                        <td><?=$item['admin_creator']?> </td>
-                                        <td><?=$item['record_status']?> </td>
+                                        <td class="custom-table"><?=$item['post_id']?> </td>
+                                        <td class="custom-table"><?=$item['title']?> </td>
+
+                                        <td class="custom-table"> 
+                                            <img  src="record_images/post_images/<?=$item['post_img'];?>" alt="item">
+                                        
+                                        
+                                        </td>
+                                        <td><?=$item['caption']?> </td>
                                         <td>
-                                            <!-- <a href="mod_category.php" class="btn">Edit Record</a> -->
-                                             <div class="col-md-9 ms-auto me-auto" style="text-align:center">
-                                                <form action="mod_category.php?catidlabel=<?=$item['cat_id']?>" method="post">
-                                                    <button type="submit" name="cat-edit-btn">Edit Records</button>
+                                            <a href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
+                                        </td>
+                                        <td><?=$item['date_webposted']?> </td>
+                                        <td><?=$item['admin_creator']?> </td>
+                                        <td class="item-txt"><?=$item['record_status']?> </td>
+                                        <td>
+                                             <div class="col-md-15 ms-auto me-auto" style="text-align:center">
+                                                <form action="mod_news.php?postidlabel=<?=$item['post_id']?>" method="post">
+                                                    <button type="submit" name="post-edit-btn">Edit Records</button>
                                                 </form>
                                              </div>                                             
                                         </td>
@@ -81,15 +87,7 @@ require "../vscode/dbcon.php";
                     </tbody>
                 </table>
                 <div>
-                    <!-- <nav>
-                        <ul class="pagination">
-                            <?php for ($i = 1; $i <= $totalPages; $i++) {?>
-                                <li class="page-item <?=($page === $i) ? 'active' : ''?>">
-                                    <a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a>
-                                </li>
-                            <?php }?>
-                        </ul>
-                    </nav> -->
+               
 
                     <nav>
                         <ul class="pagination">
@@ -112,8 +110,8 @@ require "../vscode/dbcon.php";
                         </ul>
                     </nav>
                     <div class="col-md-4 ms-auto">
-                        <form action="mod_category.php?catidlabel=0" method="post">
-                            <button type="submit" name="cat-add-btn">Add New Category</button>
+                        <form action="mod_account.php?postidlabel?=0" method="post">
+                            <button type="submit" name="post-add-btn">Add New Item</button>
 
                         </form>
                     </div>
@@ -124,9 +122,6 @@ require "../vscode/dbcon.php";
             </div>
 
 
-
-
-
 <!-- END OF CONTENTS -->
 </div>
 
@@ -134,40 +129,27 @@ require "../vscode/dbcon.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
+
+
+
 <?php
 include 'includes/footer.php';
 
-// function pagination($con)
-// {
-//     // Pagination logic
-//     $limit = 10; // Number of rows per page
-//     $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-//     $start = ($page - 1) * $limit;
-
-// // Fetch rows with LIMIT in SQL query
-//     $query = "SELECT * FROM categories LIMIT $start, $limit";
-//     $runquery = mysqli_query($con, $query);
-
-// // Fetch total number of rows
-//     $totalQuery = "SELECT COUNT(*) as total FROM categories";
-//     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
-//     $total = $totalResult['total'];
-
-//     $totalPages = ceil($total / $limit);
-//     return $totalPages;
-// }
-
 function RetrieveAll($table, $con, $start, $limit)
 {
+    
     $query = "SELECT 
-                cat.cat_id, 
-                cat.category_name, 
-                cat.date_created, 
-                CONCAT('admin', cat.admin_creator, ' : ', us.firstname) AS admin_creator, 
-                cat.record_status 
-              FROM $table cat 
-              LEFT JOIN admin a ON cat.admin_creator = a.admin_id 
-              LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id 
+                np.post_id,
+                np.title,
+                np.post_img,
+                np.caption,
+                np.post_url,
+                np.date_webposted, 
+                CONCAT('admin', np.admin_id, ' : ', us.firstname) AS admin_creator, 
+                np.record_status 
+              FROM news_update np 
+              LEFT JOIN admin a ON np.admin_id = a.admin_id 
+              LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id
               LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
@@ -182,7 +164,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM categories";
+    $totalQuery = "SELECT COUNT(*) as total FROM items";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

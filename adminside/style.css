@@ -321,6 +321,14 @@ button:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.custom-table {
+    width: 80%; /* Set specific width (e.g., 80% of the parent container) */
+    max-width: 1200px; /* Optional: limit the maximum width */
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse;
+}
+
+
 
 /* NAVBAR */
 .custom-nav, #admin-logout {

@@ -77,7 +77,7 @@ require "../vscode/dbcon.php";
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">No records found</td>
+                                    <td colspan="15" class="text-center">No records found</td>
                                 </tr>
                             <?php
                             }

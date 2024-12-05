@@ -139,9 +139,9 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
 
 else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
     $isEdit = $_POST['post-confirm-btn'];
-    $post_title = $_POST['item_name'];
-    $post_caption = $_POST['item_spec'];
-    $post_url = $_POST['item_desc']; 
+    $post_title = $_POST['post_title'];
+    $post_caption = $_POST['post_caption'];
+    $post_url = $_POST['post_url']; 
     
     
     if($isEdit === "1"){
@@ -152,11 +152,12 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
 
         if (!empty($_FILES['post_img']['name'])) {
             // New image uploaded
-            $item_img = $_FILES['post_img']['name'];
+            $post_img = $_FILES['post_img']['name'];
             $path = "record_images/post_images/";
             $path_img_ext = pathinfo($post_img, PATHINFO_EXTENSION);
-            $imgfile_name = $post_id . "_" . time() . '.' . $post_img_ext;
+            $imgfile_name = $post_id . "_" . time() . '.' . $path_img_ext;
             move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
+            
         } else {
             // No new image uploaded, retain the existing one
             $imgfile_name = $init_img;
@@ -171,10 +172,10 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
             }
         }
         
-        $query = "UPDATE news SET title=?, post_url=?, caption=?, post_img=?, record_status = ? WHERE post_id = ?";
+        $query = "UPDATE news_update SET title=?, post_url=?, caption=?, post_img=?, record_status = ? WHERE post_id = ?";
         // 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("sssdissi", $item_name,$item_spec, $item_desc, $item_price, $cat_id, $imgfile_name, $post_recstat, $post_id);
+        $stmt->bind_param("sssssi", $post_title, $post_url, $post_caption, $imgfile_name, $post_recstat, $post_id);
 
         if ($stmt->execute()) {
             header("Location: view_news.php");
@@ -194,14 +195,14 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
         move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
 
 
-        $query = "INSERT INTO news_update(post_id,title,caption,post_img,post_url,admin_creator,date_created,record_status)
-        VALUES(?,?,?,?,?,?,NOW(),'Active');";
+        $query = "INSERT INTO news_update(post_id,title,caption,post_img,post_url,admin_id,date_webposted,record_status)
+        VALUES(?,?,?,?,?,?, NOW() ,'Active');";
 
 
         //INSERT QUERY NOT UPDATED YET
 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("isssdisi", $post_id,$post_title,$post_caption,$imgfile_name, $post_url, $admin_id, NOW(),$post_recstat);
+        $stmt->bind_param("issssi", $post_id,$post_title,$post_caption,$imgfile_name, $post_url, $admin_id);
 
         if ($stmt->execute()) {
             header("Location: view_news.php");
@@ -219,7 +220,92 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
     header("Location: view_news.php");
 }
 
+//THIS IS FOR CONFIRMING AND INSERTING / UPDAITNG NEWS AND UPDATE RECORD
 
+
+
+else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
+    $isEdit = $_POST['post-confirm-btn'];
+    $post_title = $_POST['post_title'];
+    $post_caption = $_POST['post_caption'];
+    $post_url = $_POST['post_url']; 
+    
+    
+    if($isEdit === "1"){
+        $post_id = $_POST['post_id'];
+        $post_recstat = $_POST['recstat'];
+        $init_img = $_POST['init_img'];
+
+
+        if (!empty($_FILES['post_img']['name'])) {
+            // New image uploaded
+            $post_img = $_FILES['post_img']['name'];
+            $path = "record_images/post_images/";
+            $path_img_ext = pathinfo($post_img, PATHINFO_EXTENSION);
+            $imgfile_name = $post_id . "_" . time() . '.' . $path_img_ext;
+            move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
+            
+        } else {
+            // No new image uploaded, retain the existing one
+            $imgfile_name = $init_img;
+
+            $query = "SELECT post_img FROM news_update WHERE post_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $post_id);
+            if($stmt->execute()){
+                $imgres = $stmt->get_result();
+                $qrow = $imgres->fetch_assoc(); // Adjusted fetch method
+                $imgfile_name = $qrow['post_img'];
+            }
+        }
+        
+        $query = "UPDATE news_update SET title=?, post_url=?, caption=?, post_img=?, record_status = ? WHERE post_id = ?";
+        // 
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("sssssi", $post_title, $post_url, $post_caption, $imgfile_name, $post_recstat, $post_id);
+
+        if ($stmt->execute()) {
+            header("Location: view_account.php");
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+    } else if($isEdit === "0") {
+        $post_id = TableRowCount("news_update",$con)+1;
+        $admin_id = $_SESSION['admin_id'];
+
+        $post_img = $_FILES['post_img']['name'];
+        $path = "record_images/post_images/";
+        $post_img_ext = pathinfo($post_img,PATHINFO_EXTENSION);
+        $imgfile_name = $post_id."_".time(). '.' . $post_img_ext;
+        move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
+
+
+        $query = "INSERT INTO news_update(post_id,title,caption,post_img,post_url,admin_id,date_webposted,record_status)
+        VALUES(?,?,?,?,?,?, NOW() ,'Active');";
+
+
+        //INSERT QUERY NOT UPDATED YET
+
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("issssi", $post_id,$post_title,$post_caption,$imgfile_name, $post_url, $admin_id);
+
+        if ($stmt->execute()) {
+            header("Location: view_account.php");
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+
+    } else {
+        echo "Invalid action.";
+    } 
+
+} else if (isset($_POST['post-cancel-btn'])){
+    header("Location: view_news.php");
+}
 
 
 
