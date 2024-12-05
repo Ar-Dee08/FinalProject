@@ -542,6 +542,11 @@ select.admin-sel {
     background-color: transparent;
 }
 
+.offcanvas img {
+    display: block;
+    margin: 0 auto;
+}
+
 /* Admin */
 .logossite {
     display: flex;
