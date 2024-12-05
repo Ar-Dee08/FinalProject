@@ -7,25 +7,28 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <h2>
-                    Products
+                    User Account Records
                 </h2>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered custom-table">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Item Name</th>
-                            <th>Image</th>
-                            <th>Specification</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Category</th>
+                            <th>User Full Name</th>
+                            <th>Student Number</th>
+                            <th>Contact #</th>
+                            <th>Email</th>
+                            <th>Account Status</th>
+                            <th>Membership Status</th>
+                            <th>Customer Type</th>
+                            <th>User Verification Status</th>
                             <th>Date Created</th>
                             <th>Creator Admin ID</th>
                             <th>Record Status</th>
@@ -41,31 +44,31 @@ require "../vscode/dbcon.php";
                             $start = ($page - 1) * $limit;
                             
                             // Fetch records for the current page
-                            $itemrecords = RetrieveAll("items", $con, $start, $limit);
+                            $newsrecords = RetrieveAll("news_update", $con, $start, $limit);
 
-                            if (mysqli_num_rows($itemrecords) > 0) {
-                                foreach ($itemrecords as $item) :
+                            if (mysqli_num_rows($newsrecords) > 0) {
+                                foreach ($newsrecords as $item) :
                         ?>
                                     <tr>
-                                        <td><?=$item['item_id']?> </td>
-                                        <td><?=$item['item_name']?> </td>
+                                        <td class="custom-table"><?=$item['post_id']?> </td>
+                                        <td class="custom-table"><?=$item['title']?> </td>
 
-                                        <td> 
-                                            <img  src="record_images/item_images/<?=$item['item_img'];?>" alt="item">
+                                        <td class="custom-table"> 
+                                            <img  src="record_images/post_images/<?=$item['post_img'];?>" alt="item">
                                         
                                         
                                         </td>
-                                        <td><?=$item['item_spec']?> </td>
-                                        <td><?=$item['item_desc']?> </td>
-                                        <td><?=$item['item_price']?> </td>
-                                        <td><?=$item['category']?> </td>
-                                        <td><?=$item['date_created']?> </td>
+                                        <td><?=$item['caption']?> </td>
+                                        <td>
+                                            <a href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
+                                        </td>
+                                        <td><?=$item['date_webposted']?> </td>
                                         <td><?=$item['admin_creator']?> </td>
                                         <td class="item-txt"><?=$item['record_status']?> </td>
                                         <td>
                                              <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                <form action="mod_product.php?itemidlabel=<?=$item['item_id']?>" method="post">
-                                                    <button type="submit" name="item-edit-btn">Edit Records</button>
+                                                <form action="mod_news.php?postidlabel=<?=$item['post_id']?>" method="post">
+                                                    <button type="submit" name="post-edit-btn">Edit Records</button>
                                                 </form>
                                              </div>                                             
                                         </td>
@@ -84,6 +87,8 @@ require "../vscode/dbcon.php";
                     </tbody>
                 </table>
                 <div>
+               
+
                     <nav>
                         <ul class="pagination">
                             <!-- Previous Button -->
@@ -105,8 +110,8 @@ require "../vscode/dbcon.php";
                         </ul>
                     </nav>
                     <div class="col-md-4 ms-auto">
-                        <form action="mod_product.php?itemidlabel?=0" method="post">
-                            <button type="submit" name="item-add-btn">Add New Item</button>
+                        <form action="mod_account.php?postidlabel?=0" method="post">
+                            <button type="submit" name="post-add-btn">Add New Item</button>
 
                         </form>
                     </div>
@@ -134,20 +139,17 @@ function RetrieveAll($table, $con, $start, $limit)
 {
     
     $query = "SELECT 
-                i.item_id, 
-                i.item_name,
-                i.item_img,
-                i.item_spec,
-                i.item_desc,
-                i.item_price,
-                cat.category_name AS category, 
-                i.date_created, 
-                CONCAT('admin', i.admin_creator, ' : ', us.firstname) AS admin_creator, 
-                i.record_status 
-              FROM items i 
-              LEFT JOIN admin a ON i.admin_creator = a.admin_id 
+                np.post_id,
+                np.title,
+                np.post_img,
+                np.caption,
+                np.post_url,
+                np.date_webposted, 
+                CONCAT('admin', np.admin_id, ' : ', us.firstname) AS admin_creator, 
+                np.record_status 
+              FROM news_update np 
+              LEFT JOIN admin a ON np.admin_id = a.admin_id 
               LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id
-              LEFT JOIN categories cat ON i.cat_id = cat.cat_id 
               LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);

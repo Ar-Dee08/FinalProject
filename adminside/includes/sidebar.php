@@ -7,12 +7,27 @@
         <div class="list-group">
             <a href="view_category.php" class="list-group-item list-group-item-action">CATEGORIES</a>
             <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
-            <a href="#" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
-            <a href="#" class="list-group-item list-group-item-action">ACCOUNTS</a>
+            <a href="view_news.php" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
+
+            <!-- Collapsible Section -->
+            <a class="list-group-item list-group-item-action" 
+               data-bs-toggle="collapse" 
+               href="#collapseAccounts" 
+               role="button" 
+               aria-expanded="false" 
+               aria-controls="collapseAccounts">
+                USER ACCOUNT INFORMATION
+            </a>
+            <div class="collapse" id="collapseAccounts">
+                <ul class="list-group mt-2">
+                    <a class="list-group-item list-group-item-action" href="view_account.php">USER INFORMATION</a>
+                    <a class="list-group-item list-group-item-action" href="category2.php">USER ACCOUNT DETAILS</a>
+                </ul>
+            </div>
+
             <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
             <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
             <a href="#" class="list-group-item list-group-item-action">USERS</a>
         </div>
     </div>
 </div>
-

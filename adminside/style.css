@@ -330,6 +330,26 @@ button:hover {
     color: #e0e9eb;
 }
 
+/* ADMIN CONTAINER */
+.admin-container {
+    background-color: #CEDFE3;
+    padding: 30px;    
+    border-radius: 5px;
+    max-width: 90%;
+    /* max-height: fit-content; */
+    margin: 5% auto;    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-table {
+    width: 80%; /* Set specific width (e.g., 80% of the parent container) */
+    max-width: 1200px; /* Optional: limit the maximum width */
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse;
+}
+
 /* NAVBAR */
 .custom-nav, #admin-logout {
     background-color: #285963; /* Replace with your hex code */
