@@ -1,15 +1,17 @@
 <nav class="navbar navbar-expand-lg shadow custom-nav">
   <div class="container-fluid ms-3">
-    <a class="navbar-brand" href="../adminside/homeadmin.php"><b>SSITE Merchandise</b></a>
+    <button id="logo-ssite-1">
+      <img src="images/SSITE-LOGO.png" alt="SSITE-LOGO Logo" style="width:80px;height:auto;">
+    </button>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
       <!-- SIDEBAR CALL -->
-      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        <b>Set Up</b>
-      </button>
+      <a class="btn btn-primary" href="#" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <b>Menu</b>
+      </a>
 
       <ul class="navbar-nav me-auto">
         <li class="nav-item active" id="home-admin">
