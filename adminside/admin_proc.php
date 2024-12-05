@@ -303,8 +303,8 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
         echo "Invalid action.";
     } 
 
-} else if (isset($_POST['post-cancel-btn'])){
-    header("Location: view_news.php");
+} else if (isset($_POST['ui-cancel-btn'])){
+    header("Location: view_userinfo.php");
 }
 
 
