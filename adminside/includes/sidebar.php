@@ -21,7 +21,7 @@
             <div class="collapse" id="collapseAccounts">
                 <ul class="list-group mt-2">
                     <a class="list-group-item list-group-item-action" href="view_userinfo.php">USER INFORMATION</a>
-                    <a class="list-group-item list-group-item-action" href="category2.php">USER ACCOUNT DETAILS</a>
+                    <a class="list-group-item list-group-item-action" href="view_useracc.php">USER ACCOUNT DETAILS</a>
                 </ul>
             </div>
 
