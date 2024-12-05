@@ -7,6 +7,7 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
+
 <div class="admin-container">
 
     <div class="row">
@@ -14,23 +15,27 @@ require "../vscode/dbcon.php";
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        Products
+                        User Information Records
                     </h2>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered custom-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Item Name</th>
-                                <th>Image</th>
-                                <th>Specification</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Category</th>
+                                <th>User Full Name</th>
+                                <th>Student Number</th>
+                                <th>Sex</th>
+                                <th>Birthdate</th>
+                                <th>Contact #</th>
+                                <th>Email</th>
+                                <th>Account Status</th>
+                                <!-- <th>Membership Status</th>
+                                <th>Customer Type</th>
+                                <th>User Verification Status</th>
                                 <th>Date Created</th>
                                 <th>Creator Admin ID</th>
-                                <th>Record Status</th>
+                                <th>Record Status</th> -->
                                 <th style="text-align : center">Edit</th>
                             </tr>
                         </thead>
@@ -43,31 +48,24 @@ require "../vscode/dbcon.php";
                                 $start = ($page - 1) * $limit;
                                 
                                 // Fetch records for the current page
-                                $itemrecords = RetrieveAll("items", $con, $start, $limit);
+                                $records = RetrieveAll("user_information", $con, $start, $limit);
 
-                                if (mysqli_num_rows($itemrecords) > 0) {
-                                    foreach ($itemrecords as $item) :
+                                if (mysqli_num_rows($records) > 0) {
+                                    foreach ($records as $item) :
                             ?>
                                         <tr>
-                                            <td><?=$item['item_id']?> </td>
-                                            <td><?=$item['item_name']?> </td>
-
-                                            <td> 
-                                                <img  src="record_images/item_images/<?=$item['item_img'];?>" alt="item">
-                                            
-                                            
-                                            </td>
-                                            <td><?=$item['item_spec']?> </td>
-                                            <td><?=$item['item_desc']?> </td>
-                                            <td><?=$item['item_price']?> </td>
-                                            <td><?=$item['category']?> </td>
-                                            <td><?=$item['date_created']?> </td>
-                                            <td><?=$item['admin_creator']?> </td>
-                                            <td class="item-txt"><?=$item['record_status']?> </td>
+                                            <td ><?=$item['userinfo_id']?> </td>
+                                            <td ><?=$item['user_fullname']?> </td>
+                                            <td><?=$item['student_number']?> </td>
+                                            <td><?=$item['sex']?> </td>
+                                            <td><?=$item['bday']?> </td>
+                                            <td><?=$item['contact_number']?> </td>
+                                            <td><?=$item['email']?> </td>
+                                            <td class="item-txt"><?=$item['account_status']?> </td>
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_product.php?itemidlabel=<?=$item['item_id']?>" method="post">
-                                                        <button type="submit" name="item-edit-btn">Edit Records</button>
+                                                    <form action="mod_userinfo.php?uiidlabel=<?=$item['userinfo_id']?>" method="post">
+                                                        <button type="submit" name="ui-edit-btn">Edit Records</button>
                                                     </form>
                                                 </div>                                             
                                             </td>
@@ -86,8 +84,7 @@ require "../vscode/dbcon.php";
                         </tbody>
                     </table>
                     <div>
-                
-
+            
                         <nav>
                             <ul class="pagination">
                                 <!-- Previous Button -->
@@ -109,8 +106,8 @@ require "../vscode/dbcon.php";
                             </ul>
                         </nav>
                         <div class="col-md-4 ms-auto">
-                            <form action="mod_product.php?itemidlabel?=0" method="post">
-                                <button type="submit" name="item-add-btn">Add New Item</button>
+                            <form action="mod_userinfo.php?uiidlabel?=0" method="post">
+                                <button type="submit" name="ui-add-btn">Add New Account</button>
 
                             </form>
                         </div>
@@ -122,6 +119,7 @@ require "../vscode/dbcon.php";
 
 
 <!-- END OF CONTENTS -->
+</div>
 </div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -137,22 +135,7 @@ include 'includes/footer.php';
 function RetrieveAll($table, $con, $start, $limit)
 {
     
-    $query = "SELECT 
-                i.item_id, 
-                i.item_name,
-                i.item_img,
-                i.item_spec,
-                i.item_desc,
-                i.item_price,
-                cat.category_name AS category, 
-                i.date_created, 
-                CONCAT('admin', i.admin_creator, ' : ', us.firstname) AS admin_creator, 
-                i.record_status 
-              FROM items i 
-              LEFT JOIN admin a ON i.admin_creator = a.admin_id 
-              LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id
-              LEFT JOIN categories cat ON i.cat_id = cat.cat_id 
-              LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
+    $query = "SELECT userinfo_id, CONCAT(firstname, ' ',lastname) AS user_fullname, student_number, sex, bday, contact_number, email, account_status FROM user_information LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
     $stmt->bind_param("ii", $start, $limit);
@@ -166,7 +149,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM items";
+    $totalQuery = "SELECT COUNT(*) as total FROM user_information";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

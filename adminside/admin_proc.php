@@ -220,12 +220,12 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
     header("Location: view_news.php");
 }
 
-//THIS IS FOR CONFIRMING AND INSERTING / UPDAITNG NEWS AND UPDATE RECORD
+//THIS IS FOR CONFIRMING AND INSERTING / UPDAITNG USER INFORMATION RECORD
 
 
 
-else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
-    $isEdit = $_POST['post-confirm-btn'];
+else if(isset($_POST['ui-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
+    $isEdit = $_POST['ui-confirm-btn'];
     $post_title = $_POST['post_title'];
     $post_caption = $_POST['post_caption'];
     $post_url = $_POST['post_url']; 

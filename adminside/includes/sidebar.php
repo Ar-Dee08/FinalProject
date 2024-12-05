@@ -16,11 +16,11 @@
                role="button" 
                aria-expanded="false" 
                aria-controls="collapseAccounts">
-                USER ACCOUNT INFORMATION
+                USER ACCOUNT RECORDS
             </a>
             <div class="collapse" id="collapseAccounts">
                 <ul class="list-group mt-2">
-                    <a class="list-group-item list-group-item-action" href="view_account.php">USER INFORMATION</a>
+                    <a class="list-group-item list-group-item-action" href="view_userinfo.php">USER INFORMATION</a>
                     <a class="list-group-item list-group-item-action" href="category2.php">USER ACCOUNT DETAILS</a>
                 </ul>
             </div>

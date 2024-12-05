@@ -55,8 +55,8 @@
                 <label for="last_name">Last Name:</label>
                 <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required><br><br>
                 
-                <label for="gender">Gender:</label>
-                <select class="login-sel" id="gender" name="gender" required>
+                <label for="sex">Sex :</label>
+                <select class="login-sel" id="sex" name="sex" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
