@@ -14,31 +14,5 @@ customer
 - ass@gmail.com	
 - ass
 
-ADD TO DB
-* categories
-* items
-* news_update
-
-- record_Status (if Removed or Active)
-
-**[Treyd Fest 2024]**
-
-Hello @everyone!
-
-For this year's Treyd Fest, SSITE will once again be participating as one of the booths for this event!
-
-For that reason, we are currently looking for SSITE members that volunteer to be one of the people manning the booth along with the SSITE executives and other members. We are looking for three (3) members for AM and three (3) members for PM to be precise, and you can access the link with your BPSU Email for the list of people who volunteer to be a part of this event. 
-
-**AM working hours** : 8:00 AM - 12:00PM
-**PM working hours** : 12:00 PM - 4:00PM
-
-
-:pushpin: Google Sheet for the Volunteering SSITE Members for Treyd Fest 2024 Booth :    
-
-
-
-Thank you for taking the time to read and we hope to see you during Treyd Fest. Hope you enjoy the event!
-
-For further questions, you can contact the our organization president :
-SSITE President : @President Aira
-Email : mc_ssite@bpsu.edu.ph
+* NEED :
+- Add Discounted Price field in item table

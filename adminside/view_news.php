@@ -52,7 +52,7 @@ require "../vscode/dbcon.php";
                                         <td><?=$item['item_name']?> </td>
 
                                         <td> 
-                                            <img  src="record_images/item_images/<?=$item['item_img'];?>" alt="item">
+                                            <img  src="item_images/<?=$item['item_img'];?>" alt="item">
                                         
                                         
                                         </td>
@@ -65,8 +65,8 @@ require "../vscode/dbcon.php";
                                         <td class="item-txt"><?=$item['record_status']?> </td>
                                         <td>
                                              <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                <form action="mod_product.php?itemidlabel=<?=$item['item_id']?>" method="post">
-                                                    <button type="submit" name="item-edit-btn">Edit Records</button>
+                                                <form action="mod_product.php?postidlabel=<?=$item['post_id']?>" method="post">
+                                                    <button type="submit" name="post-edit-btn">Edit Records</button>
                                                 </form>
                                              </div>                                             
                                         </td>
@@ -108,8 +108,8 @@ require "../vscode/dbcon.php";
                         </ul>
                     </nav>
                     <div class="col-md-4 ms-auto">
-                        <form action="mod_product.php?itemidlabel?=0" method="post">
-                            <button type="submit" name="item-add-btn">Add New Item</button>
+                        <form action="mod_product.php?postidlabel?=0" method="post">
+                            <button type="submit" name="post-add-btn">Add New Item</button>
 
                         </form>
                     </div>

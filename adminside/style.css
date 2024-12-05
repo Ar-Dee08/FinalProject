@@ -315,7 +315,7 @@ button:hover {
     border-radius: 5px;
     max-width: 90%;
     /* max-height: fit-content; */
-    margin: 50px auto;    
+    margin: 5% auto;    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-family: 'Inter', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -327,6 +327,13 @@ button:hover {
     background-color: #285963; /* Replace with your hex code */
     color: #f4f4f4; /* Text color */
   }
+
+.custom-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
 
 .custom-nav button {
     background-color: #458D9E;
@@ -396,9 +403,18 @@ select.admin-sel {
     color: #163A3E;
 }
 
-.item-img img {
+.record-img img {
     height: auto;
     max-width: 8em;
     max-height: 10em;
     object-fit: cover !important; /* ensures the image covers the given area */
+}
+
+.mod-img-preview img {
+    height: auto;
+    max-width: 15em;
+    max-height: 15em;
+    object-fit: cover !important; /* ensures the image covers the given area */
+    border-radius: 3%;
+    margin: 2em auto;
 }

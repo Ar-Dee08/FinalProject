@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 12:41 PM
+-- Generation Time: Dec 04, 2024 at 07:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,8 +62,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`cat_id`, `category_name`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'Clothing', 2, '2024-12-04 17:08:04', 'Removed'),
-(2, 'Miscellaneous', 2, '2024-12-04 17:08:12', 'Removed'),
+(1, 'Clothing', 2, '2024-12-04 17:08:04', 'Active'),
+(2, 'Miscellaneous', 2, '2024-12-04 17:08:12', 'Active'),
 (3, 'Bag', 2, '2024-12-04 17:08:44', 'Active');
 
 -- --------------------------------------------------------
@@ -143,9 +143,9 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_img`, `item_price`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'TSHIRT', 'White', 'sadadsasdasdad', 0x617364616461, 300, 30, 2, '2024-12-04', 'Active'),
-(2, 'TOTE BAG', 'SMALL', 'WHITE', 0x312d31313339395f667265652d68656172742d636c69706172742d6c6f76652d68656172742d636c69706172742d7472616e73706172656e742d6261636b67726f756e642e706e67, 300, 3, 2, '2024-12-04', '<br />\r\n<b>Warning</b>:  '),
-(3, 'TSHIR', 'A', 'SD', 0x5f313733333331323131312e706e67, 43, 3, 2, '2024-12-04', 'Active');
+(1, 'T-Shirt', 'Small', 'White', 0x315f313733333333333938312e706e67, 320, 1, 2, '2024-12-05', 'Active'),
+(2, 'Polo Shirt', 'Medium', '  Turquoise', 0x325f313733333333343135342e6a7067, 700, 1, 2, '2024-12-05', 'Active'),
+(3, 'Tote Bag', 'Brightening Future~', '-', 0x335f313733333333343230322e706e67, 220, 3, 2, '2024-12-05', 'Active');
 
 -- --------------------------------------------------------
 
@@ -177,10 +177,9 @@ CREATE TABLE `news_update` (
   `post_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `caption` text NOT NULL,
-  `post_image` longblob NOT NULL,
+  `post_img` longblob NOT NULL,
   `post_url` text NOT NULL,
   `admin_id` bigint(11) UNSIGNED NOT NULL,
-  `date_uploaded` date NOT NULL,
   `date_webposted` date NOT NULL,
   `record_status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -340,7 +339,8 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (43, 1, '2024-12-04 10:52:47', 2),
 (44, 1, '2024-12-04 14:27:22', 2),
 (45, 4, '2024-12-04 14:29:42', 1),
-(46, 1, '2024-12-04 14:31:37', 2);
+(46, 1, '2024-12-04 14:31:37', 2),
+(47, 1, '2024-12-04 22:14:10', 2);
 
 -- --------------------------------------------------------
 
@@ -532,7 +532,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

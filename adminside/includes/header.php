@@ -10,7 +10,9 @@
 </head>
 <body>
 
-    <?php include('navbar.php'); ?>
+    <div class="custom-nav">
+        <?php include('navbar.php'); ?>
+    </div>
     <?php include('sidebar.php'); ?>
 
     <div class="admin-container">
