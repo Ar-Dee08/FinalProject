@@ -490,7 +490,6 @@ select.admin-sel {
     color: #5e9ba9;
 }
 
-/* Offcanvas Styling */
 .btn.btn-primary {
     font-family: 'Inter', sans-serif;
     background-color: transparent;
@@ -506,6 +505,7 @@ select.admin-sel {
     color: #5e9ba9 !important;
 }
 
+/* Offcanvas Styling */
 .offcanvas {
     background-color: #285963;
     color: #F9F6F6;
@@ -542,6 +542,11 @@ select.admin-sel {
     background-color: transparent;
 }
 
+.offcanvas img {
+    display: block;
+    margin: 0 auto;
+}
+
 /* Admin */
 .logossite {
     display: flex;
@@ -566,4 +571,19 @@ select.admin-sel {
     font-size: 1.2rem;
     margin-top: 10px;
     color: #e0e9eb;
+}
+
+.logo-bg-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/SSITE-LOGO.png');
+    background-repeat: repeat;
+    background-size: 180px;
+    background-color: #b4dbe6;
+    opacity: 0.1;
+    z-index: -1;
 }

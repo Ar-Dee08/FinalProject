@@ -8,6 +8,7 @@ require "../vscode/dbcon.php";
 
 <!-- CONTENT -->
 
+<div class="logo-bg-2"></div>
 <div class="admin-container">
 
     <div class="row">

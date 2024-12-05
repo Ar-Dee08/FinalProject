@@ -7,6 +7,7 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
+<div class="logo-bg-2"></div>
 <div class="admin-container">
 
     <div class="row">
@@ -73,27 +74,27 @@ require "../vscode/dbcon.php";
                                             </td>
                                         </tr>
 
-                                    <?php
-                                    endforeach;                                                                 
-                                } else {
-                                    ?>
-                                    <tr>
-                                        <td colspan="15" class="text-center">No records found</td>
-                                    </tr>
                                 <?php
-                                }
-                            ?>
-                        </tbody>
-                    </table>
-                    <div>
-                
+                                endforeach;                                                                 
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="15" class="text-center">No records found</td>
+                                </tr>
+                            <?php
+                            }
+                        ?>
+                    </tbody>
+                </table>
+                <div>
+               
 
-                        <nav>
-                            <ul class="pagination">
-                                <!-- Previous Button -->
-                                <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
-                                    <a class="page-link" href="?page=<?= $page - 1; ?>">Previous</a>
-                                </li>
+                    <nav>
+                        <ul class="pagination">
+                            <!-- Previous Button -->
+                            <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="?page=<?= $page - 1; ?>">Previous</a>
+                            </li>
 
                                 <!-- Page Numbers -->
                                 <?php for ($i = 1; $i <= $totalPages; $i++) : ?>

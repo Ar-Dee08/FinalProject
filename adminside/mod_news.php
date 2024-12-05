@@ -36,6 +36,7 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
 ?>
 
 <!-- CONTENTS -->
+<div class="logo-bg-2"></div>
 <div class="admin-container">
 
     <div class="row admin-mod-text">
