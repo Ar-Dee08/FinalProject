@@ -2,6 +2,7 @@
 session_start();
 include 'admin_middleware.php';
 include 'includes/header.php';
+include 'includes/footer.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,11 +13,19 @@ include 'includes/header.php';
     <title>Home</title>
 </head>
 <body class="logo-bg-2">
-    <div>
-        <h1>Home</h1>
+    <div class="home-txt">
+        <h2>Welcome, Admin!</h2>
+        <p>What would you like to do today?</p>
+    </div>
+    <!-- 
     <?php
-        include 'includes/footer.php';
-    ?>
-    <!-- </div>
+        if (isset($_SESSION['firstname'])) {
+            echo "<p>Hello, " . htmlspecialchars($_SESSION['firstname']) . "!</p>";
+        } else {
+            echo "<p>Hello, Admin!</p>";
+        }
+        ?>
+     -->
+
 </body>
-</html> -->
+</html>

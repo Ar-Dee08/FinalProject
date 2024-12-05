@@ -587,3 +587,26 @@ select.admin-sel {
     opacity: 0.1;
     z-index: -1;
 }
+
+.home-txt {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.home-txt h2 {
+    font-size: 1.8rem;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.home-txt p {
+    font-size: 1rem;
+    color: #666666;
+    line-height: 1.5;
+}
