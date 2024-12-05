@@ -7,7 +7,6 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -85,8 +84,6 @@ require "../vscode/dbcon.php";
                     </tbody>
                 </table>
                 <div>
-               
-
                     <nav>
                         <ul class="pagination">
                             <!-- Previous Button -->

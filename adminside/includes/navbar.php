@@ -24,9 +24,10 @@
           <a class="nav-link" href="#">Link</a>
         </li> -->
       </ul>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" id="admin-logout">
-          <a class="nav-link active" href="../vscode/userlogout.php">Log Out</a>
+            <a class="nav-link active" href="../vscode/userlogout.php"><i class="fa-solid fa-right-from-bracket fa-1x"></i> Sign Out</a>
         </li>
       </ul>
         <!-- <li class="nav-item dropdown">

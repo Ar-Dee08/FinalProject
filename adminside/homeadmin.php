@@ -11,11 +11,9 @@ include 'includes/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
-<body class="login-bg">
+<body class="logo-bg-2">
     <div>
-        <img src="images/SSITE-LOGO.png" alt="Site Logo" style="width:80px;height:auto;">
         <h1>Home</h1>
-
     <!-- Sidebar JS -->
     <div>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

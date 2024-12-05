@@ -7,7 +7,7 @@ require "../vscode/dbcon.php";
 ?>
 
 <!-- CONTENT -->
-
+<div class="logo-bg-2"></div>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -122,10 +122,6 @@ require "../vscode/dbcon.php";
 
 
             </div>
-
-
-
-
 
 <!-- END OF CONTENTS -->
 </div>
