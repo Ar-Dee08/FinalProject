@@ -5,13 +5,6 @@ include 'admin_middleware.php';
 include '../vscode/dbcon.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
 <body class="logo-bg-2">
     <div class="home-txt">
     
@@ -43,8 +36,3 @@ include '../vscode/dbcon.php';
             }            
         ?> 
 
-<div class="footer-footer">
-    <?php
-        include 'includes/footer.php';
-    ?>
-</div>
