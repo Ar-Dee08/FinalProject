@@ -9,7 +9,7 @@
                 <a href="view_category.php" class="list-group-item list-group-item-action">CATEGORIES</a>
                 <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
                 <a href="view_news.php" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
-                <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
+                <a href="view_admin.php" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
                 <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
                 <!-- Collapsible Section -->
                 <a class="list-group-item list-group-item-action" 

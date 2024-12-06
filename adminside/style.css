@@ -337,7 +337,7 @@ button:hover {
     border-radius: 5px;
     max-width: 95%;
     /* max-height: fit-content; */
-    margin: 5% auto;    
+    margin: 3% auto;    
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-family: 'Inter', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -441,6 +441,11 @@ select.admin-sel {
 }
 .card-body{
     color: #163A3E;
+}
+
+.card-header {
+    padding-left: 15%;
+    padding-top: 15%;
 }
 
 .record-img img {
