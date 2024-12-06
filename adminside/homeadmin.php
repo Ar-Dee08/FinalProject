@@ -36,3 +36,8 @@ include '../vscode/dbcon.php';
             }            
         ?> 
 
+<div class="footer-footer">
+    <?php
+        include 'includes/footer.php';
+    ?>
+</div>
