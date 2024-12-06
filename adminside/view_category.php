@@ -181,8 +181,6 @@ require "../vscode/dbcon.php";
 </body>
 
 <?php
-include 'includes/footer.php';
-
 // function pagination($con)
 // {
 //     // Pagination logic
@@ -237,7 +235,10 @@ function pagination($con)
 
     return [$limit, $totalPages];
 }
-
-
 ?>
 
+<div class="footer-footer">
+    <?php
+        include 'includes/footer.php';
+    ?>
+</div>

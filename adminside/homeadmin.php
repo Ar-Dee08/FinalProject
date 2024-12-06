@@ -2,17 +2,9 @@
 // session_start();
 include 'includes/header.php';
 include 'admin_middleware.php';
-include 'includes/footer.php';
 include '../vscode/dbcon.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
 <body class="logo-bg-2">
     <div class="home-txt">
     
@@ -43,4 +35,10 @@ include '../vscode/dbcon.php';
             if (isset($_GET['error'])) {
                 echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['error'] . '</p>';
             }            
-        ?> 
+        ?>
+
+<div class="footer-footer">
+    <?php
+        include 'includes/footer.php';
+    ?>
+</div>
