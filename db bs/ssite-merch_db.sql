@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 11:26 AM
+-- Generation Time: Dec 06, 2024 at 04:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `admin_id` bigint(20) UNSIGNED NOT NULL,
   `userinfo_id` bigint(11) UNSIGNED NOT NULL,
-  `privilege` varchar(255) NOT NULL,
-  `granting_date` date NOT NULL,
+  `user_privilege` varchar(255) NOT NULL,
+  `granting_date` datetime NOT NULL,
   `admin_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,9 +39,10 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `userinfo_id`, `privilege`, `granting_date`, `admin_status`) VALUES
-(1, 1, '', '0000-00-00', 'Active'),
-(2, 6, '', '0000-00-00', 'Active');
+INSERT INTO `admin` (`admin_id`, `userinfo_id`, `user_privilege`, `granting_date`, `admin_status`) VALUES
+(1, 1, 'Authorized', '0000-00-00 00:00:00', 'Active'),
+(2, 6, 'Authorized', '0000-00-00 00:00:00', 'Active'),
+(3, 15, 'Unauthorized', '2024-12-06 00:00:00', 'Active');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,9 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`cat_id`, `category_name`, `admin_creator`, `date_created`, `record_status`) VALUES
 (1, 'Clothing', 2, '2024-12-04 17:08:04', 'Active'),
 (2, 'Miscellaneous', 2, '2024-12-04 17:08:12', 'Active'),
-(3, 'Bag', 2, '2024-12-04 17:08:44', 'Active');
+(3, 'Bag', 2, '2024-12-04 17:08:44', 'Active'),
+(4, 'Handbag', 2, '2024-12-06 16:29:40', 'Active'),
+(5, 'asd', 2, '2024-12-06 18:25:34', 'Active');
 
 -- --------------------------------------------------------
 
@@ -108,20 +111,6 @@ INSERT INTO `customertype_verification` (`custype_verif_id`, `type_verification_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `item-orders`
---
-
-CREATE TABLE `item-orders` (
-  `order_id` bigint(20) UNSIGNED NOT NULL,
-  `item_totalamount` decimal(10,0) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `item_id` bigint(11) UNSIGNED NOT NULL,
-  `transaction_id` bigint(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `items`
 --
 
@@ -132,6 +121,7 @@ CREATE TABLE `items` (
   `item_desc` varchar(255) NOT NULL,
   `item_img` longblob NOT NULL,
   `item_price` decimal(10,0) NOT NULL,
+  `item_discprice` decimal(10,0) NOT NULL,
   `cat_id` int(11) UNSIGNED NOT NULL,
   `admin_creator` bigint(20) UNSIGNED NOT NULL,
   `date_created` date NOT NULL,
@@ -142,10 +132,25 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_img`, `item_price`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'T-Shirt', 'Small', 'White', 0x315f313733333333333938312e706e67, 320, 1, 2, '2024-12-05', 'Active'),
-(2, 'Polo Shirt', 'Medium', '  Turquoise', 0x325f313733333333343135342e6a7067, 700, 1, 2, '2024-12-05', 'Active'),
-(3, 'Tote Bag', 'Brightening Future~', '-', 0x335f313733333333343230322e706e67, 220, 3, 2, '2024-12-05', 'Active');
+INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_img`, `item_price`, `item_discprice`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
+(1, 'T-Shirt', 'Small', 'White', 0x315f313733333333333938312e706e67, 320, 0, 1, 2, '2024-12-05', 'Active'),
+(2, 'Polo Shirt', 'Medium', '  Turquoise', 0x325f313733333333343135342e6a7067, 700, 0, 1, 2, '2024-12-05', 'Active'),
+(3, 'Tote Bag', 'Brightening Future~', '-', 0x335f313733333333343230322e706e67, 220, 0, 3, 2, '2024-12-05', 'Active'),
+(4, 'Sign', 'Small', 'SSITE1', 0x345f313733333437333830352e6a7067, 200, 0, 2, 2, '2024-12-06', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_orders`
+--
+
+CREATE TABLE `item_orders` (
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `item_totalamount` decimal(10,0) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `item_id` bigint(11) UNSIGNED NOT NULL,
+  `transaction_id` bigint(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -217,6 +222,16 @@ CREATE TABLE `transactionstatus` (
   `transaction_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `transactionstatus`
+--
+
+INSERT INTO `transactionstatus` (`transaction_status_id`, `transaction_status`) VALUES
+(1, 'Pending'),
+(2, 'Ongoing'),
+(3, 'Completed'),
+(4, 'Cancelled');
+
 -- --------------------------------------------------------
 
 --
@@ -241,7 +256,9 @@ INSERT INTO `user_credentials` (`usercred_id`, `email`, `password`, `userinfo_id
 (4, 'ass@gmail.com', '$2y$10$ozLtTi8z6IooAw0zQoxm3em1QpFsUnHoqlFsZvq3lD4Z8uXFtsLyO', 9),
 (5, 'aaa@gmail.com', '$2y$10$fmkfVFKVdAKbVbw2vd6/p.ugcPd0gjTvGEKekx72oeUCbME3ATrGW', 10),
 (6, 'a@gmail.com', '$2y$10$NHiSFpuQo1AnpWxhdRG23eQvp221Zx8Ifu8e8MmOpikSzLpOBzvAK', 11),
-(7, 'ab@gmail.com', '$2y$10$W31csEdjNraLvriwdETHPeB6/ggQft79znMy7K7ibp4gA.iOiQkBe', 12);
+(7, 'ab@gmail.com', '$2y$10$W31csEdjNraLvriwdETHPeB6/ggQft79znMy7K7ibp4gA.iOiQkBe', 12),
+(8, 'grardee@gmail.com', '$2y$10$O.ybD2QXctQAAhQsqa9C2.k17EvH0BAAf1JKz6Z6nbZxyKVNL2jYu', 15),
+(9, 'grards@gmail.com', '$2y$10$YUEmC3DVtcxkXdQ.u5j4P.J.7K9cc7SC8eTwinM6OCVITBKDUMh7G', 16);
 
 -- --------------------------------------------------------
 
@@ -270,8 +287,8 @@ CREATE TABLE `user_information` (
 --
 
 INSERT INTO `user_information` (`userinfo_id`, `firstname`, `lastname`, `sex`, `bday`, `student_number`, `contact_number`, `email`, `account_status`, `memstatus_id`, `customertype_id`, `custype_verif_id`, `account_created`) VALUES
-(1, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '22-05509', '09765868588', 'emmsumbad@bpsu.edu.ph', 'Active', 1, 1, 1, '2024-12-02 17:00:53'),
-(2, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '22-05509', '09765868588', 'eloisamariemsumbad@gmail.com', 'Active', 1, 1, 1, '2024-12-02 17:12:15'),
+(1, 'Eloisa Marie', 'Sumbad', 'Male', '2004-10-28', '22-05509', '09765868588', 'emsumbad@gmail.com', 'Active', 3, 1, 1, '2024-12-02 17:00:53'),
+(2, 'Eloisa Marie', 'Sumbad', 'Male', '2004-10-28', '22-05509', '09765868588', 'eloisamariemsumbaddd@gmail.com', 'Active', 1, 1, 1, '2024-12-02 17:12:15'),
 (3, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '-', '09765868588', 'jayne.islyf@gmail.com', 'Active', 1, 2, 1, '2024-12-02 17:19:10'),
 (4, 'Eloisa Marie', 'Sumbad', 'Female', '2004-10-28', '-', '09765868588', 'name@gmail.com', 'Active', 1, 2, 1, '2024-12-02 17:26:48'),
 (5, 'Eloisa Marie', 'Sumbad', 'Male', '2004-02-02', '-', '09765868588', 'blue26gatorade@gmail.com', 'Active', 1, 2, 1, '2024-12-02 17:27:37'),
@@ -281,7 +298,11 @@ INSERT INTO `user_information` (`userinfo_id`, `firstname`, `lastname`, `sex`, `
 (9, 'Eloisa Marie', 'Sumbad', 'Male', '2004-02-22', '22-05509', '09765868588', 'ass@gmail.com', 'Active', 1, 1, 1, '2024-12-03 00:37:27'),
 (10, 'Eloisa Marie', 'Sumbad', 'Female', '2004-11-01', '-', '09765868588', 'aaa@gmail.com', 'Active', 1, 2, 1, '2024-12-03 00:40:38'),
 (11, 'Eloisa Marie', 'Sumbad', 'Female', '2005-05-12', '-', '09765868588', 'a@gmail.com', 'Active', 1, 2, 1, '2024-12-03 00:54:50'),
-(12, 'Eloisa Marie', 'Sumbad', 'Female', '2005-05-12', '-', '09765868588', 'ab@gmail.com', 'Active', 1, 2, 1, '2024-12-03 00:57:58');
+(12, 'Eloisa Marie', 'Sumbad', 'Female', '2005-05-12', '-', '09765868588', 'ab@gmail.com', 'Active', 1, 2, 1, '2024-12-03 00:57:58'),
+(13, 'Grace', 'Atrazo', 'Male', '2011-11-11', '-', '09666666666', 'grace@gmail.com', 'Active', 2, 2, 2, '2024-12-06 02:41:14'),
+(14, 'Grace', 'Atrazo', 'Male', '2011-11-11', '22-05509', '09666666666', 'graceerd@gmail.com', 'Active', 2, 1, 2, '2024-12-06 10:00:06'),
+(15, 'ra', 'rd', 'Male', '2011-11-11', '132', '09666666666', 'grardee@gmail.com', 'Active', 1, 2, 1, '2024-12-06 16:26:15'),
+(16, 'Grace', 'Atrazo', 'Male', '2022-02-22', '-', '09666666666', 'grards@gmail.com', 'Active', 1, 2, 2, '2024-12-06 16:28:38');
 
 -- --------------------------------------------------------
 
@@ -352,7 +373,20 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (49, 1, '2024-12-05 10:27:23', 2),
 (50, 1, '2024-12-05 16:05:02', 2),
 (51, 1, '2024-12-05 16:18:00', 1),
-(52, 1, '2024-12-05 16:18:07', 2);
+(52, 1, '2024-12-05 16:18:07', 2),
+(53, 1, '2024-12-06 08:57:01', 2),
+(54, 4, '2024-12-06 17:45:12', 1),
+(55, 1, '2024-12-06 17:45:22', 2),
+(56, 1, '2024-12-06 17:52:36', 2),
+(57, 1, '2024-12-06 17:53:40', 2),
+(58, 1, '2024-12-06 18:10:57', 2),
+(59, 1, '2024-12-06 18:11:34', 1),
+(60, 1, '2024-12-06 18:11:44', 2),
+(61, 1, '2024-12-06 18:16:00', 2),
+(62, 1, '2024-12-06 18:16:36', 2),
+(63, 1, '2024-12-06 19:17:56', 2),
+(64, 1, '2024-12-06 21:21:03', 2),
+(65, 1, '2024-12-06 21:44:51', 2);
 
 -- --------------------------------------------------------
 
@@ -407,15 +441,6 @@ ALTER TABLE `customertype_verification`
   ADD PRIMARY KEY (`custype_verif_id`);
 
 --
--- Indexes for table `item-orders`
---
-ALTER TABLE `item-orders`
-  ADD PRIMARY KEY (`order_id`),
-  ADD UNIQUE KEY `order_id` (`order_id`),
-  ADD KEY `fk_itemid` (`item_id`),
-  ADD KEY `fk_tranid` (`transaction_id`);
-
---
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -423,6 +448,15 @@ ALTER TABLE `items`
   ADD UNIQUE KEY `item_id` (`item_id`),
   ADD KEY `fk_catid` (`cat_id`),
   ADD KEY `fk_adminid_item` (`admin_creator`);
+
+--
+-- Indexes for table `item_orders`
+--
+ALTER TABLE `item_orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD UNIQUE KEY `order_id` (`order_id`),
+  ADD KEY `fk_itemid` (`item_id`),
+  ADD KEY `fk_tranid` (`transaction_id`);
 
 --
 -- Indexes for table `mem_status`
@@ -496,13 +530,13 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `admin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customertype`
@@ -511,16 +545,16 @@ ALTER TABLE `customertype`
   MODIFY `customertype_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `item-orders`
---
-ALTER TABLE `item-orders`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `item_orders`
+--
+ALTER TABLE `item_orders`
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mem_status`
@@ -544,7 +578,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- Constraints for dumped tables
@@ -563,18 +597,18 @@ ALTER TABLE `categories`
   ADD CONSTRAINT `fk_adminid_cat` FOREIGN KEY (`admin_creator`) REFERENCES `admin` (`admin_id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `item-orders`
---
-ALTER TABLE `item-orders`
-  ADD CONSTRAINT `fk_itemid` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tranid` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`transaction_id`) ON UPDATE CASCADE;
-
---
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `fk_adminid_item` FOREIGN KEY (`admin_creator`) REFERENCES `admin` (`admin_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_catid` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`cat_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `item_orders`
+--
+ALTER TABLE `item_orders`
+  ADD CONSTRAINT `fk_itemid` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tranid` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`transaction_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news_update`
