@@ -3,6 +3,7 @@ session_start();
 include 'admin_middleware.php';
 include 'includes/header.php';
 include 'includes/footer.php';
+include '../vscode/dbcon.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +15,30 @@ include 'includes/footer.php';
 </head>
 <body class="logo-bg-2">
     <div class="home-txt">
-        <h2>Welcome, Admin!</h2>
-        <p>What would you like to do today?</p>
-    </div>
-    <!-- 
+    
+    
     <?php
-        if (isset($_SESSION['firstname'])) {
-            echo "<p>Hello, " . htmlspecialchars($_SESSION['firstname']) . "!</p>";
+        if (isset($_SESSION['admin_id'])) {
+
+            $getnamequery = "SELECT * FROM admin a LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id WHERE admin_id = ?";
+            $stmt = $con->prepare($getnamequery);
+            $stmt->bind_param("i",$_SESSION['admin_id']);
+
+            if ($stmt->execute()) {
+                $results = $stmt->get_result(); // Always return the result object        
+                $ui_row = mysqli_fetch_assoc($results); 
+                $admin_name = $ui_row['firstname'];
+                
+            
+            echo "<h2>Hello, " . htmlspecialchars($admin_name) . "!</h2>";
+            }
+            
         } else {
             echo "<p>Hello, Admin!</p>";
         }
         ?>
-     -->
+        <p>What would you like to do today?</p>
 
+    </div>
 </body>
 </html>

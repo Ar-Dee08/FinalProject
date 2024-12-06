@@ -271,9 +271,11 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
             // 
             $stmt2 = $con->prepare($query);
             $stmt2->bind_param("si",$ui_email, $usercred_id);
+            
 
-            if ($stmt->execute()) {
-                header("Location: view_userinfo.php");
+            if ($stmt->execute() && $stmt2->execute()) {
+                // header("Location: view_userinfo.php");
+                echo $ui_email;
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
