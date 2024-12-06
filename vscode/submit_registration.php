@@ -20,7 +20,7 @@ if (isset($_POST['signUp'])) {
     } else {
         $firstName = ucwords(strtolower($_POST['first_name']));
         $lastName = ucwords(strtolower($_POST['last_name']));
-        $gender = ucwords(strtolower($_POST['gender']));
+        $sex = ucwords(strtolower($_POST['sex']));
         $bday = $_POST['dob'];
         $contactnum = $_POST['mobile'];
         $account_status = "Active";
@@ -53,8 +53,8 @@ if (isset($_POST['signUp'])) {
         $uid = (TableRowCount("user_information", $con)) + 1;
         $ucredid = (TableRowCount("user_credentials", $con)) + 1;
 
-        $registerquery = "INSERT INTO user_information(userinfo_id, firstname, lastname, gender, bday, student_number, contact_number,email,account_status,memstatus_id,customertype_id,custype_verif_id,account_created)
-        VALUES(" . $uid . ",'" . $firstName . "','" . $lastName . "','" . $gender . "','" . $bday . "','" . $studentnum . "','" . $contactnum . "','" . $email . "','" . $account_status . "'," . $mem_status . "," . $customertype_id . "," . $custype_verif_id . ", NOW());";
+        $registerquery = "INSERT INTO user_information(userinfo_id, firstname, lastname, sex, bday, student_number, contact_number,email,account_status,memstatus_id,customertype_id,custype_verif_id,account_created)
+        VALUES(" . $uid . ",'" . $firstName . "','" . $lastName . "','" . $sex . "','" . $bday . "','" . $studentnum . "','" . $contactnum . "','" . $email . "','" . $account_status . "'," . $mem_status . "," . $customertype_id . "," . $custype_verif_id . ", NOW());";
 
         $credquery = "INSERT INTO user_credentials(usercred_id, email,password,userinfo_id) VALUES(" . $ucredid . ", '" . $email . "','" . $hashedPassword . "'," . $uid . ");";
 
