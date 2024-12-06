@@ -27,6 +27,7 @@ require "../vscode/dbcon.php";
                                 <th>Specification</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th>Discounted Price</th>
                                 <th>Category</th>
                                 <th>Date Created</th>
                                 <th>Creator Admin ID</th>
@@ -60,6 +61,7 @@ require "../vscode/dbcon.php";
                                             <td><?=$item['item_spec']?> </td>
                                             <td><?=$item['item_desc']?> </td>
                                             <td><?=$item['item_price']?> </td>
+                                            <td><?=$item['item_discprice']?> </td>
                                             <td><?=$item['category']?> </td>
                                             <td><?=$item['date_created']?> </td>
                                             <td><?=$item['admin_creator']?> </td>
@@ -144,6 +146,7 @@ function RetrieveAll($table, $con, $start, $limit)
                 i.item_spec,
                 i.item_desc,
                 i.item_price,
+                i.item_discprice,
                 cat.category_name AS category, 
                 i.date_created, 
                 CONCAT('admin', i.admin_creator, ' : ', us.firstname) AS admin_creator, 

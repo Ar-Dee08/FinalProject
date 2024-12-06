@@ -57,6 +57,7 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
     $item_spec = $_POST['item_spec'];
     $item_desc = $_POST['item_desc'];
     $item_price = $_POST['item_price'];
+    $item_discprice = $_POST['item_discprice'];
     $cat_id = $_POST['cat_id']; 
     
     
@@ -88,10 +89,10 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
         }
         
 
-        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price=?, cat_id=?, item_img=?, record_status = ? WHERE item_id = ?";
+        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price=?, item_discprice=?, cat_id=?, item_img=?, record_status = ? WHERE item_id = ?";
         // 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("sssdissi", $item_name,$item_spec, $item_desc, $item_price, $cat_id, $imgfile_name, $item_recstat, $item_id);
+        $stmt->bind_param("sssddissi", $item_name,$item_spec, $item_desc, $item_price, $item_discprice, $cat_id, $imgfile_name, $item_recstat, $item_id);
 
         if ($stmt->execute()) {
             header("Location: view_product.php");
@@ -111,11 +112,11 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
             move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
             echo $imgfile_name;
 
-        $query = "INSERT INTO items(item_id,item_name,item_spec,item_desc,item_price,cat_id,item_img,admin_creator,date_created,record_status)
+        $query = "INSERT INTO items(item_id,item_name,item_spec,item_desc,item_price, item_discprice,cat_id,item_img,admin_creator,date_created,record_status)
         VALUES(?,?,?,?,?,?,?,?,NOW(),'Active');";
 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("isssdisi", $item_id,$item_name,$item_spec,$item_desc,$item_price,$cat_id,$imgfile_name, $admin_id);
+        $stmt->bind_param("isssddisi", $item_id,$item_name,$item_spec,$item_desc,$item_price, $item_discprice,$cat_id,$imgfile_name, $admin_id);
 
         if ($stmt->execute()) {
             header("Location: view_product.php");
@@ -407,6 +408,64 @@ else if(isset($_POST['ad-confirm-btn'])){   //FOR ADMin
 
 
 
+//THIS IS FOR CONFIRMING AND INSERTING / UPDAITNG TRANSACTION
+
+
+
+else if(isset($_POST['tr-confirm-btn'])){   //FOR TRANSACTION
+    $isEdit = $_POST['tr-confirm-btn']; 
+           
+        if($isEdit === "1"){
+            $tr_id = $_POST['tr_id'];
+            $tr_stat = $_POST['tr_stat'];
+            
+            $query = "UPDATE transactions SET
+                    transaction_status_id = ?
+                    WHERE transaction_id = ?;";
+            // 
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ii",  $tr_stat,$tr_id);
+
+            if ($stmt->execute()) {
+                header("Location: view_transaction.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+        // } else if($isEdit === "0") {
+        //     $admin_id = TableRowCount("admin",$con)+1;
+        //     $uid = $_POST['ad_uid'];
+
+        //     $query = "INSERT INTO admin(
+        //             admin_id,
+        //             userinfo_id,
+        //             user_privilege,
+        //             granting_date,
+        //             admin_status
+        //             )
+        //     VALUES(?,?,?,NOW(),'Active');";
+
+        //     $stmt = $con->prepare($query);
+        //     $stmt->bind_param("iis", $admin_id, $uid, $ad_priv );
+            
+        //     if ($stmt->execute()) {
+        //         header("Location: view_admin.php");
+        //         exit();
+        //     } else {
+        //         echo "Error: " . $stmt->error;
+        //     }
+
+        } else {
+            echo "Invalid action.";
+        } 
+    
+} else if (isset($_POST['tr-cancel-btn'])){
+    header("Location: view_transaction.php");
+} else if (isset($_POST['tr-userinfo-btn'])){
+    header("Location: view_userinfo.php");
+
+}
 
 
 

@@ -18,6 +18,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
             $item_spec = $item_row['item_spec'];
             $item_desc = $item_row['item_desc'];
             $item_price = $item_row['item_price'];
+            $item_discprice = $item_row['item_discprice'];
             $category = $item_row['cat_id'];
             $item_stat = $item_row['record_status'];
             $item_img = $item_row['item_img'];
@@ -83,6 +84,10 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                             Item Price
                                         </label>
                                         <input type="number" value="<?= $item_price ?>" name="item_price" placeholder="Enter Item Price" class="form-control" required step="0.01" min="0"> 
+                                        <label for="">
+                                            Discounted Price
+                                        </label>
+                                        <input type="number" value="<?= $item_discprice ?>" name="item_discprice" placeholder="Enter Discounted Price" class="form-control" required step="0.01" min="0"> 
                                         
                                         <label for="">
                                             Category
@@ -142,6 +147,10 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                             Item Price
                                         </label>
                                         <input type="number" name="item_price" placeholder="Enter Item Price" class="form-control" required step="0.01" min="0"> 
+                                        <label for="">
+                                            Discounted Price
+                                        </label>
+                                        <input type="number" name="item_discprice" placeholder="Enter Discounted Price" class="form-control" required step="0.01" min="0"> 
                                         
                                         <label for="">
                                             Category

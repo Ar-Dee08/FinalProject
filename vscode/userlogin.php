@@ -55,7 +55,7 @@ if(mysqli_num_rows($uidres)===1){
 
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
 
-            header("Location: ../customerside/homecustom.php");
+            header("Location: ../customerside/homecustomer.php");
             exit();
         } else {
             echo 'user is not an admin and logged in in admin';
