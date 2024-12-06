@@ -412,59 +412,57 @@ else if(isset($_POST['ad-confirm-btn'])){   //FOR ADMin
 
 
 
-else if(isset($_POST['tr-confirm-btn'])){   //FOR ADMin
+else if(isset($_POST['tr-confirm-btn'])){   //FOR TRANSACTION
     $isEdit = $_POST['tr-confirm-btn']; 
-    $ad_priv = $_POST['ad_priv'];
            
         if($isEdit === "1"){
-            $admin_id = $_POST['admin_id'];
-            $account_status = $_POST['recstat'];
+            $tr_id = $_POST['tr_id'];
+            $tr_stat = $_POST['tr_stat'];
             
-            $query = "UPDATE admin SET
-                    user_privilege = ?,
-                    admin_status = ?
-                    WHERE admin_id = ?;";
+            $query = "UPDATE transactions SET
+                    transaction_status_id = ?
+                    WHERE transaction_id = ?;";
             // 
             $stmt = $con->prepare($query);
-            $stmt->bind_param("ssi",  $ad_priv,$account_status, $admin_id);
+            $stmt->bind_param("ii",  $tr_stat,$tr_id);
 
             if ($stmt->execute()) {
-                header("Location: view_admin.php");
+                header("Location: view_transaction.php");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
             }
 
-        } else if($isEdit === "0") {
-            $admin_id = TableRowCount("admin",$con)+1;
-            $uid = $_POST['ad_uid'];
+        // } else if($isEdit === "0") {
+        //     $admin_id = TableRowCount("admin",$con)+1;
+        //     $uid = $_POST['ad_uid'];
 
-            $query = "INSERT INTO admin(
-                    admin_id,
-                    userinfo_id,
-                    user_privilege,
-                    granting_date,
-                    admin_status
-                    )
-            VALUES(?,?,?,NOW(),'Active');";
+        //     $query = "INSERT INTO admin(
+        //             admin_id,
+        //             userinfo_id,
+        //             user_privilege,
+        //             granting_date,
+        //             admin_status
+        //             )
+        //     VALUES(?,?,?,NOW(),'Active');";
 
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("iis", $admin_id, $uid, $ad_priv );
+        //     $stmt = $con->prepare($query);
+        //     $stmt->bind_param("iis", $admin_id, $uid, $ad_priv );
             
-            if ($stmt->execute()) {
-                header("Location: view_admin.php");
-                exit();
-            } else {
-                echo "Error: " . $stmt->error;
-            }
+        //     if ($stmt->execute()) {
+        //         header("Location: view_admin.php");
+        //         exit();
+        //     } else {
+        //         echo "Error: " . $stmt->error;
+        //     }
 
         } else {
             echo "Invalid action.";
         } 
     
-} else if (isset($_POST['ad-cancel-btn'])){
-    header("Location: view_admin.php");
-} else if (isset($_POST['ad-userinfo-btn'])){
+} else if (isset($_POST['tr-cancel-btn'])){
+    header("Location: view_transaction.php");
+} else if (isset($_POST['tr-userinfo-btn'])){
     header("Location: view_userinfo.php");
 
 }

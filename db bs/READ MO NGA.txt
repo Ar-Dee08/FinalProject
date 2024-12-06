@@ -15,4 +15,7 @@ customer
 - ass
 
 * NEED :
-- Add Discounted Price field in item table
+- ADD  DATE OF COMPLETED TRANSACTION
+
+
+- DI PA NAKA SETUP ADMIN_PROC NG TRANSACTIONS
