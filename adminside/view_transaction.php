@@ -1,11 +1,19 @@
 <?php
-include 'includes/header.php';
-include 'admin_middleware.php';
-require "../vscode/dbcon.php";
+
+
+if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
+    header("Location: ../adminside/homeadmin.php?error=You can't access that page.");
+    // echo "ayaw";
+    exit();
+} else {
+    include 'includes/header.php';
+    include 'admin_middleware.php';
+    require "../vscode/dbcon.php";
 
 ?>
 
 <!-- CONTENT -->
+
 <div class="logo-bg-2"></div>
 <div class="admin-container">
 
@@ -14,7 +22,7 @@ require "../vscode/dbcon.php";
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        News and Updates Records
+                        Transaction Records
                     </h2>
                 </div>
                 <div class="card-body">
@@ -22,13 +30,14 @@ require "../vscode/dbcon.php";
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Post Title</th>
-                                <th>Post Image</th>
-                                <th>Post Caption</th>
-                                <th>Post URL</th>
-                                <th>Date Created</th>
-                                <th>Creator Admin ID</th>
-                                <th>Record Status</th>
+                                <th>User ID</th>
+                                <th>Admin Full Name</th>
+                                <th>Student Number</th>
+                                <th>Email</th>
+                                <th>User Database Access</th> 
+                                <!-- authorized / unauthorized -->
+                                <th>Date Granted</th>
+                                <th>Administrator Status</th>                                
                                 <th style="text-align : center">Edit</th>
                             </tr>
                         </thead>
@@ -41,31 +50,24 @@ require "../vscode/dbcon.php";
                                 $start = ($page - 1) * $limit;
                                 
                                 // Fetch records for the current page
-                                $newsrecords = RetrieveAll("news_update", $con, $start, $limit);
+                                $records = RetrieveAll("admin", $con, $start, $limit);
 
-                                if (mysqli_num_rows($newsrecords) > 0) {
-                                    foreach ($newsrecords as $item) :
+                                if (mysqli_num_rows($records) > 0) {
+                                    foreach ($records as $item) :
                             ?>
                                         <tr>
-                                            <td class="custom-table"><?=$item['post_id']?> </td>
-                                            <td class="custom-table"><?=$item['title']?> </td>
-
-                                            <td class="custom-table"> 
-                                                <img  src="record_images/post_images/<?=$item['post_img'];?>" alt="item">
-                                            
-                                            
-                                            </td>
-                                            <td><?=$item['caption']?> </td>
-                                            <td>
-                                                <a href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
-                                            </td>
-                                            <td><?=$item['date_webposted']?> </td>
-                                            <td><?=$item['admin_creator']?> </td>
-                                            <td class="item-txt"><?=$item['record_status']?> </td>
+                                            <td ><?=$item['admin_id']?> </td>
+                                            <td ><?=$item['userinfo_id']?> </td>
+                                            <td ><?=$item['admin_fullname']?> </td>
+                                            <td><?=$item['student_number']?> </td>
+                                            <td><?=$item['email']?> </td>
+                                            <td><?=$item['user_privilege']?> </td>
+                                            <td><?=$item['granting_date']?> </td>
+                                            <td class="item-txt"><?=$item['admin_status']?> </td>
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_news.php?postidlabel=<?=$item['post_id']?>" method="post">
-                                                        <button type="submit" name="post-edit-btn">Edit Records</button>
+                                                    <form action="mod_admin.php?adidlabel=<?=$item['admin_id']?>" method="post">
+                                                        <button type="submit" name="ad-edit-btn">Edit Records</button>
                                                     </form>
                                                 </div>                                             
                                             </td>
@@ -84,8 +86,7 @@ require "../vscode/dbcon.php";
                         </tbody>
                     </table>
                     <div>
-                
-
+            
                         <nav>
                             <ul class="pagination">
                                 <!-- Previous Button -->
@@ -106,11 +107,20 @@ require "../vscode/dbcon.php";
                                 </li>
                             </ul>
                         </nav>
-                        <div class="col-md-4 ms-auto">
-                            <form action="mod_news.php?postidlabel?=0" method="post">
-                                <button type="submit" name="post-add-btn">Add New Item</button>
+                        <div class="btn-user">
+                            <div class="col-md-4 ms-auto">
+                                <form action="mod_admin.php?adidlabel?=0" method="post">
+                                    <button type="submit" name="ad-add-btn">Add New Account</button>
 
-                            </form>
+                                </form>                            
+                            </div>
+                            <br>
+                            <div class="col-md-4 ms-auto">
+                                <form action="view_userinfo.php?=0" method="post">
+                                    <button type="submit" name="ad-userinfo-btn">Go to User Information</button>
+                                </form>
+                            </div>
+                            
                         </div>
 
                     </div>
@@ -121,32 +131,36 @@ require "../vscode/dbcon.php";
 
 <!-- END OF CONTENTS -->
 </div>
+</div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</div>
+</body>
 
 
 
+<footer>
 <?php
 include 'includes/footer.php';
+}
+
+
 
 function RetrieveAll($table, $con, $start, $limit)
 {
     
     $query = "SELECT 
-                np.post_id,
-                np.title,
-                np.post_img,
-                np.caption,
-                np.post_url,
-                np.date_webposted, 
-                CONCAT('admin', np.admin_id, ' : ', us.firstname) AS admin_creator, 
-                np.record_status 
-              FROM news_update np 
-              LEFT JOIN admin a ON np.admin_id = a.admin_id 
-              LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id
-              LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
+            a.userinfo_id,
+            a.admin_id,
+            CONCAT(ui.firstname, ' ',  ui.lastname) AS admin_fullname,
+            ui.student_number,
+            ui.email,
+            a.user_privilege,
+            a.granting_date,
+            a.admin_status
+        FROM admin a
+        LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id
+        LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
     $stmt->bind_param("ii", $start, $limit);
@@ -160,7 +174,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM items";
+    $totalQuery = "SELECT COUNT(*) as total FROM admin";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

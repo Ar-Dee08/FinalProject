@@ -1,7 +1,7 @@
 <?php
 
 
-if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
+if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
     header("Location: ../adminside/homeadmin.php?error=You can't access that page.");
     // echo "ayaw";
     exit();
