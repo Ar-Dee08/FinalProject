@@ -250,6 +250,19 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
                 $usercred_id = $row['usercred_id'];
             }
 
+            $query = "SELECT * FROM user_credentials WHERE userinfo_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $userinfo_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $usercred_id = $row['usercred_id'];
+            } else {
+                echo "No user_credentials record found for userinfo_id: $userinfo_id";
+                exit();
+            }
+
             
             $query = "UPDATE user_information SET
                     firstname = ?, lastname = ?,
@@ -274,9 +287,8 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
             
 
             if ($stmt->execute() && $stmt2->execute()) {
-                // header("Location: view_userinfo.php");
-                echo $ui_email;
-                exit();
+                header("Location: view_userinfo.php");
+                // echo $ui_email . $usercred_id;
             } else {
                 echo "Error: " . $stmt->error;
             }
@@ -315,13 +327,12 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
             $stmt2 = $con->prepare($query);
             $stmt2->bind_param("issi",$usercred_id, $ui_email, $password, $userinfo_id );
 
-            if ($stmt->execute()) {
+            if ($stmt->execute() && $stmt2->execute()) {
                 header("Location: view_userinfo.php");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
             }
-
 
         } else {
             echo "Invalid action.";
@@ -331,6 +342,67 @@ else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
     header("Location: view_userinfo.php");
 }
 
+
+//THIS IS FOR CONFIRMING AND INSERTING / UPDAITNG USER ADMIN
+
+
+
+else if(isset($_POST['ad-confirm-btn'])){   //FOR ADMin
+    $isEdit = $_POST['ad-confirm-btn']; 
+    $ad_priv = $_POST['ad_priv'];
+           
+        if($isEdit === "1"){
+            $admin_id = $_POST['admin_id'];
+            $account_status = $_POST['recstat'];
+            
+            $query = "UPDATE admin SET
+                    user_privilege = ?,
+                    admin_status = ?
+                    WHERE admin_id = ?;";
+            // 
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("ssi",  $ad_priv,$account_status, $admin_id);
+
+            if ($stmt->execute()) {
+                header("Location: view_admin.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+        } else if($isEdit === "0") {
+            $admin_id = TableRowCount("admin",$con)+1;
+            $uid = $_POST['ad_uid'];
+
+            $query = "INSERT INTO admin(
+                    admin_id,
+                    userinfo_id,
+                    user_privilege,
+                    granting_date,
+                    admin_status
+                    )
+            VALUES(?,?,?,NOW(),'Active');";
+
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("iis", $admin_id, $uid, $ad_priv );
+            
+            if ($stmt->execute()) {
+                header("Location: view_admin.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+        } else {
+            echo "Invalid action.";
+        } 
+    
+} else if (isset($_POST['ad-cancel-btn'])){
+    header("Location: view_admin.php");
+} else if (isset($_POST['ad-userinfo-btn'])){
+    header("Location: view_userinfo.php");
+
+}
 
 
 

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,25 +11,10 @@
     <link rel="stylesheet" type="text/css" href="style.css" >
 </head>
 <body>
-
-    <div class="custom-nav">
-        <?php include('navbar.php'); ?>
-    </div>
-    <?php include('sidebar.php'); ?>
-
-
-    <!-- <main>  -->
-        <!-- CAN BE NOT <MAIN> -->
-        <div class="content">
+<div class="custom-nav">
+<?php 
+include 'navbar.php'; 
+include 'sidebar.php'; 
+?>
+            <div class="content">
             <!-- Your content goes here -->
-
-
-
-
-        </div>
-    </main>
-
-    </div>
-    
-</body>
-</html>

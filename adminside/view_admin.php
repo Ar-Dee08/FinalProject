@@ -22,22 +22,22 @@ if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        User Detail Records
+                        Admin Information Records
                     </h2>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered custom-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>User Full Name</th>
+                                <th>Admin ID</th>
+                                <th>User ID</th>
+                                <th>Admin Full Name</th>
                                 <th>Student Number</th>
                                 <th>Email</th>
-                                <th>Membership Status</th>
-                                <th>Customer Type</th>
-                                <th>User Verification Status</th>
-                                <th>Date Created</th>
-                                <th>Account Status</th>                                
+                                <th>User Database Access</th> 
+                                <!-- authorized / unauthorized -->
+                                <th>Date Granted</th>
+                                <th>Administrator Status</th>                                
                                 <th style="text-align : center">Edit</th>
                             </tr>
                         </thead>
@@ -50,25 +50,24 @@ if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                 $start = ($page - 1) * $limit;
                                 
                                 // Fetch records for the current page
-                                $records = RetrieveAll("user_information", $con, $start, $limit);
+                                $records = RetrieveAll("admin", $con, $start, $limit);
 
                                 if (mysqli_num_rows($records) > 0) {
                                     foreach ($records as $item) :
                             ?>
                                         <tr>
+                                            <td ><?=$item['admin_id']?> </td>
                                             <td ><?=$item['userinfo_id']?> </td>
-                                            <td ><?=$item['user_fullname']?> </td>
+                                            <td ><?=$item['admin_fullname']?> </td>
                                             <td><?=$item['student_number']?> </td>
                                             <td><?=$item['email']?> </td>
-                                            <td><?=$item['memstatus']?> </td>
-                                            <td><?=$item['customer_type']?> </td>
-                                            <td><?=$item['type_verification_stat']?> </td>
-                                            <td><?=$item['account_created']?> </td>
-                                            <td class="item-txt"><?=$item['account_status']?> </td>
+                                            <td><?=$item['user_privilege']?> </td>
+                                            <td><?=$item['granting_date']?> </td>
+                                            <td class="item-txt"><?=$item['admin_status']?> </td>
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_userinfo.php?uiidlabel=<?=$item['userinfo_id']?>" method="post">
-                                                        <button type="submit" name="ui-edit-btn">Edit Records</button>
+                                                    <form action="mod_admin.php?adidlabel=<?=$item['admin_id']?>" method="post">
+                                                        <button type="submit" name="ad-edit-btn">Edit Records</button>
                                                     </form>
                                                 </div>                                             
                                             </td>
@@ -110,15 +109,15 @@ if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                         </nav>
                         <div class="btn-user">
                             <div class="col-md-4 ms-auto">
-                                <form action="mod_userinfo.php?uiidlabel?=0" method="post">
-                                    <button type="submit" name="ui-add-btn">Add New Account</button>
+                                <form action="mod_admin.php?adidlabel?=0" method="post">
+                                    <button type="submit" name="ad-add-btn">Add New Account</button>
 
                                 </form>                            
                             </div>
                             <br>
                             <div class="col-md-4 ms-auto">
                                 <form action="view_userinfo.php?=0" method="post">
-                                    <button type="submit" name="ui-add-btn">Go to User Information</button>
+                                    <button type="submit" name="ad-userinfo-btn">Go to User Information</button>
                                 </form>
                             </div>
                             
@@ -143,26 +142,24 @@ if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
 
 <?php
 include 'includes/footer.php';
-                                }
+}
+
+
+
 function RetrieveAll($table, $con, $start, $limit)
 {
     
-    $query = " SELECT 
-        ui.userinfo_id,
-        CONCAT(ui.firstname, ' ', ui.lastname) as user_fullname,
-        ui.student_number,
-        ui.email,
-        uc.password,
-        ms.memstatus,
-        ct.customer_type,
-        ctv.type_verification_stat,
-        ui.account_created,
-        ui.account_status
-        FROM user_information ui
-        LEFT JOIN user_credentials uc ON ui.userinfo_id = uc.userinfo_id
-        LEFT JOIN mem_status ms ON ui.memstatus_id = ms.memstatus_id
-        LEFT JOIN customertype ct ON ui.customertype_id = ct.customertype_id
-        LEFT JOIN customertype_verification ctv ON ui.custype_verif_id = ctv.custype_verif_id
+    $query = "SELECT 
+            a.userinfo_id,
+            a.admin_id,
+            CONCAT(ui.firstname, ' ',  ui.lastname) AS admin_fullname,
+            ui.student_number,
+            ui.email,
+            a.user_privilege,
+            a.granting_date,
+            a.admin_status
+        FROM admin a
+        LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id
         LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
@@ -177,7 +174,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM user_information";
+    $totalQuery = "SELECT COUNT(*) as total FROM admin";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

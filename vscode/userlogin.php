@@ -33,10 +33,15 @@ if(mysqli_num_rows($uidres)===1){
         if(mysqli_num_rows($aidres)===1 && $logintype === "2"){           //verified user and is admin
             $admin_row = mysqli_fetch_assoc($aidres);
             $aid = $admin_row['admin_id'];
+            $ad_priv = $admin_row['user_privilege'];
             $usertype_id = 2; //admin id
             echo 'This is admin';
             $_SESSION['uid'] = $uid;
             $_SESSION['admin_id'] = $aid;
+            
+            if($ad_priv === 'Authorized'){
+                $_SESSION['isPriv'] = 1;                
+            }
 
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
 
