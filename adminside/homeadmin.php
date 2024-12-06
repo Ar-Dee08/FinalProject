@@ -30,7 +30,7 @@ include '../vscode/dbcon.php';
                 $admin_name = $ui_row['firstname'];
                 
             
-            echo "<h2>Hello, " . htmlspecialchars($admin_name) . "!</h2>";
+            echo "<h2>Hello, Admin " . htmlspecialchars($admin_name) . "!</h2>";
             }
             
         } else {
