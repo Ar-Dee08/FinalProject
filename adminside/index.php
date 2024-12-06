@@ -21,10 +21,10 @@
          <h2>Log In</h2>
 
             <?php
-                if (isset($_GET['catid'])) {
-                    echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['catid'] . '</p>';
+                if (isset($_GET['error'])) {
+                    echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['error'] . '</p>';
                 }            
-            ?>
+            ?> 
          <form action="../vscode/userlogin.php" method="post">
             <div class="form-group">
                 <label for="username">Email:</label>

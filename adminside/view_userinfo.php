@@ -1,8 +1,14 @@
 <?php
-session_start();
-include 'admin_middleware.php';
-include 'includes/header.php';
-require "../vscode/dbcon.php";
+
+
+if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
+    header("Location: ../adminside/homeadmin.php?");
+    // echo "ayaw";
+    exit();
+} else {
+    include 'includes/header.php';
+    include 'admin_middleware.php';
+    require "../vscode/dbcon.php";
 
 ?>
 
@@ -143,6 +149,7 @@ require "../vscode/dbcon.php";
 <?php
 include 'includes/footer.php';
 
+                                }
 function RetrieveAll($table, $con, $start, $limit)
 {
     

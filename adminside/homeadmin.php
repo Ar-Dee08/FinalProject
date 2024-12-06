@@ -1,7 +1,7 @@
 <?php
-session_start();
-include 'admin_middleware.php';
+// session_start();
 include 'includes/header.php';
+include 'admin_middleware.php';
 include 'includes/footer.php';
 include '../vscode/dbcon.php';
 ?>
@@ -39,6 +39,8 @@ include '../vscode/dbcon.php';
         ?>
         <p>What would you like to do today?</p>
 
-    </div>
-</body>
-</html>
+        <?php
+            if (isset($_GET['error'])) {
+                echo '<p style="color: #CEDFE3;" class="error-login" align="center">' . $_GET['error'] . '</p>';
+            }            
+        ?> 

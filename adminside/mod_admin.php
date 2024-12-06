@@ -1,7 +1,7 @@
 <?php
-session_start();
-include 'admin_middleware.php';
+// session_start();
 include 'includes/header.php';
+include 'admin_middleware.php';
 include '../vscode/dbcon.php';
 
 
