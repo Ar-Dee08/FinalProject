@@ -16,7 +16,7 @@ require "../vscode/dbcon.php";
             <div class="card">
                 <div class="card-header">
                     <h2>
-                        User Information Records
+                        User Detail Records
                     </h2>
                 </div>
                 <div class="card-body">
@@ -145,7 +145,7 @@ function RetrieveAll($table, $con, $start, $limit)
         ui.userinfo_id,
         CONCAT(ui.firstname, ' ', ui.lastname) as user_fullname,
         ui.student_number,
-        uc.email,
+        ui.email,
         uc.password,
         ms.memstatus,
         ct.customer_type,
