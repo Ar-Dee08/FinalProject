@@ -224,85 +224,107 @@ else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
 
 
 
-else if(isset($_POST['ui-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
-    $isEdit = $_POST['ui-confirm-btn'];
-    $post_title = $_POST['post_title'];
-    $post_caption = $_POST['post_caption'];
-    $post_url = $_POST['post_url']; 
+else if(isset($_POST['ui-confirm-btn'])){   //FOR USERI NFO PROCESSING
+    $isEdit = $_POST['ui-confirm-btn']; 
+    $ui_fname = $_POST['ui_fname'];
+    $ui_lname = $_POST['ui_lname'];
+    $ui_contact = $_POST['ui_contact'];
+    $ui_email = $_POST['ui_email'];
+    $ui_sex = ucwords(strtolower($_POST['ui_sex']));
+    $ui_dob = $_POST['ui_bday'];
+    $student_number = $_POST['student_number'];    
+    $memstatus_id = $_POST['memstatus_id'];
+    $customertype_id = $_POST['ui_type'];
+    $custype_verif_id = $_POST['custype_verif_id'];
     
-    
-    if($isEdit === "1"){
-        $post_id = $_POST['post_id'];
-        $post_recstat = $_POST['recstat'];
-        $init_img = $_POST['init_img'];
+    // $emailAlreadyExists = CheckEmail($con, $email);
+       
+        if($isEdit === "1"){
+            $userinfo_id = $_POST['userinfo_id'];
+            $account_status = $_POST['recstat'];
 
+            $query = "SELECT * FROM user_credentials WHERE userinfo_id = " . $userinfo_id;
 
-        if (!empty($_FILES['post_img']['name'])) {
-            // New image uploaded
-            $post_img = $_FILES['post_img']['name'];
-            $path = "record_images/post_images/";
-            $path_img_ext = pathinfo($post_img, PATHINFO_EXTENSION);
-            $imgfile_name = $post_id . "_" . time() . '.' . $path_img_ext;
-            move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
-            
-        } else {
-            // No new image uploaded, retain the existing one
-            $imgfile_name = $init_img;
-
-            $query = "SELECT post_img FROM news_update WHERE post_id = ?";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("i", $post_id);
-            if($stmt->execute()){
-                $imgres = $stmt->get_result();
-                $qrow = $imgres->fetch_assoc(); // Adjusted fetch method
-                $imgfile_name = $qrow['post_img'];
+            if ($results = mysqli_query($con, $query)) {
+                $row = mysqli_fetch_assoc($results);
+                $usercred_id = $row['usercred_id'];
             }
-        }
-        
-        $query = "UPDATE news_update SET title=?, post_url=?, caption=?, post_img=?, record_status = ? WHERE post_id = ?";
-        // 
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("sssssi", $post_title, $post_url, $post_caption, $imgfile_name, $post_recstat, $post_id);
 
-        if ($stmt->execute()) {
-            header("Location: view_account.php");
-            exit();
+            
+            $query = "UPDATE user_information SET
+                    firstname = ?, lastname = ?,
+                    contact_number = ? ,bday = ?,
+                    email = ?,
+                    sex = ?, student_number = ?,
+                    memstatus_id = ?,
+                    customertype_id=?,
+                    custype_verif_id = ?,
+                    account_status = ?
+                    WHERE userinfo_id = ?;";
+            // 
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("sssssssiiisi",  $ui_fname, $ui_lname, $ui_contact, $ui_dob, $ui_email, $ui_sex,$student_number,$memstatus_id,$customertype_id,$custype_verif_id,$account_status, $userinfo_id);
+
+            $query = "UPDATE user_credentials SET
+                    email = ?
+                    WHERE usercred_id = ?;";
+            // 
+            $stmt2 = $con->prepare($query);
+            $stmt2->bind_param("si",$ui_email, $usercred_id);
+
+            if ($stmt->execute()) {
+                header("Location: view_userinfo.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+        } else if($isEdit === "0") {
+            $userinfo_id = TableRowCount("user_information",$con)+1;
+            $usercred_id = TableRowCount("user_credentials",$con)+1;
+            $admin_id = $_SESSION['admin_id'];
+            $password = password_hash($_POST['ui_password'], PASSWORD_DEFAULT);
+
+            $query = "INSERT INTO user_information(
+                    userinfo_id,
+                    firstname, lastname,
+                    contact_number,bday,
+                    email,
+                    sex, student_number,
+                    memstatus_id,
+                    customertype_id,
+                    custype_verif_id,
+                    account_status,
+                    account_created
+                    )
+            VALUES(?,?,?,?,?,?,?,?,?,?,?,'Active',NOW());";
+
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("isssssssiii", $userinfo_id, $ui_fname, $ui_lname, $ui_contact, $ui_dob, $ui_email, $ui_sex,$student_number,$memstatus_id,$customertype_id,$custype_verif_id );
+
+            $query = "INSERT INTO user_credentials(
+                    usercred_id, 
+                    email, 
+                    password, 
+                    userinfo_id
+                    )                    
+                    VALUES(?,?,?,?);";
+            // 
+            $stmt2 = $con->prepare($query);
+            $stmt2->bind_param("issi",$usercred_id, $ui_email, $password, $userinfo_id );
+
+            if ($stmt->execute()) {
+                header("Location: view_userinfo.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+
         } else {
-            echo "Error: " . $stmt->error;
-        }
-
-    } else if($isEdit === "0") {
-        $post_id = TableRowCount("news_update",$con)+1;
-        $admin_id = $_SESSION['admin_id'];
-
-        $post_img = $_FILES['post_img']['name'];
-        $path = "record_images/post_images/";
-        $post_img_ext = pathinfo($post_img,PATHINFO_EXTENSION);
-        $imgfile_name = $post_id."_".time(). '.' . $post_img_ext;
-        move_uploaded_file($_FILES['post_img']['tmp_name'], $path . $imgfile_name);
-
-
-        $query = "INSERT INTO news_update(post_id,title,caption,post_img,post_url,admin_id,date_webposted,record_status)
-        VALUES(?,?,?,?,?,?, NOW() ,'Active');";
-
-
-        //INSERT QUERY NOT UPDATED YET
-
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("issssi", $post_id,$post_title,$post_caption,$imgfile_name, $post_url, $admin_id);
-
-        if ($stmt->execute()) {
-            header("Location: view_account.php");
-            exit();
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-
-    } else {
-        echo "Invalid action.";
-    } 
-
+            echo "Invalid action.";
+        } 
+    
 } else if (isset($_POST['ui-cancel-btn'])){
     header("Location: view_userinfo.php");
 }

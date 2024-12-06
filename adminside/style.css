@@ -350,6 +350,18 @@ button:hover {
     border-collapse: collapse;
 }
 
+.btn-user {
+    display: inline-block;
+    align-items: right;
+    max-width: 100%;
+}
+
+.btn-user button {
+    /* align-items: right; */
+    width: 15em;
+    
+}
+
 /* NAVBAR */
 .custom-nav, #admin-logout {
     background-color: #285963; /* Replace with your hex code */

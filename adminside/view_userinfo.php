@@ -106,12 +106,22 @@ require "../vscode/dbcon.php";
                                 </li>
                             </ul>
                         </nav>
-                        <div class="col-md-4 ms-auto">
-                            <form action="mod_userinfo.php?uiidlabel?=0" method="post">
-                                <button type="submit" name="ui-add-btn">Add New Account</button>
+                        <div class="btn-user">
+                            <div class="col-md-4 ms-auto">
+                                <form action="mod_userinfo.php?uiidlabel?=0" method="post">
+                                    <button type="submit" name="ui-add-btn">Add New Account</button>
 
-                            </form>
+                                </form>                            
+                            </div>
+                            <br>
+                            <div class="col-md-4 ms-auto">
+                                <form action="view_useracc.php?=0" method="post">
+                                    <button type="submit" name="ui-add-btn">Go to User Account Details</button>
+                                </form>
+                            </div>
                         </div>
+                        
+
 
                     </div>
 

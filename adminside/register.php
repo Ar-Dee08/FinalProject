@@ -43,7 +43,7 @@
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" onkeyup="confirmPass();" required><br><br>
 
                 <label for="type">Type:</label>
-                <select class="login-sel" id="type" name="type" required> 
+                <select class="login-sel" id="type" name="type" onchange="toggleInput" required> 
                     <!-- WILL BA MODIFIED WITH PHP LATER -->
                     <option value="student">Student</option>
                     <option value="non_student">Non-Student</option>

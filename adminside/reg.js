@@ -8,6 +8,7 @@
 
  // Function to toggle the input field
  function toggleInput() {
+    
      if (typeSelect.value === 'non_student') {
          studentNumberInput.disabled = true; // Disable input
          studentNumberInput.value = '';      // Clear the input value
