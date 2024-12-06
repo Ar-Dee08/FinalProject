@@ -101,17 +101,17 @@ require "../vscode/dbcon.php";
                                 </li>
                             </ul>
                         </nav>
-                        <div >
-                            <!-- <div class="col-md-4 ms-auto">
-                                <form action="mod_userinfo.php?uiidlabel?=0" method="post">
-                                    <button type="submit" name="ui-add-btn">Add New Account</button>
+                        <div class="btn-user">
+                            <div class="col-md-4 ms-auto">
+                                <form action="mod_admin.php?adidlabel?=0" method="post">
+                                    <button type="submit" name="ad-add-btn">Add New Account</button>
 
                                 </form>                            
-                            </div> -->
+                            </div>
                             <br>
                             <div class="col-md-4 ms-auto">
-                                <form action="view_admin.php?=0" method="post">
-                                    <button type="submit" >Go to User Information</button>
+                                <form action="view_userinfo.php?=0" method="post">
+                                    <button type="submit" name="ad-userinfo-btn">Go to User Information</button>
                                 </form>
                             </div>
                             
@@ -150,7 +150,7 @@ function RetrieveAll($table, $con, $start, $limit)
             a.granting_date,
             a.admin_status
         FROM admin a
-        LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id
+        LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id
         LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);

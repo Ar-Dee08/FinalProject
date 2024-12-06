@@ -30,7 +30,7 @@
     }
  }
 
- document.getElementById('passwarning').addEventListener("onkeyup", function () {
+ document.getElementById('passwarning').addEventListener('onkeyup', function () {
     confirmPass();
   });
 

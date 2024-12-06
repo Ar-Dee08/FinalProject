@@ -35,6 +35,7 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
 } else if (isset($_POST['ad-add-btn'])){ //IF NEW RECORD
     $admin_id = TableRowCount("admin",$con)+1;
     $isEdit = False;
+    $ad_priv = 'Unauthorized';
 
 }
 
@@ -90,6 +91,23 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                                 echo '<p class="error-login">' . $_GET['error'] . '</p>';
                                             }            
                                         ?>
+                                         <?php
+                                    } else {  //ADDING USER
+                                        ?>
+                                        <h1>Grant Administrator Privileges</h1>
+                                        <label for="">
+                                            Enter User ID : 
+                                        </label>
+                                        <input type="text" name="ad_uid" placeholder="Enter First Name" class="form-control" required>  
+                                        <br>
+                                        <br>
+                                       
+                                        <p>Not sure? You can check the user information.</p>
+                                        <button type="submit" name="ad-userinfo-btn" formnovalidate>Check User Information</button>
+
+                                     <?php   
+                                    }                                    
+                                    ?>
                                         <br>
                                         <br>
 
@@ -99,7 +117,7 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                         <br>
                                         <select class="admin-sel" name="ad_priv" id="recstat">
                                             <?php
-                                                if($acc_stat == "Authorized"){
+                                                if($ad_priv == "Authorized"){
                                                     ?>
                                                         <option value="Authorized">Authorize</option>
                                                         <option value="Unauthorized">Unauthorize</option>
@@ -113,6 +131,13 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                             ?>                                    
                                         </select>
                                         <br>
+                                       <?php 
+                                       
+                                       if($isEdit){ //ADDING USER
+                                       ?>
+
+
+
                                         <br>
                                         <br>
                                         <br>
@@ -123,7 +148,7 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                         <br>
                                         <select class="admin-sel" name="recstat" id="recstat">
                                             <?php
-                                                if($acc_stat == "Active"){
+                                                if($ad_stat == "Active"){
                                                     ?>
                                                         <option value="Active">Active</option>
                                                         <option value="Removed">Remove</option>
@@ -147,14 +172,23 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                     Admin ID : <?=$admin_id?>
                                 </label>        
                                 <br>
-                                <label for="" class="userinfo-label">
-                                    User ID : <?=$ad_uid?>
-                                </label>  
-                                <br>                                
+
+                                    <?php 
+                                    if($isEdit){
+                                        ?>
+                                        <label for="" class="userinfo-label">
+                                            User ID : <?=$ad_uid?>
+                                        </label>  
+                                        <br> 
+                                        <?php
+                                    }                                    
+                                    ?>
+
+                                                               
                             </div>
                             <div>
                                 <br>
-                                <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="ui-confirm-btn">Confirm</button>
+                                <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="ad-confirm-btn">Confirm</button>
                                 <button type="submit" name="ad-cancel-btn" formnovalidate>Cancel</button>
                             </div>
                         </div>
@@ -163,10 +197,6 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
             </div>
         </div>
     </div>
-
-
-
-
 
 
 
