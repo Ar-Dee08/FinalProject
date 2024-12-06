@@ -30,14 +30,15 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Order ID</th>
                                 <th>User ID</th>
-                                <th>Admin Full Name</th>
-                                <th>Student Number</th>
-                                <th>Email</th>
-                                <th>User Database Access</th> 
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Total Amt</th>
+                                <th>User</th> 
                                 <!-- authorized / unauthorized -->
-                                <th>Date Granted</th>
-                                <th>Administrator Status</th>                                
+                                <th>Payment Method</th>
+                                <th>Status</th>                                
                                 <th style="text-align : center">Edit</th>
                             </tr>
                         </thead>
@@ -56,18 +57,19 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                     foreach ($records as $item) :
                             ?>
                                         <tr>
-                                            <td ><?=$item['admin_id']?> </td>
+                                            <td ><?=$item['transaction_id']?> </td>
+                                            <td ><?=$item['order_id']?> </td>
                                             <td ><?=$item['userinfo_id']?> </td>
-                                            <td ><?=$item['admin_fullname']?> </td>
-                                            <td><?=$item['student_number']?> </td>
-                                            <td><?=$item['email']?> </td>
-                                            <td><?=$item['user_privilege']?> </td>
-                                            <td><?=$item['granting_date']?> </td>
-                                            <td class="item-txt"><?=$item['admin_status']?> </td>
+                                            <td><?=$item['item_name']?> </td>
+                                            <td><?=$item['quantity']?> </td>
+                                            <td><?=$item['item_totalamount']?> </td>
+                                            <td><?=$item['user_full']?> </td>
+                                            <td><?=$item['payment_method']?> </td>
+                                            <td class="item-txt"><?=$item['transaction_status']?> </td>
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_admin.php?adidlabel=<?=$item['admin_id']?>" method="post">
-                                                        <button type="submit" name="ad-edit-btn">Edit Records</button>
+                                                    <form action="mod_transaction.php?tridlabel=<?=$item['transaction_id']?>" method="post">
+                                                        <button type="submit" name="tr-edit-btn">Edit Records</button>
                                                     </form>
                                                 </div>                                             
                                             </td>
@@ -107,21 +109,20 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                 </li>
                             </ul>
                         </nav>
-                        <div class="btn-user">
-                            <div class="col-md-4 ms-auto">
-                                <form action="mod_admin.php?adidlabel?=0" method="post">
-                                    <button type="submit" name="ad-add-btn">Add New Account</button>
 
-                                </form>                            
+                        <!-- TEMPORARY, REMOVE THIS BUTTON AFTER -->
+                            <div class="col-md-4 ms-auto">
+                                <form action="mod_transaction.php?tridlabel=1" method="post">
+                                    <button type="submit" name="tr-edit-btn">EDITEDIEDIT</button>
+                                </form>
                             </div>
                             <br>
                             <div class="col-md-4 ms-auto">
                                 <form action="view_userinfo.php?=0" method="post">
-                                    <button type="submit" name="ad-userinfo-btn">Go to User Information</button>
+                                    <button type="submit" name="tr-userinfo-btn">Go to User Information</button>
                                 </form>
                             </div>
                             
-                        </div>
 
                     </div>
 
@@ -150,16 +151,20 @@ function RetrieveAll($table, $con, $start, $limit)
 {
     
     $query = "SELECT 
-            a.userinfo_id,
-            a.admin_id,
-            CONCAT(ui.firstname, ' ',  ui.lastname) AS admin_fullname,
-            ui.student_number,
-            ui.email,
-            a.user_privilege,
-            a.granting_date,
-            a.admin_status
-        FROM admin a
-        LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id
+	tr.transaction_id,
+    ord.order_id,
+    tr.userinfo_id,
+    i.item_name,
+    ord.quantity,
+    ord.item_totalamount,
+    CONCAT(ui.firstname, ' ', ui.lastname) AS user_full,
+    tr.payment_method, trs.transaction_status
+
+ FROM  transactions tr
+ LEFT JOIN item_orders ord ON tr.transaction_id = ord.transaction_id
+ LEFT JOIN items i ON ord.item_id = i.item_id
+ LEFT JOIN user_information ui ON tr.userinfo_id = ui.userinfo_id
+ LEFT JOIN transactionstatus trs ON tr.transaction_status_id = trs.transaction_status
         LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
@@ -174,7 +179,7 @@ function pagination($con)
     $limit = 10;
 
     // Fetch total number of rows
-    $totalQuery = "SELECT COUNT(*) as total FROM admin";
+    $totalQuery = "SELECT COUNT(*) as total FROM transactions";
     $totalResult = mysqli_fetch_assoc(mysqli_query($con, $totalQuery));
     $total = $totalResult['total'];
 

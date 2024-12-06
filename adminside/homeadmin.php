@@ -41,7 +41,7 @@ include '../vscode/dbcon.php';
                 <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
                 <a href="view_news.php" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
                 <a href="view_admin.php" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
-                <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
+                <a href="view_transaction.php" class="list-group-item list-group-item-action">TRANSACTIONS</a>
                 <?php 
 if(isset($_SESSION['isPriv'])){ ?>
     <a class="list-group-item list-group-item-action" 

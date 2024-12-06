@@ -1,42 +1,56 @@
 <?php
-// session_start();
 include 'includes/header.php';
 include 'admin_middleware.php';
 include '../vscode/dbcon.php';
 
 
-if(isset($_POST['ad-edit-btn'])){ //IF EDITING RECORD
-    if (isset($_GET['adidlabel'])) {
-        $admin_id = $_GET['adidlabel'];
+if(isset($_POST['tr-edit-btn'])){ //IF EDITING RECORD
+    if (isset($_GET['tridlabel'])) {
+        $tr_id = $_GET['tridlabel'];
 
-        $getnamequery = "SELECT * FROM admin a
-LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = ?";
+        $getnamequery = "SELECT * FROM  transactions tr
+            LEFT JOIN item_orders ord ON tr.transaction_id = ord.transaction_id
+            LEFT JOIN items i ON ord.item_id = i.item_id
+            LEFT JOIN user_information ui ON tr.userinfo_id = ui.userinfo_id
+            LEFT JOIN transactionstatus trs ON tr.transaction_status_id = trs.transaction_status
+            WHERE tr.transaction_id = ?";
         $stmt = $con->prepare($getnamequery);
-        $stmt->bind_param("s",$admin_id);
-        if ($stmt->execute()) {
-            $results = $stmt->get_result(); // Always return the result object        
-            $ad_row = mysqli_fetch_assoc($results);      
-            $ad_full = $ad_row['firstname'] . ' ' . $ad_row['lastname'];
-            $ad_uid = $ad_row['userinfo_id'];
-            $ad_su = $ad_row['student_number'];
-            $ad_email = $ad_row['email'];
-            $ad_priv = $ad_row['user_privilege'];
-            $ad_date = $ad_row['granting_date'];
-            $ad_stat = $ad_row['admin_status'];
-            $ad_contact = $ad_row['contact_number'];
+        $stmt->bind_param("s", $tr_id);
 
+if ($stmt->execute()) {
+    $results = $stmt->get_result(); 
 
-        } else {
-            echo "Error: " . $stmt->error;
-        }
+    if ($results->num_rows > 0) {
+        $tr_row = $results->fetch_assoc(); 
+
+        $tr_full = $tr_row['firstname'] . ' ' . $tr_row['lastname'];
+        $tr_uid = $tr_row['userinfo_id'];
+        $tr_oid = $tr_row['order_id'];
+        $tr_item = $tr_row['item_name'];
+        $tr_q = $tr_row['quantity'];
+        $tr_total = $tr_row['item_totalamount'];
+        $tr_payment = $tr_row['payment_method'];
+        $tr_stat = $tr_row['transaction_status'];
+    } else {
+        $tr_full = null;
+        $tr_uid = null;
+        $tr_oid = null;
+        $tr_item = null;
+        $tr_q = null;
+        $tr_total = null;
+        $tr_payment = null;
+        $tr_stat = null;
+    }
+} else {
+    echo "Error executing query: " . $stmt->error;
+}
+
         $isEdit = True;
 
     }                                     
-} else if (isset($_POST['ad-add-btn'])){ //IF NEW RECORD
-    $admin_id = TableRowCount("admin",$con)+1;
+} else if (isset($_POST['tr-add-btn'])){ //IF NEW RECORD
+    $tr_id = TableRowCount("admin",$con)+1;
     $isEdit = False;
-    $ad_priv = 'Unauthorized';
-
 }
 
 ?>
@@ -57,139 +71,92 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                     <form action="admin_proc.php" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="hidden" name="admin_id" value="<?= $admin_id; ?>"> <!-- Pass the category ID -->
+                                <input type="hidden" name="tr_id" value="<?= $tr_id; ?>"> <!-- Pass the category ID -->
                                 <?php
                                     // IF EDIT RECORD
                                     if($isEdit){?> 
+                                        <h1>
+                                        Order # in Transaction# : 
+                                        </h1>
                                         <label for="">
-                                            Current User : 
+                                            User : 
                                         </label>
-                                        <input type="text" value="<?= $ad_full ?>" disabled name="ad_full" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" value="<?= $tr_full ?>" disabled name="tr_full" placeholder="User" class="form-control" required>  
                                         <br>
                                         <label for="">
-                                            User Email : 
+                                            Ordered Item
                                         </label>
-                                        <input type="text" value="<?= $ad_email ?>" disabled name="ad_email" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" value="<?= $tr_item ?>" disabled name="tr_item" placeholder="Ordered Item" class="form-control" required>  
                                         <br>
                                         <label for="">
-                                            User Contact Number : 
+                                            Quantity : 
                                         </label>
-                                        <input type="text" value="<?= $ad_contact ?>" disabled name="ad_contact" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" value="<?= $tr_q ?>" disabled name="tr_q" placeholder="Item Quantity" class="form-control" required>  
                                         <br>
                                         <label for="">
-                                            User Student Number : 
+                                            Total Amount Price : 
                                         </label>
-                                        <input type="text" value="<?= $ad_su ?>" disabled name="ad_su" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" value="<?= $tr_total ?>" disabled name="tr_total" placeholder="Total Amount Price" class="form-control" required>  
                                         <br>
                                         <label for="">
-                                            Current User Database Access : 
+                                            Payment Method
                                         </label>
-                                        <input type="text" value="<?= $ad_priv ?>" disabled name="ad_priv" placeholder="User Database Privilege" class="form-control" required>  
-                                        
-                                        <?php
-                                            if (isset($_GET['error'])) {
-                                                echo '<p class="error-login">' . $_GET['error'] . '</p>';
-                                            }            
-                                        ?>
-                                         <?php
-                                    } else {  //ADDING USER
-                                        ?>
-                                        <h1>Grant Administrator Privileges</h1>
-                                        <label for="">
-                                            Enter User ID : 
-                                        </label>
-                                        <input type="text" name="ad_uid" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" value="<?= $tr_payment ?>" disabled name="tr_payment" placeholder="Payment Method" class="form-control" required>  
                                         <br>
                                         <br>
-                                       
-                                        <p>Not sure? You can check the user information.</p>
-                                        <button type="submit" name="ad-userinfo-btn" formnovalidate>Check User Information</button>
+                                        <br>
+                                <label for="tr_stat">Transaction Status:</label>
+                                <br>
+                                <select class="admin-sel" name="tr_stat">
+                                    <?php
+                                    $catquery = "SELECT * FROM transactionstatus";
+                                    $result = mysqli_query($con, $catquery);
 
-                                     <?php   
-                                    }                                    
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+
+                                            if($isEdit){
+                                                $selected = ($row['transaction_status_id'] == $tr_stat) ? 'selected' : '';
+                                                echo '<option value="' . $row['transaction_status_id'] . '" ' . $selected . '>' . htmlspecialchars($row['transaction_status']) . '</option>';
+
+                                            } else {
+                                                echo '<option value="' . $row['transaction_status_id'] . '">' . htmlspecialchars($row['transaction_status']) . '</option>';
+
+                                            }
+
+                                        }
+                                    } else {
+                                        echo '<option value="0">Status not set</option>';
+                                    }
                                     ?>
-                                        <br>
-                                        <br>
+                                </select>
 
-                                        <label for="">
-                                            User Database Access
-                                        </label>
+                                <br>
                                         <br>
-                                        <select class="admin-sel" name="ad_priv" id="recstat">
-                                            <?php
-                                                if($ad_priv == "Authorized"){
-                                                    ?>
-                                                        <option value="Authorized">Authorize</option>
-                                                        <option value="Unauthorized">Unauthorize</option>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                        <option value="Unauthorized">Unauthorize</option>
-                                                        <option value="Authorized">Authorize</option>
-                                                    <?php
-                                                }
-                                            ?>                                    
-                                        </select>
-                                        <br>
-                                       <?php 
-                                       
-                                       if($isEdit){ //ADDING USER
+                                     <?php   
+                                    }                                                                        
                                        ?>
-
-
-
-                                        <br>
-                                        <br>
-                                        <br>
-                                        
-                                        <label for="">
-                                            Administrator Status
-                                        </label>
-                                        <br>
-                                        <select class="admin-sel" name="recstat" id="recstat">
-                                            <?php
-                                                if($ad_stat == "Active"){
-                                                    ?>
-                                                        <option value="Active">Active</option>
-                                                        <option value="Removed">Remove</option>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                        <option value="Removed">Remove</option>
-                                                        <option value="Active">Active</option>
-                                                    <?php
-                                                }
-                                            ?>                                    
-                                        </select>
-                                        <br>
-                                        <br>
-
-                                        <?php
-                                    }?>
                             </div>
                             <div class="col-md-6">
                                 <label for="" class="admin-label">
-                                    Admin ID : <?=$admin_id?>
+                                    Transaction ID : <?=$tr_id?>
                                 </label>        
                                 <br>
-
-                                    <?php 
-                                    if($isEdit){
-                                        ?>
-                                        <label for="" class="userinfo-label">
-                                            User ID : <?=$ad_uid?>
-                                        </label>  
-                                        <br> 
-                                        <?php
-                                    }                                    
-                                    ?>
+                                <label for="" class="admin-label">
+                                    Order ID : <?=$tr_oid?>
+                                </label>        
+                                <br>
+                                <label for="" class="admin-label">
+                                    User ID : <?=$tr_uid?>
+                                </label>        
+                                <br>
 
                                                                
                             </div>
                             <div>
                                 <br>
-                                <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="ad-confirm-btn">Confirm</button>
-                                <button type="submit" name="ad-cancel-btn" formnovalidate>Cancel</button>
+                                <button type="submit" value="<?= $isEdit ? '1' : '0'; ?>" name="tr-confirm-btn">Confirm</button>
+                                <button type="submit" name="tr-cancel-btn" formnovalidate>Cancel</button>
                             </div>
                         </div>
                     </form>                
