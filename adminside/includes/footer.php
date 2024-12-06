@@ -8,10 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
 
 <footer>
-    <div>
-        <img src="" alt="">
+  <div class="footer">
+  <div class="footer-content">
+        <h3>About SSITE</h3>
+        <p>SSITE is dedicated to promoting quality IT education and providing support through various events and resources.</p>
     </div>
-  <div class="footer" style="margin: 20px 0;">
     <!-- Icons Row -->
     <div class="row icons-row">
       <a href="https://www.facebook.com/bpsu.ssite"><i class="fa fa-facebook"></i></a>
@@ -22,19 +23,18 @@
 
     <!-- Links Row -->
     <div class="row">
-      <ul style="list-style: none; padding: 0;">
+      <ul>
         <!-- To change -->
-        <li style="display: inline; margin-right: 10px;"><a href="#">Contact us</a></li>
-        <li style="display: inline; margin-right: 10px;"><a href="#">Our Services</a></li>
-        <li style="display: inline; margin-right: 10px;"><a href="#">Privacy Policy</a></li>
-        <li style="display: inline; margin-right: 10px;"><a href="#">Terms & Conditions</a></li>
-        <li style="display: inline; margin-right: 10px;"><a href="#">Career</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">News & Updates</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
     </div>
 
     <!-- Footer Text -->
     <div class="row-c" style="margin-top: 10px;">
-      SSITE Copyright © 2024 Student Society on Information Technology Education - All Rights Reserved.
+    &copy; 2023 SSITE. All rights reserved.
     </div>
   </div>
 </footer>
