@@ -39,10 +39,10 @@
   </div>
 </footer>
 
-<style>
+<!-- <style>
 .footer {
-    height: 50%;
     width: 100%;
+    height: 50%;
     background: #285963;
     color: #f4f4f4;
     padding: 30px 0;
@@ -99,10 +99,7 @@
 }
 
 
-
-
-
-</style>
+</style> -->
 
 
 <!-- JS ng ewan ko ke rd -->

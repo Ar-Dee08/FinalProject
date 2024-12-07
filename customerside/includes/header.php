@@ -13,13 +13,14 @@
     <title>SSITE Inventory System</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../adminside/style.css" >
-</head>
+    <link rel="stylesheet" href="<?php echo dirname($_SERVER['SCRIPT_NAME']) . '/../adminside/style.css'; ?>">
+    </head>
 <body>
 <div class="custom-nav">
 <?php 
 include 'navbar.php'; 
 include 'sidebar.php'; 
 ?>
+</div>
             <div class="content">
             <!-- Your content goes here -->
