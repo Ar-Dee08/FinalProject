@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require "../vscode/dbcon.php";
+include 'admin_middleware.php';
 
  ?>
 <!DOCTYPE html>

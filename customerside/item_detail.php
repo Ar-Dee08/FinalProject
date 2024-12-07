@@ -36,6 +36,7 @@ if (isset($_GET['item_id'])) {
         <div class="back-cont">
             back-cont [idk]
             <form action="customer_proc.php" method="post">
+                <input type="hidden" name="item_id" value="<?= $item_id; ?>"> <!-- Pass the category ID -->
 
          
             <div class="item-top-section">

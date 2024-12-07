@@ -18,7 +18,7 @@
           <a class="nav-link" href="../customerside/homecustomer.php"><b>Home</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
-          <a class="nav-link" href="#"><b>Products</b> <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="product_display.php"><b>Products</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
           <a class="nav-link" href="#"><b>News & Update</b> <span class="sr-only">(current)</span></a>
@@ -32,6 +32,26 @@
       </ul>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
       <ul class="navbar-nav ms-auto">
+        <li>
+          <label for="">
+          <?php 
+
+          $query = "SELECT * FROM user_information WHERE userinfo_id = ?";
+          $stmt = $con->prepare($query);
+          $stmt->bind_param("i", $_SESSION['uid']
+        );
+          if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $item = $result->fetch_assoc();
+                $user_fullname = $item['firstname'] .' ' . $item['lastname'];
+            }
+          }
+          echo $user_fullname;
+          ?>
+
+          </label>
+        </li>
         <li class="nav-item" id="admin-logout">
           <a class="nav-link active" href="../vscode/userlogout.php"><i class="fa-solid fa-right-from-bracket fa-1x"></i> Sign Out</a>
         </li>

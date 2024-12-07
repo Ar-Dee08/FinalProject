@@ -4,7 +4,12 @@
 <!-- TESTING LANG ITOOOO -->
 
 <?php 
-session_start(); ?>
+
+
+session_start(); 
+include '../vscode/dbcon.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

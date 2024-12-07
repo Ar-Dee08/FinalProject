@@ -67,7 +67,7 @@ if(mysqli_num_rows($uidres)===1){
             echo 'This is not admin';
             $usertype_id = 1; //customer id
             $_SESSION['uid'] = $uid;
-
+            echo "SESSION UID: " . $_SESSION['uid'];
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
 
             header("Location: ../customerside/homecustomer.php");
