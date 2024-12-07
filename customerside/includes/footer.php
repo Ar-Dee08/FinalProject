@@ -39,68 +39,6 @@
   </div>
 </footer>
 
-<!-- <style>
-.footer {
-    width: 100%;
-    height: 50%;
-    background: #285963;
-    color: #f4f4f4;
-    padding: 30px 0;
-    font-family: 'Play', sans-serif;
-    text-align: center;
-    margin: 20px 0px 0px 0px;
-    overflow-x: hidden;
-    position: absolute;
-    font-family: 'Inter', sans-serif;
-}
-
-.icons-row {
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    display: inline-block;
-    bottom: 20%;
-    margin-bottom: 40px;
-}
-
-.icons-row a i {
-    font-size: 2em;
-    color: #f4f4f4;
-    transition: color 0.3s ease;
-}
-
-.icons-row a:hover i {
-    color: #a3c2c2;
-}
-
- .footer .row a {
-    text-decoration: none;
-    color: #f4f4f4;
-    transition: 0.5s;
-}
-
-.footer .row a:hover {
-        color: #a3c2c2;
-}
-
-.footer .row ul {
-    width: 100%;
-    padding: 0;
-    list-style: none;
-}
-
-.footer .row ul li {
-    display: inline-block;
-    margin: 0 30px;
-}
-
-.footer .row-c {
-    margin-top: 10px;
-}
-
-
-</style> -->
-
 
 <!-- JS ng ewan ko ke rd -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

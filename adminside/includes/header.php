@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+require "../vscode/dbcon.php";
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +15,14 @@
     <link rel="stylesheet" href="<?php echo dirname($_SERVER['SCRIPT_NAME']) . '/style.css'; ?>">
     </head>
 <body>
+
+<?php
+    include 'userCheck.php';
+    // if($sesh_ad_priv === 2) {
+    //     unset($_SESSION['isPriv']);
+    // }
+?>
+
 <div class="custom-nav">
 <?php 
 include 'navbar.php'; 

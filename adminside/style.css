@@ -362,6 +362,28 @@ button:hover {
     
 }
 
+#disabled_ad-edit-btn button {
+    background-color: #1E4A50 !important;
+    
+}
+
+button {
+    padding: 12px;
+    color: #F9F6F6;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #1E4A50;
+    transform: translateY(-2px);
+}
+
 /* NAVBAR */
 .custom-nav, #admin-logout {
     background-color: #285963; /* Replace with your hex code */
@@ -628,8 +650,9 @@ select.admin-sel {
     line-height: 1.5;
 }
 /* DI NAGANA DITO, NEED SA FOOTER MISMO NAKA INTERNAL */
+
 .footer {
-    height: 50%;
+    max-height: 50%;
     width: 100%;
     background: #285963;
     color: #f4f4f4;
@@ -646,7 +669,7 @@ select.admin-sel {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    display: inline-block;
+    display: inline-block !important;
     bottom: 20%;
     margin-bottom: 40px;
 }

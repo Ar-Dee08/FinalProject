@@ -39,13 +39,20 @@ if(mysqli_num_rows($uidres)===1){
             $_SESSION['uid'] = $uid;
             $_SESSION['admin_id'] = $aid;
             
-            if($ad_priv === 'Authorized'){
-                $_SESSION['isPriv'] = 1;                
+            if($ad_priv == 'Authorized'){
+                $_SESSION['isPriv'] = 1;  
+                echo $_SESSION['isPriv'] . $_SESSION['admin_id'] . $ad_priv;
+                
+                header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
+                
+            } else if($ad_priv == 'Unauthorized') {
+                unset($_SESSION['isPriv']);                
+                header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
+
             }
 
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
 
-            header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
             exit();
         } else if($logintype === "1")        
         {                                            //verified but customer only

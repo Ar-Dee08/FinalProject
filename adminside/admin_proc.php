@@ -112,11 +112,13 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
             move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
             echo $imgfile_name;
 
-        $query = "INSERT INTO items(item_id,item_name,item_spec,item_desc,item_price, item_discprice,cat_id,item_img,admin_creator,date_created,record_status)
-        VALUES(?,?,?,?,?,?,?,?,NOW(),'Active');";
+        $query = "INSERT INTO items(item_id, item_name, item_spec, item_desc, item_price, item_discprice, cat_id, item_img, admin_creator, date_created, record_status)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("isssddisi", $item_id,$item_name,$item_spec,$item_desc,$item_price, $item_discprice,$cat_id,$imgfile_name, $admin_id);
+        $date_created = date("Y-m-d H:i:s"); 
+        $record_status = 'Active'; 
+        $stmt->bind_param("isssddissss", $item_id, $item_name, $item_spec, $item_desc, $item_price, $item_discprice, $cat_id, $imgfile_name, $admin_id, $date_created, $record_status);
 
         if ($stmt->execute()) {
             header("Location: view_product.php");

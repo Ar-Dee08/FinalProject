@@ -40,27 +40,35 @@ include '../vscode/dbcon.php';
                 <a href="view_category.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-list"></i> Category</a>
                 <a href="view_product.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-shirt"></i> Products</a>
                 <a href="view_news.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
-                <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
+                
+                <?php 
+                if(isset($_SESSION['isPriv'])){ ?>
+                    <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
+                    <?php } ?>
+                
                 <a href="view_transaction.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-dollar-sign"></i> Transaction</a>
                 <?php 
-if(isset($_SESSION['isPriv'])){ ?>
-    <a class="list-group-item list-group-item-action" 
-    data-bs-toggle="collapse" 
-    href="#collapseAccounts" 
-    role="button" 
-    aria-expanded="false" 
-    aria-controls="collapseAccounts">
-    <i class="fa-regular fa-user"></i> User Account Records
-    </a>
-    <div class="collapse-2" id="collapseAccounts">
-        <ul class="list-group mt-2">
-            <a class="list-group-item list-group-item-action" href="view_userinfo.php">User Information</a>
-            <a class="list-group-item list-group-item-action" href="view_useracc.php">User Account Details</a>
-        </ul>
-<?php }
-?>
+                if(isset($_SESSION['isPriv'])){ ?>
+                    <a class="list-group-item list-group-item-action" 
+                    data-bs-toggle="collapse" 
+                    href="#collapseAccounts" 
+                    role="button" 
+                    aria-expanded="false" 
+                    aria-controls="collapseAccounts">
+                    <i class="fa-regular fa-user"></i> User Account Records
+                    </a>
+                    <div class="collapse-2" id="collapseAccounts">
+                        <ul class="list-group mt-2">
+                            <a class="list-group-item list-group-item-action" href="view_userinfo.php">User Information</a>
+                            <a class="list-group-item list-group-item-action" href="view_useracc.php">User Account Details</a>
+                        </ul>
+                    </div>
                 
-                </div>
+                <?php }
+    // echo  $_SESSION['admin_id'];  
+                // if visible, means user is set as authorized
+
+                ?>
     </div>
     </div>
     

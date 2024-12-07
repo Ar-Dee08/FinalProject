@@ -10,7 +10,7 @@
 <footer>
   <div class="footer">
   <div class="footer-content">
-        <h3><strong>About SSITE</strong></h3>
+        <h3>About SSITE</h3>
         <p>SSITE is dedicated to promoting quality IT education and providing support through various events and resources.</p>
     </div>
     <!-- Icons Row -->
@@ -38,7 +38,7 @@
     </div>
   </div>
 </footer>
-<!--  -->
+
 
 <!-- <script src="test.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
