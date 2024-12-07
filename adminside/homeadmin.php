@@ -42,21 +42,6 @@ include '../vscode/dbcon.php';
                 <a href="view_news.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
                 <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
                 <a href="view_transaction.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-dollar-sign"></i> Transaction</a>
-                <style>
-                    .list-group {
-                        margin: 20px auto;
-                        width: 50%;
-                    }
-
-                    .list-group-item {
-                        padding: 15px 20px;
-                        font-size: 18px;
-                    }
-
-                    .list-group-item i {
-                        margin-right: 10px;
-                    }
-                </style>
                 <?php 
 if(isset($_SESSION['isPriv'])){ ?>
     <a class="list-group-item list-group-item-action" 
