@@ -7,11 +7,11 @@
         </div>
         <div class="offcanvas-body">
             <div class="list-group">
-                <a href="view_category.php" class="list-group-item list-group-item-action">CATEGORIES</a>
-                <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
-                <a href="view_news.php" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
-                <a href="view_admin.php" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
-                <a href="view_transaction.php" class="list-group-item list-group-item-action">TRANSACTIONS</a>
+                <a href="view_category.php" class="list-group-item list-group-item-action">Categories</a>
+                <a href="view_product.php" class="list-group-item list-group-item-action">Products</a>
+                <a href="view_news.php" class="list-group-item list-group-item-action">News & Updates</a>
+                <a href="view_admin.php" class="list-group-item list-group-item-action">Administrators</a>
+                <a href="view_transaction.php" class="list-group-item list-group-item-action">Transactions</a>
                 <!-- Collapsible Section -->
 <?php 
 
@@ -22,14 +22,19 @@
         role="button" 
         aria-expanded="false" 
         aria-controls="collapseAccounts">
-            USER ACCOUNT RECORDS
+            User Account Records
         </a>
         <div class="collapse" id="collapseAccounts">
             <ul class="list-group mt-2">
-                <a class="list-group-item list-group-item-action" href="view_userinfo.php">USER INFORMATION</a>
-                <a class="list-group-item list-group-item-action" href="view_useracc.php">USER ACCOUNT DETAILS</a>
+                <a class="list-group-item list-group-item-action" href="view_userinfo.php">User Information</a>
+                <a class="list-group-item list-group-item-action" href="view_useracc.php">User Account Details</a>
             </ul>
         </div>
+        <style>
+            .collapse {
+                text-indent: 20px;
+            }
+        </style>
     <?php }
 
 ?>

@@ -10,7 +10,7 @@
 <footer>
   <div class="footer">
   <div class="footer-content">
-        <h3>About SSITE</h3>
+        <h3><strong>About SSITE</strong></h3>
         <p>SSITE is dedicated to promoting quality IT education and providing support through various events and resources.</p>
     </div>
     <!-- Icons Row -->

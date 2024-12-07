@@ -37,11 +37,11 @@ include '../vscode/dbcon.php';
         ?> 
     <div>
     <div class="list-group">
-                <a href="view_category.php" class="list-group-item list-group-item-action">CATEGORIES</a>
-                <a href="view_product.php" class="list-group-item list-group-item-action">PRODUCTS/ITEMS</a>
-                <a href="view_news.php" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
-                <a href="view_admin.php" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
-                <a href="view_transaction.php" class="list-group-item list-group-item-action">TRANSACTIONS</a>
+                <a href="view_category.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-list"></i> Category</a>
+                <a href="view_product.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-shirt"></i> Products</a>
+                <a href="view_news.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
+                <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
+                <a href="view_transaction.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-dollar-sign"></i> Transaction</a>
                 <?php 
 if(isset($_SESSION['isPriv'])){ ?>
     <a class="list-group-item list-group-item-action" 
@@ -50,12 +50,12 @@ if(isset($_SESSION['isPriv'])){ ?>
     role="button" 
     aria-expanded="false" 
     aria-controls="collapseAccounts">
-        USER ACCOUNT RECORDS
+    <i class="fa-regular fa-user"></i> User Account Records
     </a>
-    <div class="collapse" id="collapseAccounts">
+    <div class="collapse-2" id="collapseAccounts">
         <ul class="list-group mt-2">
-            <a class="list-group-item list-group-item-action" href="view_userinfo.php">USER INFORMATION</a>
-            <a class="list-group-item list-group-item-action" href="view_useracc.php">USER ACCOUNT DETAILS</a>
+            <a class="list-group-item list-group-item-action" href="view_userinfo.php">User Information</a>
+            <a class="list-group-item list-group-item-action" href="view_useracc.php">User Account Details</a>
         </ul>
 <?php }
 ?>
