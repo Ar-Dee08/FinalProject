@@ -7,12 +7,14 @@ include '../vscode/dbcon.php';
 
 <body class="logo-bg-2">
     <div class="product-container">
-        <div class="home-txt">
-
-            <div>
-                div container
+        <div class="product-txt">
+            product-container [eto mismong container na white]
+            <div class="back-cont">
+                back-cont [idk]
                 <div>
-                    Header
+                    <h1>
+                        Header
+                    </h1>
                 </div>
                 <?php
                 $query = "SELECT * FROM items"; // Adjust the column names if needed
@@ -27,19 +29,24 @@ include '../vscode/dbcon.php';
                             while ($row = $result->fetch_assoc()) { 
                                 $itemName = htmlspecialchars($row['item_name']); // Sanitize for HTML output
                                 $itemImage = htmlspecialchars($row['item_img']); // Sanitize and ensure the path is valid
-                                $itemPrice = htmlspecialchars($row['item_price']); // Sanitize and ensure the path is valid
+                                $itemDisplayPrice = htmlspecialchars($row['item_price']); // Sanitize and ensure the path is valid
                         ?>
                             <li>
-                                <a href="#">
+                                <!-- LINK TO ITEMS -->
+                                <a href="#"> 
                                     <div class="display-item">
                                         <div class="display">
                                             <img  src="../adminside/record_images/item_images/<?=$itemImage;?>" alt="<?php echo $itemName; ?>" class="item-image">
 
                                         </div>
+                                        <br>
                                         <div>
+                                            <p>
                                             <?php echo $itemName . '<br>';
+                                            echo '₱'.  $itemDisplayPrice; ?>
+
+                                            </p>
                                              
-                                            echo '₱'.  $itemPrice; ?>
                                         </div>
                                     </div>
                                 </a>
@@ -69,9 +76,10 @@ include '../vscode/dbcon.php';
 
     .display-item{
         display: inline-block;
-        background-color: red;
+        background-color: #dff;
         border-radius: 5px;
         padding: 15px;
+        margin: 5%;
     }
 
     .item-image {
@@ -80,6 +88,7 @@ include '../vscode/dbcon.php';
         max-width: 7em;
         max-height: 7em;
     }
+
 
 
 </style>    

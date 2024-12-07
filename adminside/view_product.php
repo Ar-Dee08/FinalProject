@@ -26,6 +26,7 @@ require "../vscode/dbcon.php";
                                 <th>Image</th>
                                 <th>Specification</th>
                                 <th>Description</th>
+                                <th>Type</th>
                                 <th>Price</th>
                                 <th>Discounted Price</th>
                                 <th>Category</th>
@@ -60,6 +61,7 @@ require "../vscode/dbcon.php";
                                             </td>
                                             <td><?=$item['item_spec']?> </td>
                                             <td><?=$item['item_desc']?> </td>
+                                            <td><?=$item['item_type']?> </td>
                                             <td><?=$item['item_price']?> </td>
                                             <td><?=$item['item_discprice']?> </td>
                                             <td><?=$item['category']?> </td>
@@ -145,6 +147,7 @@ function RetrieveAll($table, $con, $start, $limit)
                 i.item_img,
                 i.item_spec,
                 i.item_desc,
+                i.item_type,
                 i.item_price,
                 i.item_discprice,
                 cat.category_name AS category, 

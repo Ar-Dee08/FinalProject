@@ -641,7 +641,6 @@ select.admin-sel {
     color: #666666;
     line-height: 1.5;
 }
-/* DI NAGANA DITO, NEED SA FOOTER MISMO NAKA INTERNAL */
 
 .footer {
     max-height: 50%;
@@ -745,6 +744,29 @@ select.admin-sel {
 }
 
 .prod-list p {
+    font-size: 1rem;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.product-txt {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 70%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.product-txt h2 {
+    font-size: 1.8rem;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.product-txt p {
     font-size: 1rem;
     color: #666666;
     line-height: 1.5;

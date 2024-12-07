@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2024 at 04:40 PM
+-- Generation Time: Dec 07, 2024 at 02:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,8 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`admin_id`, `userinfo_id`, `user_privilege`, `granting_date`, `admin_status`) VALUES
 (1, 1, 'Authorized', '0000-00-00 00:00:00', 'Active'),
 (2, 6, 'Authorized', '0000-00-00 00:00:00', 'Active'),
-(3, 15, 'Unauthorized', '2024-12-06 00:00:00', 'Active');
+(3, 15, 'Unauthorized', '2024-12-06 00:00:00', 'Active'),
+(4, 17, 'Authorized', '2024-12-07 16:39:55', 'Active');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,8 @@ INSERT INTO `categories` (`cat_id`, `category_name`, `admin_creator`, `date_crea
 (2, 'Miscellaneous', 2, '2024-12-04 17:08:12', 'Active'),
 (3, 'Bag', 2, '2024-12-04 17:08:44', 'Active'),
 (4, 'Handbag', 2, '2024-12-06 16:29:40', 'Active'),
-(5, 'asd', 2, '2024-12-06 18:25:34', 'Active');
+(5, 'asd', 2, '2024-12-06 18:25:34', 'Removed'),
+(6, 'asd', 2, '2024-12-07 17:38:16', 'Active');
 
 -- --------------------------------------------------------
 
@@ -119,6 +121,7 @@ CREATE TABLE `items` (
   `item_name` varchar(255) NOT NULL,
   `item_spec` text NOT NULL,
   `item_desc` varchar(255) NOT NULL,
+  `item_type` varchar(50) NOT NULL,
   `item_img` longblob NOT NULL,
   `item_price` decimal(10,0) NOT NULL,
   `item_discprice` decimal(10,0) NOT NULL,
@@ -132,11 +135,13 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_img`, `item_price`, `item_discprice`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'T-Shirt', 'Small', 'White', 0x315f313733333333333938312e706e67, 320, 0, 1, 2, '2024-12-05', 'Active'),
-(2, 'Polo Shirt', 'Medium', '  Turquoise', 0x325f313733333333343135342e6a7067, 700, 0, 1, 2, '2024-12-05', 'Active'),
-(3, 'Tote Bag', 'Brightening Future~', '-', 0x335f313733333333343230322e706e67, 220, 0, 3, 2, '2024-12-05', 'Active'),
-(4, 'Sign', 'Small', 'SSITE1', 0x345f313733333437333830352e6a7067, 200, 0, 2, 2, '2024-12-06', 'Active');
+INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_type`, `item_img`, `item_price`, `item_discprice`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
+(1, 'T-SHIRT', 'Small', '   ASD', 'Single', 0x315f313733333534363237312e706e67, 320, 300, 1, 2, '2024-12-07', 'Active'),
+(2, 'Tote Bag', 'Brightening Future~', ' White', 'Single', 0x325f313733333534363636362e706e67, 220, 200, 1, 2, '2024-12-07', 'Active'),
+(3, 'Crinkles', '8pcs', '-', 'Bundle', 0x335f313733333537363230342e706e67, 80, 75, 2, 2, '2024-12-07', 'Active'),
+(4, 'ITEM 1', 'A', 'AA', 'Single', 0x345f313733333537363835312e706e67, 412, 312, 3, 4, '2024-12-07', 'Active'),
+(5, 'TSHIT', 'E', 'A', 'Single', 0x355f313733333537363933342e6a7067, 566, 342, 1, 4, '2024-12-07', 'Active'),
+(6, 'TOTE BAG', 'SSITE', '4', 'Single', 0x365f313733333537363937362e6a7067, 200, 232, 4, 4, '2024-12-07', 'Active');
 
 -- --------------------------------------------------------
 
@@ -258,7 +263,8 @@ INSERT INTO `user_credentials` (`usercred_id`, `email`, `password`, `userinfo_id
 (6, 'a@gmail.com', '$2y$10$NHiSFpuQo1AnpWxhdRG23eQvp221Zx8Ifu8e8MmOpikSzLpOBzvAK', 11),
 (7, 'ab@gmail.com', '$2y$10$W31csEdjNraLvriwdETHPeB6/ggQft79znMy7K7ibp4gA.iOiQkBe', 12),
 (8, 'grardee@gmail.com', '$2y$10$O.ybD2QXctQAAhQsqa9C2.k17EvH0BAAf1JKz6Z6nbZxyKVNL2jYu', 15),
-(9, 'grards@gmail.com', '$2y$10$YUEmC3DVtcxkXdQ.u5j4P.J.7K9cc7SC8eTwinM6OCVITBKDUMh7G', 16);
+(9, 'grards@gmail.com', '$2y$10$YUEmC3DVtcxkXdQ.u5j4P.J.7K9cc7SC8eTwinM6OCVITBKDUMh7G', 16),
+(10, 'abs@gmail.com', '$2y$10$b/noFIZJE3xONQmDbRJDlOU/2UnG3KFyDvdQ1uvImu0r3.iAezVR6', 17);
 
 -- --------------------------------------------------------
 
@@ -302,7 +308,8 @@ INSERT INTO `user_information` (`userinfo_id`, `firstname`, `lastname`, `sex`, `
 (13, 'Grace', 'Atrazo', 'Male', '2011-11-11', '-', '09666666666', 'grace@gmail.com', 'Active', 2, 2, 2, '2024-12-06 02:41:14'),
 (14, 'Grace', 'Atrazo', 'Male', '2011-11-11', '22-05509', '09666666666', 'graceerd@gmail.com', 'Active', 2, 1, 2, '2024-12-06 10:00:06'),
 (15, 'ra', 'rd', 'Male', '2011-11-11', '132', '09666666666', 'grardee@gmail.com', 'Active', 1, 2, 1, '2024-12-06 16:26:15'),
-(16, 'Grace', 'Atrazo', 'Male', '2022-02-22', '-', '09666666666', 'grards@gmail.com', 'Active', 1, 2, 2, '2024-12-06 16:28:38');
+(16, 'Grace', 'Atrazo', 'Male', '2022-02-22', '-', '09666666666', 'grards@gmail.com', 'Active', 1, 2, 2, '2024-12-06 16:28:38'),
+(17, 'Ace', 'Macaspac', 'Female', '2005-10-11', '-', '09913655545', 'abs@gmail.com', 'Active', 1, 2, 1, '2024-12-07 16:38:13');
 
 -- --------------------------------------------------------
 
@@ -386,7 +393,62 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (62, 1, '2024-12-06 18:16:36', 2),
 (63, 1, '2024-12-06 19:17:56', 2),
 (64, 1, '2024-12-06 21:21:03', 2),
-(65, 1, '2024-12-06 21:44:51', 2);
+(65, 1, '2024-12-06 21:44:51', 2),
+(66, 1, '2024-12-07 00:12:25', 2),
+(67, 1, '2024-12-07 02:59:17', 1),
+(68, 1, '2024-12-07 09:16:18', 2),
+(69, 4, '2024-12-07 09:17:56', 1),
+(70, 1, '2024-12-07 09:37:44', 2),
+(71, 10, '2024-12-07 16:38:22', 1),
+(72, 1, '2024-12-07 16:38:39', 2),
+(73, 10, '2024-12-07 16:40:11', 2),
+(74, 10, '2024-12-07 16:45:35', 1),
+(75, 10, '2024-12-07 16:48:16', 2),
+(76, 1, '2024-12-07 16:48:29', 2),
+(77, 1, '2024-12-07 16:49:24', 2),
+(78, 10, '2024-12-07 16:58:57', 2),
+(79, 1, '2024-12-07 17:06:56', 2),
+(80, 10, '2024-12-07 17:07:11', 2),
+(81, 1, '2024-12-07 17:07:27', 2),
+(82, 1, '2024-12-07 17:08:47', 2),
+(83, 10, '2024-12-07 17:10:13', 2),
+(84, 10, '2024-12-07 17:10:51', 2),
+(85, 10, '2024-12-07 17:12:55', 2),
+(86, 4, '2024-12-07 17:28:12', 1),
+(87, 10, '2024-12-07 17:32:38', 2),
+(88, 10, '2024-12-07 17:33:45', 2),
+(89, 10, '2024-12-07 17:34:02', 2),
+(90, 1, '2024-12-07 17:37:19', 2),
+(91, 1, '2024-12-07 17:42:15', 2),
+(92, 1, '2024-12-07 17:42:25', 2),
+(93, 1, '2024-12-07 17:44:17', 2),
+(94, 1, '2024-12-07 17:44:26', 2),
+(95, 1, '2024-12-07 17:44:40', 2),
+(96, 10, '2024-12-07 17:44:50', 2),
+(97, 10, '2024-12-07 17:45:29', 2),
+(98, 10, '2024-12-07 17:45:33', 2),
+(99, 10, '2024-12-07 17:48:18', 2),
+(100, 10, '2024-12-07 17:49:31', 2),
+(101, 10, '2024-12-07 17:50:20', 2),
+(102, 1, '2024-12-07 17:51:04', 2),
+(103, 10, '2024-12-07 17:56:48', 2),
+(104, 1, '2024-12-07 17:59:19', 2),
+(105, 10, '2024-12-07 18:26:37', 2),
+(106, 1, '2024-12-07 18:40:30', 2),
+(107, 10, '2024-12-07 18:51:42', 2),
+(108, 1, '2024-12-07 18:53:58', 2),
+(109, 10, '2024-12-07 18:56:32', 2),
+(110, 1, '2024-12-07 18:58:16', 2),
+(111, 10, '2024-12-07 19:39:06', 2),
+(112, 1, '2024-12-07 19:39:21', 2),
+(113, 10, '2024-12-07 19:39:42', 2),
+(114, 1, '2024-12-07 19:53:35', 2),
+(115, 1, '2024-12-07 19:54:12', 1),
+(116, 1, '2024-12-07 19:54:21', 2),
+(117, 1, '2024-12-07 19:54:40', 1),
+(118, 1, '2024-12-07 20:34:49', 2),
+(119, 10, '2024-12-07 20:56:59', 1),
+(120, 10, '2024-12-07 21:05:36', 2);
 
 -- --------------------------------------------------------
 
@@ -530,13 +592,13 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `admin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cat_id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customertype`
@@ -548,7 +610,7 @@ ALTER TABLE `customertype`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `item_orders`
@@ -578,7 +640,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- Constraints for dumped tables

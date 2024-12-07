@@ -17,6 +17,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
             $item_name = $item_row['item_name'];
             $item_spec = $item_row['item_spec'];
             $item_desc = $item_row['item_desc'];
+            $item_type = $item_row['item_type'];
             $item_price = $item_row['item_price'];
             $item_discprice = $item_row['item_discprice'];
             $category = $item_row['cat_id'];
@@ -88,7 +89,29 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                             Discounted Price
                                         </label>
                                         <input type="number" value="<?= $item_discprice ?>" name="item_discprice" placeholder="Enter Discounted Price" class="form-control" required step="0.01" min="0"> 
+                                        <label for="">
+                                        Item Status
+                                        </label>
+                                        <br>
+                                        <select class="admin-sel" name="item_type" id="recstat">
+                                            <?php
+                                            if($item_type == "Single"){
+                                                ?>
+                                                    <option value="Single">Single</option>
+                                                    <option value="Bundle">Bundle</option>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <option value="Bundle">Bundle</option>
+                                                    <option value="Single">Single</option>
+                                                <?php
+                                            }
+                                            ?>
                                         
+                                        </select>
+                                        <br>
+                                        <br>
+
                                         <label for="">
                                             Category
                                         </label>
@@ -151,7 +174,16 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                             Discounted Price
                                         </label>
                                         <input type="number" name="item_discprice" placeholder="Enter Discounted Price" class="form-control" required step="0.01" min="0"> 
-                                        
+                                        <label for="">
+                                        Item Status
+                                        </label>
+                                        <br>
+                                        <select class="admin-sel" name="item_type" id="recstat">
+                                            <option value="Single">Single</option>
+                                            <option value="Bundle">Bundle</option>    
+                                        </select>
+                                        <br>
+                                        <br>
                                         <label for="">
                                             Category
                                         </label>
@@ -183,11 +215,14 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                         
                                         </select>
                                         <br>
+                                        <br>
                                         
                                         <label for="">
                                             Item Image
                                         </label>
                                         <input type="file" name="item_img" accept=".jpg,.jpeg,.png,.gif" placeholder="Submit Image File" class="form-control" required> 
+                                        <br>
+                                        <br>
 
                                         <?php
                                     }

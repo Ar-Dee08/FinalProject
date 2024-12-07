@@ -56,6 +56,7 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
     $item_name = $_POST['item_name'];
     $item_spec = $_POST['item_spec'];
     $item_desc = $_POST['item_desc'];
+    $item_type = $_POST['item_type'];
     $item_price = $_POST['item_price'];
     $item_discprice = $_POST['item_discprice'];
     $cat_id = $_POST['cat_id']; 
@@ -89,10 +90,10 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
         }
         
 
-        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_price=?, item_discprice=?, cat_id=?, item_img=?, record_status = ? WHERE item_id = ?";
+        $query = "UPDATE items SET item_name = ?, item_spec = ?, item_desc=?, item_type=?, item_price=?, item_discprice=?, cat_id=?, item_img=?, record_status = ? WHERE item_id = ?";
         // 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("sssddissi", $item_name,$item_spec, $item_desc, $item_price, $item_discprice, $cat_id, $imgfile_name, $item_recstat, $item_id);
+        $stmt->bind_param("ssssddissi", $item_name,$item_spec, $item_desc, $item_type, $item_price, $item_discprice, $cat_id, $imgfile_name, $item_recstat, $item_id);
 
         if ($stmt->execute()) {
             header("Location: view_product.php");
@@ -112,13 +113,13 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
             move_uploaded_file($_FILES['item_img']['tmp_name'], $path . $imgfile_name);
             echo $imgfile_name;
 
-        $query = "INSERT INTO items(item_id, item_name, item_spec, item_desc, item_price, item_discprice, cat_id, item_img, admin_creator, date_created, record_status)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        $query = "INSERT INTO items(item_id, item_name, item_spec, item_desc, item_type, item_price, item_discprice, cat_id, item_img, admin_creator, date_created, record_status)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         $stmt = $con->prepare($query);
         $date_created = date("Y-m-d H:i:s"); 
         $record_status = 'Active'; 
-        $stmt->bind_param("isssddissss", $item_id, $item_name, $item_spec, $item_desc, $item_price, $item_discprice, $cat_id, $imgfile_name, $admin_id, $date_created, $record_status);
+        $stmt->bind_param("issssddissss", $item_id, $item_name, $item_spec, $item_desc, $item_type, $item_price, $item_discprice, $cat_id, $imgfile_name, $admin_id, $date_created, $record_status);
 
         if ($stmt->execute()) {
             header("Location: view_product.php");

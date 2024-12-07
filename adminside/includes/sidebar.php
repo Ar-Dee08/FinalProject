@@ -11,7 +11,7 @@
                 <a href="view_news.php" class="list-group-item list-group-item-action">News & Updates</a>
                 <?php 
                 if(isset($_SESSION['isPriv'])){ ?>
-                    <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
+                    <a href="view_admin.php" class="list-group-item list-group-item-action"> Administrator</a>
                     <?php } ?>
                 <a href="view_transaction.php" class="list-group-item list-group-item-action">Transactions</a>
                 <!-- Collapsible Section -->
