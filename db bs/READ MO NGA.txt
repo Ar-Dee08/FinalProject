@@ -20,6 +20,15 @@ customer
 
 * NEED :
 - ADD  DATE OF COMPLETED TRANSACTION
-
-
 - DI PA NAKA SETUP ADMIN_PROC NG TRANSACTIONS
+
+
+//USE WHEN THERE'S A HEADER ISSUE
+include 'includes/header.php';
+include 'admin_middleware.php';
+require "../vscode/dbcon.php";
+if($sesh_ad_priv === 2) {
+    unset($_SESSION['isPriv']);
+}
+
+*used this first in view_useracc

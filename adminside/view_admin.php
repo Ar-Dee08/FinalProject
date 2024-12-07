@@ -67,7 +67,17 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
                                                     <form action="mod_admin.php?adidlabel=<?=$item['admin_id']?>" method="post">
-                                                        <button type="submit" name="ad-edit-btn">Edit Records</button>
+                                                    <?php            
+                                                        if($item['admin_id'] == $_SESSION['admin_id']){ ?>
+                                                            <button type="submit" disabled id="disabled_ad-edit-btn" name="disabled_ad-edit-btn">Edit Records</button>
+                                                    <?php
+                                                        } else {
+                                                            ?>
+                                                            <button type="submit" name="ad-edit-btn">Edit Records</button>
+                                                    <?php
+                                                        }
+
+                                                        ?>
                                                     </form>
                                                 </div>                                             
                                             </td>

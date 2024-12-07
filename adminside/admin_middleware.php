@@ -6,6 +6,7 @@ if (isset($_SESSION['uid'])) { //CHECK IF USER IS ADMIN, will be updated
 
     }
 } else {
+
     $_SESSION['message'] = "Login to continue";
     header("Location: index.php?error=Login to continue.");
     // include '../vscode/userlogout.php';

@@ -362,6 +362,28 @@ button:hover {
     
 }
 
+#disabled_ad-edit-btn button {
+    background-color: #1E4A50 !important;
+    
+}
+
+button {
+    padding: 12px;
+    color: #F9F6F6;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #1E4A50;
+    transform: translateY(-2px);
+}
+
 /* NAVBAR */
 .custom-nav, #admin-logout {
     background-color: #285963; /* Replace with your hex code */
