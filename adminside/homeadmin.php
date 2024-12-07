@@ -69,3 +69,4 @@ if(isset($_SESSION['isPriv'])){ ?>
         include 'includes/footer.php';
     ?>
 </div>
+</div>
