@@ -241,7 +241,7 @@ input:focus, .login-sel:focus {
 }
 
 /* Buttons */
-button {
+button:not(.disabled_ad-edit-btn) {
     padding: 12px;
     background-color: #458D9E;
     color: #F9F6F6;
@@ -254,7 +254,7 @@ button {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
+button:not(.disabled_ad-edit-btn):hover {
     background-color: #1E4A50;
     transform: translateY(-2px);
 }
@@ -362,13 +362,10 @@ button:hover {
     
 }
 
-#disabled_ad-edit-btn button {
-    background-color: #1E4A50 !important;
-    
-}
 
-button {
+.disabled_ad-edit-btn {
     padding: 12px;
+    background-color: #1E4A50;
     color: #F9F6F6;
     border: none;
     border-radius: 8px;
@@ -377,11 +374,6 @@ button {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-button:hover {
-    background-color: #1E4A50;
-    transform: translateY(-2px);
 }
 
 /* NAVBAR */

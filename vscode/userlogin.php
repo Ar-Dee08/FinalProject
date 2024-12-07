@@ -34,6 +34,10 @@ if(mysqli_num_rows($uidres)===1){
             $admin_row = mysqli_fetch_assoc($aidres);
             $aid = $admin_row['admin_id'];
             $ad_priv = $admin_row['user_privilege'];
+            $ad_stat = $admin_row['admin_status'];
+
+            if($ad_stat == "Active"){
+
             $usertype_id = 2; //admin id
             echo 'This is admin';
             $_SESSION['uid'] = $uid;
@@ -43,17 +47,20 @@ if(mysqli_num_rows($uidres)===1){
                 $_SESSION['isPriv'] = 1;  
                 echo $_SESSION['isPriv'] . $_SESSION['admin_id'] . $ad_priv;
                 
-                header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
+                header("Location: ../adminside/homeadmin.php");     //AUTHORIZED ADMIN
                 
             } else if($ad_priv == 'Unauthorized') {
                 unset($_SESSION['isPriv']);                
-                header("Location: ../adminside/homeadmin.php");     //WILL BE CHANGED IF MAY BRIDGE PAGE NA TO ADMIN
+                header("Location: ../adminside/homeadmin.php");    //UNAUTHORIZED ADMIN
 
             }
 
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
-
             exit();
+        } else {
+            header("Location: ../adminside/adminLogin.php?error=You are not authorized to access the page.");
+            exit();
+        }
         } else if($logintype === "1")        
         {                                            //verified but customer only
             echo 'This is not admin';
