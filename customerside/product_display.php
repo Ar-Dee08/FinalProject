@@ -1,28 +1,56 @@
 <?php
-// session_start();
 include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
+
+// Check database connection
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Get selected category from URL (default to null if not set)
+$selectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : null;
+
+// Query to fetch items, filter by category if selected
+$query = "SELECT * FROM items";
+if ($selectedCategory) {
+    $query .= " WHERE category_id = $selectedCategory"; // Assuming `items` has a `category_id` column
+}
+$result = $con->query($query);
+
+// Query to fetch all categories
+$categoryQuery = "SELECT * FROM categories";
+$categoryResult = $con->query($categoryQuery);
 ?>
 
 <body class="logo-bg-2">
     <div class="product-container">
         <div class="product-txt">
-            product-container [eto mismong container na white]
             <div class="back-cont">
-                back-cont [idk]
                 <div>
-                    <h1>
-                        Header
-                    </h1>
+                    <h1>Products</h1>
+                    <hr>
                 </div>
-                <?php
-                $query = "SELECT * FROM items"; // Adjust the column names if needed
-                $result = $con->query($query); // Execute the query
-                ?>
 
+                <!-- Category Filter Form -->
+                <form method="GET" action="product_display.php" style="text-align: right; margin-bottom: 20px;">
+                    <select name="category" id="category" onchange="this.form.submit()">
+                        <option value="">All Categories</option>
+                        <?php
+                        if ($categoryResult && $categoryResult->num_rows > 0) {
+                            while ($categoryRow = $categoryResult->fetch_assoc()) {
+                                $categoryId = htmlspecialchars($categoryRow['cat_id']);
+                                $categoryName = htmlspecialchars($categoryRow['category_name']);
+                                $isSelected = $selectedCategory === (int)$categoryId ? "selected" : "";
+                                echo "<option value='$categoryId' $isSelected>$categoryName</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </form>
+
+                <!-- Product Display -->
                 <div class="display-cont">
-                    cont body
                     <ul>
                         <?php 
                         if ($result && $result->num_rows > 0) { 
@@ -37,17 +65,14 @@ include '../vscode/dbcon.php';
                                 <a href="item_detail.php?item_id=<?= urlencode($row['item_id']); ?>"> 
                                     <div class="display-item">
                                         <div class="display">
-                                            <img  src="../adminside/record_images/item_images/<?=$itemImage;?>" alt="<?php echo $itemName; ?>" class="item-image">
-
+                                            <img src="../adminside/record_images/item_images/<?= $itemImage ?: 'default.jpg'; ?>" 
+                                                 alt="<?= $itemName; ?>" class="item-image">
                                         </div>
-                                        <br>
                                         <div>
                                             <p>
-                                            <?php echo $itemName . '<br>';
-                                            echo '₱'.  $itemDisplayPrice; ?>
-
+                                                <?= $itemName; ?><br>
+                                                ₱<?= $itemPrice; ?>
                                             </p>
-                                             
                                         </div>
                                     </div>
                                 </a>
@@ -61,16 +86,36 @@ include '../vscode/dbcon.php';
                         } 
                         ?>
                     </ul>
-
-                    end of cont body
                 </div>
-                    
             </div>
-
-        <div>
+        </div>
     </div>
 </div>
- 
+<style>
+    .display-cont li {
+        display: inline-block;
+    }
+
+    .display-item{
+        display: inline-block;
+        background-color: #dff;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 5%;
+    }
+
+    .item-image {
+        width: 7em;
+        height: 7em;
+        max-width: 7em;
+        max-height: 7em;
+    }
+
+
+
+</style>    
+
+
 
 
 <div class="footer-footer">
