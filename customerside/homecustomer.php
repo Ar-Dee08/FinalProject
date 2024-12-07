@@ -10,11 +10,11 @@ include '../vscode/dbcon.php';
     
     <div>
     <div class="list-group">
-                <a href="product_display.php" class="list-group-item list-group-item-action">PRODUCTS</a>
-                <a href="#" class="list-group-item list-group-item-action">eme</a>
-                <a href="#" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
-                <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
-                <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
+                <a href="#" class="list-group-item list-group-item-action">Home</a>
+                <a href="product_display.php" class="list-group-item list-group-item-action">Products</a>
+                <a href="#" class="list-group-item list-group-item-action">News & Updates</a>
+                <a href="#" class="list-group-item list-group-item-action">About Us</a>
+                <a href="#" class="list-group-item list-group-item-action">Profile Account</a>
                 
     <a class="list-group-item list-group-item-action" 
     data-bs-toggle="collapse" 

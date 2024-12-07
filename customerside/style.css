@@ -1,3 +1,21 @@
+/* Universal Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Inter', sans-serif;    
+    background-size: 150px;
+    background-position: center;
+    color: #285963;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
 .customer-container {
     background-color: #CEDFE3;
     padding: 30px;    
@@ -8,4 +26,122 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-family: 'Inter', sans-serif;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Footer */
+.footer {
+    max-height: 50%;
+    width: 100%;
+    background: #285963;
+    color: #f4f4f4;
+    padding: 30px 0;
+    font-family: 'Play', sans-serif;
+    text-align: center;
+    margin: 20px 0px 0px 0px;
+    overflow-x: hidden;
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+}
+
+.icons-row {
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    display: inline-block !important;
+    bottom: 20%;
+    margin-bottom: 40px;
+}
+
+.icons-row a i {
+    font-size: 2em;
+    color: #f4f4f4;
+    transition: color 0.3s ease;
+}
+
+.icons-row a:hover i {
+    color: #a3c2c2;
+}
+
+ .footer .row a {
+    text-decoration: none;
+    color: #f4f4f4;
+    transition: 0.5s;
+}
+
+.footer .row a:hover {
+        color: #a3c2c2;
+}
+
+.footer .row ul {
+    width: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.footer .row ul li {
+    display: inline-block;
+    margin: 0 30px;
+}
+
+.footer .row-c {
+    margin-top: 10px;
+}
+
+/* NavBar */
+/* Admin Navbar */
+#logo-ssite-1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding-right: 30px;
+}
+
+#logo-ssite-1:hover {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);
+}
+
+.nav-item {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
+
+.nav-item.active {
+    border-radius: 8px;
+}
+
+.nav-item.active .nav-link {
+    color: #F9F6F6 !important;
+}
+
+.nav-item:hover .nav-link {
+    color: #5e9ba9 !important;
+}
+
+.navbar-nav ms-auto {
+    font-family: 'Inter', sans-serif;
+}
+
+.navbar-nav ms-auto.active {
+    color: #f9f6f6;
+}
+
+.navbar-nav ms-auto:hover {
+    color: #5e9ba9;
+}
+
+.btn.btn-primary {
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+    border: none;
+    color: #F9F6F6 ;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn.btn-primary:hover {
+    background-color: transparent;
+    border: none;
+    color: #5e9ba9 !important;
 }
