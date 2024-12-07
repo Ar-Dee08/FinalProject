@@ -6,9 +6,13 @@ since yan nakalagay sa dbcon na name ng db (temporarily, maaayos pagka may time 
 
 Admin creds : 
 
-admin
-- e...d@gmail.com
+admin authorized
+- e...d@gmail.com 
 - ems
+
+admin unauthorized
+- abs@gmail.vom
+-abs
 
 customer
 - ass@gmail.com	

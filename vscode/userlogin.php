@@ -40,7 +40,7 @@ if(mysqli_num_rows($uidres)===1){
             $_SESSION['admin_id'] = $aid;
             
             if($ad_priv === 'Authorized'){
-                $_SESSION['isPriv'] = 1;                
+                $_SESSION['isPriv'] = 1;  
             }
 
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION

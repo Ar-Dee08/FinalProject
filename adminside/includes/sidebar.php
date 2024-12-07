@@ -1,4 +1,3 @@
-
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <img src="images/SSITE-LOGO-CIRCLE.png" alt="SSITE Logo" height="120px" width="120px">
         <div class="offcanvas-header">

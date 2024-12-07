@@ -1,0 +1,11 @@
+.customer-container {
+    background-color: #CEDFE3;
+    padding: 30px;    
+    border-radius: 5px;
+    max-width: 95%;
+    /* max-height: fit-content; */
+    margin: 3% auto;    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
