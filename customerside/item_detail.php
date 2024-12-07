@@ -34,24 +34,45 @@ if (isset($_GET['item_id'])) {
             product-container [eto mismong container na white]
         <div class="back-cont">
             back-cont [idk]
-            <div class="item-header">
+            <!-- <div class="item-header">
                 <h1>
                     Header
                 </h1>
-            </div>
+            </div> -->
             <div class="item-top-section">
                     
                 <div class="item-detail-image">
                     <img src='../adminside/record_images/item_images/<?=$item['item_img']?>' alt='<?=$item['item_name']?>' class="item-detail-image">
                 </div>
-                <div>
-                    <h1><?=$item['item_name'] ?></h1>
-                    <p>Price: ₱<?=$item['item_price']?></p>
-                </div>
+                <div class="item-detail-name">
+                    <h1><?=$item_name?></h1>
+                    <h5>Price: ₱<?=$item_discprice?> — ₱<?=$item_price?></h>
+                    <br>
+                    <h6><?=$item_spec?></h6>
 
+                </div>
             </div>
-            <div>
-                <p>Description : <?=$item_desc?></p>
+            <hr> 
+            <!-- EDIT NIYO NALANG HR TAG -->
+            <div class="item-mid-section">
+                <div class="item-description">
+                    <p>Description : </p>
+                    <p><?=$item_desc?></p>
+
+                </div>
+            </div>
+                    
+            <div class="item-bottom-section">
+                    
+            
+            <br>
+                <div class="item-detail-buttons">
+                    <button type="submit" name="item-cart-btn" formnovalidate>Add to Cart</button>
+                    <button type="submit" name="item-order-btn" formnovalidate>Order Now</button>
+                    
+
+                
+                </div>
 
             </div>
 
