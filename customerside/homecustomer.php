@@ -15,8 +15,7 @@ include '../vscode/dbcon.php';
                 <a href="#" class="list-group-item list-group-item-action">NEWS & UPDATES</a>
                 <a href="#" class="list-group-item list-group-item-action">ADMINISTRATORS</a>
                 <a href="#" class="list-group-item list-group-item-action">TRANSACTIONS</a>
-                <?php 
-if(isset($_SESSION['isPriv'])){ ?>
+                
     <a class="list-group-item list-group-item-action" 
     data-bs-toggle="collapse" 
     href="#collapseAccounts" 
@@ -30,8 +29,7 @@ if(isset($_SESSION['isPriv'])){ ?>
             <a class="list-group-item list-group-item-action" href="view_userinfo.php">USER INFORMATION</a>
             <a class="list-group-item list-group-item-action" href="view_useracc.php">USER ACCOUNT DETAILS</a>
         </ul>
-<?php }
-?>
+
                 
                 </div>
     </div>
