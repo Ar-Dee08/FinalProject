@@ -3,6 +3,8 @@
 include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
+
+// echo $_SESSION['uid'];
 ?>
     <div class="home-txt">
     

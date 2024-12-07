@@ -32,13 +32,12 @@ if (isset($_GET['item_id'])) {
 
     <div class="product-txt">
             product-container [eto mismong container na white]
+
         <div class="back-cont">
             back-cont [idk]
-            <!-- <div class="item-header">
-                <h1>
-                    Header
-                </h1>
-            </div> -->
+            <form action="customer_proc.php" method="post">
+
+         
             <div class="item-top-section">
                     
                 <div class="item-detail-image">
@@ -49,8 +48,17 @@ if (isset($_GET['item_id'])) {
                     <h5>Price: ₱<?=$item_discprice?> — ₱<?=$item_price?></h>
                     <br>
                     <h6><?=$item_spec?></h6>
-
+                    <div>
+                        <p>HELLO GRARDEE AKO PO E2 PAPALITAN NALANG PI NG YUNG SA QUANTITY EME NG MGA ECOMMERCE YUNG MAY PLUS AT MINUS SIGN SA MAGKABILANG GILID</p>
+                        <input type="number" min="0" step="1" name="quantity" placeholder="quantity" class="form-control" required>
+                        
+                    </div>
+                    <div>
+                        <h6>SSITE Member Price : ₱<?=$item_discprice?></h6>
+                        <h6>SSITE Non-Member Price : ₱<?=$item_price?></h6>
+                    </div>
                 </div>
+                
             </div>
             <hr> 
             <!-- EDIT NIYO NALANG HR TAG -->
@@ -67,14 +75,14 @@ if (isset($_GET['item_id'])) {
             
             <br>
                 <div class="item-detail-buttons">
-                    <button type="submit" name="item-cart-btn" formnovalidate>Add to Cart</button>
-                    <button type="submit" name="item-order-btn" formnovalidate>Order Now</button>
+                    <button type="submit" name="item-cart-btn" >Add to Cart</button>
+                    <button type="submit" name="item-order-btn" >Order Now</button>
                     
 
                 
                 </div>
-
             </div>
+            </form>
 
         </div>
 

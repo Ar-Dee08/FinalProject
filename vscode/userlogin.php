@@ -4,6 +4,7 @@ require "dbcon.php";
 
 session_start();
 //USERNAME MIGHT BE CHANGED TO EMAIL
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     function verify($data)
     {

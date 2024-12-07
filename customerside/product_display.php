@@ -4,9 +4,6 @@ include 'user_middleware.php';
 include '../vscode/dbcon.php';
 
 // Check database connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 // Get selected category from URL (default to null if not set)
 $selectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : null;
@@ -14,7 +11,7 @@ $selectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : null;
 // Query to fetch items, filter by category if selected
 $query = "SELECT * FROM items";
 if ($selectedCategory) {
-    $query .= " WHERE category_id = $selectedCategory"; // Assuming `items` has a `category_id` column
+    $query .= " WHERE cat_id = $selectedCategory"; // Assuming `items` has a `category_id` column
 }
 $result = $con->query($query);
 
@@ -71,7 +68,7 @@ $categoryResult = $con->query($categoryQuery);
                                         <div>
                                             <p>
                                                 <?= $itemName; ?><br>
-                                                ₱<?= $itemPrice; ?>
+                                                ₱<?= $itemDisplayPrice; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -81,7 +78,7 @@ $categoryResult = $con->query($categoryQuery);
                             } 
                         } else { 
                         ?>
-                            <li>No items found in the database.</li>
+                            <li>No items yet in this category.</li>
                         <?php 
                         } 
                         ?>
