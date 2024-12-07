@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2024 at 02:22 PM
+-- Generation Time: Dec 07, 2024 at 09:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,6 +44,29 @@ INSERT INTO `admin` (`admin_id`, `userinfo_id`, `user_privilege`, `granting_date
 (2, 6, 'Authorized', '0000-00-00 00:00:00', 'Active'),
 (3, 15, 'Unauthorized', '2024-12-06 00:00:00', 'Active'),
 (4, 17, 'Authorized', '2024-12-07 16:39:55', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` bigint(20) NOT NULL,
+  `item_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `cart_status` varchar(50) NOT NULL,
+  `userinfo_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `item_id`, `quantity`, `cart_status`, `userinfo_id`) VALUES
+(1, 2, 1, 'Active', 6),
+(2, 3, 3, 'Active', 6),
+(3, 2, 3, 'Active', 6);
 
 -- --------------------------------------------------------
 
@@ -199,7 +222,8 @@ CREATE TABLE `news_update` (
 --
 
 INSERT INTO `news_update` (`post_id`, `title`, `caption`, `post_img`, `post_url`, `admin_id`, `date_webposted`, `record_status`) VALUES
-(1, 'SSITE Conversion Week 2024', '         🎶“𝐺𝑢𝑠𝑡𝑜 𝑘𝑜𝑛𝑔 𝑖𝑏𝑖𝑔𝑎𝑦 𝑎𝑛𝑔 𝑐𝑜𝑑𝑒 𝑛𝑎 𝑔𝑢𝑠𝑡𝑜 𝑚𝑜”🎶\r\n\r\nDecember 06 is coming, Peninsulares! Are you ready for some fun at the Treyd Fest 2024?💥📢\r\n\r\nDon’t miss out on this chance to get a discount when you purchase your tickets—just use our promo code, 𝗦𝗦𝗜𝗧𝗘𝟮𝟬𝟮𝟰 ✨ Malay mo, may makasama ka pa sa 711 after the event. 👀\r\n\r\nGrab your tickets now, and let\'s make this event unforgettable!🎉\r\n\r\n:pushpin: For ticket-selling instructions, click this link: https://www.facebook.com/share/p/19bQLNzAwJ/ \r\n\r\n:pushpin: Visit the page below for further updates and information regarding Treyd Fest 2024\r\nCampus Student Government- BPSU Main Campus : \r\nhttps://www.facebook.com/bpsuCSGmain\r\n@everyone\r\n\r\n#TreydFest2024\r\n#SSITE2024', 0x315f313733333337323235322e6a7067, 'https://www.facebook.com/', 2, '2024-12-05 00:00:00', 'Active');
+(1, 'SSITE Conversion Week 2024', ' 🎶“𝐺𝑢𝑠𝑡𝑜 𝑘𝑜𝑛𝑔 𝑖𝑏𝑖𝑔𝑎𝑦 𝑎𝑛𝑔 𝑐𝑜𝑑𝑒 𝑛𝑎 𝑔𝑢𝑠𝑡𝑜 𝑚𝑜”🎶\r\n\r\n\r\nDecember 06 is coming, Peninsulares! Are you ready for some fun at the Treyd Fest 2024?💥📢\r\n\r\nDon’t miss out on this chance to get a discount when you purchase your tickets—just use our promo code, 𝗦𝗦𝗜𝗧𝗘𝟮𝟬𝟮𝟰 ✨ Malay mo, may makasama ka pa sa 711 after the event. 👀\r\n\r\nGrab your tickets now, and let&#039;s make this event unforgettable!🎉\r\n\r\n:pushpin: For ticket-selling instructions, click this link: https://www.facebook.com/share/p/19bQLNzAwJ/ \r\n\r\n:pushpin: Visit the page below for further updates and information regarding Treyd Fest 2024\r\nCampus Student Government- BPSU Main Campus : \r\nhttps://www.facebook.com/bpsuCSGmain\r\n@everyone\r\n\r\n#TreydFest2024\r\n#SSITE2024', 0x315f313733333337323235322e6a7067, 'https://www.facebook.com/', 2, '2024-12-05 00:00:00', 'Active'),
+(2, 'SSITE Conversion Week', 'A\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA\r\nA', 0x325f313733333538333239382e6a7067, 'ASDSAD.COM', 2, '2024-12-07 22:54:58', 'Active');
 
 -- --------------------------------------------------------
 
@@ -448,7 +472,20 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (117, 1, '2024-12-07 19:54:40', 1),
 (118, 1, '2024-12-07 20:34:49', 2),
 (119, 10, '2024-12-07 20:56:59', 1),
-(120, 10, '2024-12-07 21:05:36', 2);
+(120, 10, '2024-12-07 21:05:36', 2),
+(121, 1, '2024-12-07 22:48:05', 2),
+(122, 10, '2024-12-07 22:56:59', 1),
+(123, 4, '2024-12-08 02:22:51', 1),
+(124, 1, '2024-12-08 02:41:49', 2),
+(125, 1, '2024-12-08 02:42:14', 2),
+(126, 1, '2024-12-08 02:45:19', 2),
+(127, 4, '2024-12-08 02:45:43', 1),
+(128, 10, '2024-12-08 02:46:02', 2),
+(129, 1, '2024-12-08 02:47:44', 2),
+(130, 1, '2024-12-08 02:52:20', 2),
+(131, 1, '2024-12-08 03:04:15', 2),
+(132, 4, '2024-12-08 03:09:23', 1),
+(133, 1, '2024-12-08 03:18:18', 2);
 
 -- --------------------------------------------------------
 
@@ -480,6 +517,14 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`),
   ADD UNIQUE KEY `admin_id` (`admin_id`),
   ADD KEY `fk_adminuid` (`userinfo_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `fk_cart_item` (`item_id`),
+  ADD KEY `fk_cart_` (`userinfo_id`);
 
 --
 -- Indexes for table `categories`
@@ -628,7 +673,7 @@ ALTER TABLE `mem_status`
 -- AUTO_INCREMENT for table `news_update`
 --
 ALTER TABLE `news_update`
-  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transactions`
@@ -640,7 +685,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- Constraints for dumped tables
@@ -651,6 +696,13 @@ ALTER TABLE `user_login`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `fk_adminuid` FOREIGN KEY (`userinfo_id`) REFERENCES `user_information` (`userinfo_id`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_cart_` FOREIGN KEY (`userinfo_id`) REFERENCES `user_information` (`userinfo_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_cart_item` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `categories`
