@@ -41,14 +41,16 @@
 
 <style>
 .footer {
-    height: 100%;
+    height: 50%;
+    width: 100%;
     background: #285963;
     color: #f4f4f4;
     padding: 30px 0;
     font-family: 'Play', sans-serif;
     text-align: center;
-    margin: 20px 0;
+    margin: 20px 0px 0px 0px;
     overflow-x: hidden;
+    position: absolute;
     font-family: 'Inter', sans-serif;
 }
 
@@ -95,6 +97,11 @@
 .footer .row-c {
     margin-top: 10px;
 }
+
+
+
+
+
 </style>
 
 
