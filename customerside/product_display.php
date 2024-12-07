@@ -6,46 +6,76 @@ include '../vscode/dbcon.php';
 ?>
 
 <body class="logo-bg-2">
-    <div class="customer-container">
+    <div class="product-container">
+        <div class="home-txt">
 
-    <div class="prod-list">
-        <div>
-
-        </div>
-
-        <div>
-        pic    
             <div>
-                <ul>
-                    <li>
-                        sad SHOULD HAVE IMAGE
-                        <a href="">
-                            LINK
-                            <div>
-                                WOP
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        not sad SHOULD HAVE IMAGE
-                        <a href="">
-                            LINK
-                            <div>
-                                WOP
-                            </div>
-                        </a>
-                            
-                    </li>
-                </ul>
-            </div>
-        </div>
+                div container
+                <div>
+                    Header
+                </div>
+                <div class="display-cont">
+                    cont body
+                    <ul>
+                        <li>
+                            <a href="">
+                                
+                                <div class="display-item" >
+                                    <div>
+                                        IMAGE
+                                    </div>
+                                    <div>
+                                        item name
+                                    </div>
+                                </div>
 
-    </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="display-item" >
+                                    <div>
+                                        IMAGE
+                                    </div>
+                                    <div>
+                                        item name
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="display-item" >
+                                    <div>
+                                        IMAGE
+                                    </div>
+                                    <div>
+                                        item name
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    end of cont body
+                </div>
+                    
+            </div>
+
+        <div>
     </div>
 </div>
+<style>
+    .display-cont li {
+        display: inline-block;
+    }
 
-    <div class="footer-footer">
-        <?php
-            include 'includes/footer.php';
-        ?>
-    </div>
+    .display-item{
+        display: block;
+        background-color: red;
+    }
+</style>    
+<div class="footer-footer">
+    <?php
+        include 'includes/footer.php';
+    ?>
+</div>

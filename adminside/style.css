@@ -628,8 +628,9 @@ select.admin-sel {
     line-height: 1.5;
 }
 /* DI NAGANA DITO, NEED SA FOOTER MISMO NAKA INTERNAL */
+
 .footer {
-    height: 50%;
+    max-height: 50%;
     width: 100%;
     background: #285963;
     color: #f4f4f4;
@@ -646,7 +647,7 @@ select.admin-sel {
     justify-content: center;
     align-items: center;
     gap: 20px;
-    display: inline-block;
+    display: inline-block !important;
     bottom: 20%;
     margin-bottom: 40px;
 }
