@@ -98,7 +98,7 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
                                         <label for="">
                                             Enter User ID : 
                                         </label>
-                                        <input type="text" name="ad_uid" placeholder="Enter First Name" class="form-control" required>  
+                                        <input type="text" name="ad_uid" placeholder="Enter User ID" class="form-control" required>  
                                         <br>
                                         <br>
                                        

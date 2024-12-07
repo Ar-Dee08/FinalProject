@@ -1,14 +1,8 @@
 <?php
 
 
-if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
-    header("Location: ../adminside/homeadmin.php?error=You can't access that page.");
-    // echo "ayaw";
-    exit();
-} else {
     include 'includes/header.php';
     include 'admin_middleware.php';
-    require "../vscode/dbcon.php";
 
 ?>
 
@@ -117,11 +111,15 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                 </form>
                             </div>
                             <br>
+                            <?php 
+                            if(isset($_SESSION['isPriv'])){ ?>
                             <div class="col-md-4 ms-auto">
-                                <form action="view_userinfo.php?=0" method="post">
+                                <form action="view_userinfo.php" method="post">
                                     <button type="submit" name="tr-userinfo-btn">Go to User Information</button>
                                 </form>
                             </div>
+                            <?php 
+                            } ?>
                             
 
                     </div>
@@ -143,7 +141,7 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
 <footer>
 <?php
 include 'includes/footer.php';
-}
+
 
 
 

@@ -1,4 +1,3 @@
-
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <img src="images/SSITE-LOGO-CIRCLE.png" alt="SSITE Logo" height="120px" width="120px">
         <div class="offcanvas-header">
@@ -10,7 +9,10 @@
                 <a href="view_category.php" class="list-group-item list-group-item-action">Categories</a>
                 <a href="view_product.php" class="list-group-item list-group-item-action">Products</a>
                 <a href="view_news.php" class="list-group-item list-group-item-action">News & Updates</a>
-                <a href="view_admin.php" class="list-group-item list-group-item-action">Administrators</a>
+                <?php 
+                if(isset($_SESSION['isPriv'])){ ?>
+                    <a href="view_admin.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Administrator</a>
+                    <?php } ?>
                 <a href="view_transaction.php" class="list-group-item list-group-item-action">Transactions</a>
                 <!-- Collapsible Section -->
 <?php 

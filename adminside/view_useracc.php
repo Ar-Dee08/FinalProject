@@ -1,15 +1,19 @@
 <?php
 
+//USE WHEN THERE'S A HEADER ISSUE
+include 'includes/header.php';
+include 'admin_middleware.php';
+require "../vscode/dbcon.php";
+if($sesh_ad_priv === 2) {
+    unset($_SESSION['isPriv']);
+}
 
-if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
+if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
     header("Location: ../adminside/homeadmin.php?error=You can't access that page.");
     // echo "ayaw";
     exit();
 } else {
-    include 'includes/header.php';
-    include 'admin_middleware.php';
-    require "../vscode/dbcon.php";
-
+    
 ?>
 
 <!-- CONTENT -->
@@ -68,7 +72,18 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
                                                     <form action="mod_userinfo.php?uiidlabel=<?=$item['userinfo_id']?>" method="post">
-                                                        <button type="submit" name="ui-edit-btn">Edit Records</button>
+                                                    <?php            
+                                                    echo $_SESSION['admin_id'];                                            
+                                                        if($item['admin_id'] == $_SESSION['admin_id']){ ?>
+                                                            <button type="submit" disabled name="ui-edit-btn">Edit Records</button>
+                                                    <?php
+                                                        } else {
+                                                            ?>
+                                                            <button type="submit" name="ui-edit-btn">Edit Records</button>
+                                                    <?php
+                                                        }
+
+                                                        ?>
                                                     </form>
                                                 </div>                                             
                                             </td>
