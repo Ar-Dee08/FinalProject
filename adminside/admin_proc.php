@@ -55,7 +55,7 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
     $isEdit = $_POST['item-confirm-btn'];
     $item_name = $_POST['item_name'];
     $item_spec = $_POST['item_spec'];
-    $item_desc = $_POST['item_desc'];
+    $item_desc = htmlspecialchars($_POST['item_desc']);
     $item_type = $_POST['item_type'];
     $item_price = $_POST['item_price'];
     $item_discprice = $_POST['item_discprice'];
@@ -144,7 +144,7 @@ else if(isset($_POST['item-confirm-btn'])){   //FOR ITEM PROCESSING
 else if(isset($_POST['post-confirm-btn'])){   //FOR NEWS AND UPDATE PROCESSING
     $isEdit = $_POST['post-confirm-btn'];
     $post_title = $_POST['post_title'];
-    $post_caption = $_POST['post_caption'];
+    $post_caption = htmlspecialchars($_POST['post_caption']);
     $post_url = $_POST['post_url']; 
     
     

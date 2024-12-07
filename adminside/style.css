@@ -771,3 +771,35 @@ select.admin-sel {
     color: #666666;
     line-height: 1.5;
 }
+
+.display-cont li {
+    display: inline-block;
+}
+
+.display-item{
+    display: inline-block;
+    background-color: #dff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5%;
+}
+
+.item-image {
+    width: 7em;
+    height: 7em;
+    max-width: 7em;
+    max-height: 7em;
+}
+
+.item-detail-image img{
+    object-fit: contain;
+    width: 15em;
+    height: auto;
+    max-width: 20em;
+    max-height: 20em;
+}
+
+.back-cont {
+    display: block;
+
+}

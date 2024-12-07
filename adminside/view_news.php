@@ -55,7 +55,7 @@ require "../vscode/dbcon.php";
                                             
                                             
                                             </td>
-                                            <td><?=$item['caption']?> </td>
+                                            <td><?=htmlspecialchars($item['caption'])?> </td>
                                             <td>
                                                 <a href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
                                             </td>

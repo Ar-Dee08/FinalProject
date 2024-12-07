@@ -30,10 +30,11 @@ include '../vscode/dbcon.php';
                                 $itemName = htmlspecialchars($row['item_name']); // Sanitize for HTML output
                                 $itemImage = htmlspecialchars($row['item_img']); // Sanitize and ensure the path is valid
                                 $itemDisplayPrice = htmlspecialchars($row['item_price']); // Sanitize and ensure the path is valid
+                                $item_id = htmlspecialchars($row['item_id']);
                         ?>
                             <li>
                                 <!-- LINK TO ITEMS -->
-                                <a href="#"> 
+                                <a href="item_detail.php?item_id=<?= urlencode($row['item_id']); ?>"> 
                                     <div class="display-item">
                                         <div class="display">
                                             <img  src="../adminside/record_images/item_images/<?=$itemImage;?>" alt="<?php echo $itemName; ?>" class="item-image">
@@ -69,31 +70,7 @@ include '../vscode/dbcon.php';
         <div>
     </div>
 </div>
-<style>
-    .display-cont li {
-        display: inline-block;
-    }
-
-    .display-item{
-        display: inline-block;
-        background-color: #dff;
-        border-radius: 5px;
-        padding: 15px;
-        margin: 5%;
-    }
-
-    .item-image {
-        width: 7em;
-        height: 7em;
-        max-width: 7em;
-        max-height: 7em;
-    }
-
-
-
-</style>    
-
-
+ 
 
 
 <div class="footer-footer">

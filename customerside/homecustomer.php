@@ -4,8 +4,6 @@ include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
 ?>
-
-<body class="logo-bg-2">
     <div class="home-txt">
     
     <div>
