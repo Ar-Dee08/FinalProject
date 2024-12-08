@@ -9,7 +9,7 @@
             <a href="product_display.php" class="list-group-item list-group-item-action">Products</a>
             <a href="view_news.php" class="list-group-item list-group-item-action">News & Updates</a>
             <a href="about_ssite.php" class="list-group-item list-group-item-action">About Us</a>
-            <a href="user_profile.php" class="list-group-item list-group-item-action">Account</a>
+            <a href="view_profile.php" class="list-group-item list-group-item-action">Account</a>
             <!-- To edit -->
             <!-- Collapsible Section -->
             <?php if(isset($_SESSION['isPriv'])) { ?>
