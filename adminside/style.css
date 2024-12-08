@@ -784,9 +784,9 @@ select.admin-sel {
     object-fit: contain;
     width: 25em;
     min-width: 25em;
-    /* height: auto; */
-    max-width: 50%;
-    max-height: 50em;
+    height: 20em;
+    max-width: 30em;
+    max-height: 35em;
     border-radius: 5px;
     margin: 1%;
     filter: drop-shadow(3px 1px 2px #92a3a5);
@@ -799,7 +799,18 @@ select.admin-sel {
     position: relative;
     text-align: left;
     vertical-align: top;
+    
     /* overflow: auto; */
+}
+
+.item-detail-name a{
+    text-decoration: none;
+    color: #163A3E;
+}
+
+.item-detail-name a:hover {
+    text-decoration: none;
+    color: #458D9E;
 }
 
 .back-cont {
@@ -819,4 +830,28 @@ select.admin-sel {
     width: 90%;
     flex-wrap:inherit;
     /* max-width: 80%; */
+}
+
+.display-cont li {
+    display: inline-block;
+}
+
+.display-item{
+    display: inline-block;
+    background-color: #dff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5%;
+}
+
+.item-image {
+    width: 7em;
+    height: 7em;
+    max-width: 7em;
+    max-height: 7em;
+}
+
+.form-cart {
+    height: 25em;
+    max-height: 30em;
 }

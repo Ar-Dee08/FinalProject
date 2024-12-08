@@ -89,24 +89,7 @@ $categoryResult = $con->query($categoryQuery);
     </div>
 </div>
 <style>
-    .display-cont li {
-        display: inline-block;
-    }
-
-    .display-item{
-        display: inline-block;
-        background-color: #dff;
-        border-radius: 5px;
-        padding: 15px;
-        margin: 5%;
-    }
-
-    .item-image {
-        width: 7em;
-        height: 7em;
-        max-width: 7em;
-        max-height: 7em;
-    }
+    
 
 
 

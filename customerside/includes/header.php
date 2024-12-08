@@ -20,6 +20,7 @@ include '../vscode/dbcon.php';
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo dirname($_SERVER['SCRIPT_NAME']) . '/../adminside/style.css'; ?>">
+    <link rel="stylesheet" href="<?php echo dirname($_SERVER['SCRIPT_NAME']) . '/../customerside/style.css'; ?>">
     </head>
 <body class="logo-bg-2">
 <div class="custom-nav">
