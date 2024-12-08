@@ -56,6 +56,7 @@ try {
         <p><strong>Type:</strong> <?php echo htmlspecialchars($user['customer_type']); ?></p>
     </div>
 </div>
+hello
 
     <!-- Edit Button -->
     <button onclick="location.href='edit_account.php'" class="edit-button">Edit Profile</button>
