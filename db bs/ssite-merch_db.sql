@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2024 at 09:45 PM
+-- Generation Time: Dec 08, 2024 at 05:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -66,7 +66,9 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`cart_id`, `item_id`, `quantity`, `cart_status`, `userinfo_id`) VALUES
 (1, 2, 1, 'Active', 6),
 (2, 3, 3, 'Active', 6),
-(3, 2, 3, 'Active', 6);
+(3, 2, 3, 'Active', 6),
+(4, 1, 2, 'Active', 9),
+(5, 1, 1, 'Active', 6);
 
 -- --------------------------------------------------------
 
@@ -159,12 +161,12 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_spec`, `item_desc`, `item_type`, `item_img`, `item_price`, `item_discprice`, `cat_id`, `admin_creator`, `date_created`, `record_status`) VALUES
-(1, 'T-SHIRT', 'Small', '   ASD', 'Single', 0x315f313733333534363237312e706e67, 320, 300, 1, 2, '2024-12-07', 'Active'),
-(2, 'Tote Bag', 'Brightening Future~', ' White', 'Single', 0x325f313733333534363636362e706e67, 220, 200, 1, 2, '2024-12-07', 'Active'),
-(3, 'Crinkles', '8pcs', '-', 'Bundle', 0x335f313733333537363230342e706e67, 80, 75, 2, 2, '2024-12-07', 'Active'),
-(4, 'ITEM 1', 'A', 'AA', 'Single', 0x345f313733333537363835312e706e67, 412, 312, 3, 4, '2024-12-07', 'Active'),
-(5, 'TSHIT', 'E', 'A', 'Single', 0x355f313733333537363933342e6a7067, 566, 342, 1, 4, '2024-12-07', 'Active'),
-(6, 'TOTE BAG', 'SSITE', '4', 'Single', 0x365f313733333537363937362e6a7067, 200, 232, 4, 4, '2024-12-07', 'Active');
+(1, 'T-SHIRT', 'Small', '    ASD', 'Single', 0x315f313733333637323935372e706e67, 320, 300, 1, 2, '2024-12-07', 'Active'),
+(2, 'Tote Bag', 'Brightening Future~', '  White', 'Single', 0x325f313733333637323937322e706e67, 220, 200, 1, 2, '2024-12-07', 'Active'),
+(3, 'Crinkles', '8pcs', ' -', 'Bundle', 0x335f313733333637333136382e6a7067, 80, 75, 1, 2, '2024-12-07', 'Active'),
+(4, 'Polo Shirt', 'A', ' AA', 'Single', 0x345f313733333637333039372e706e67, 412, 312, 1, 4, '2024-12-07', 'Active'),
+(5, 'TSHIT', 'E', ' A', 'Single', 0x355f313733333537363933342e6a7067, 566, 342, 1, 4, '2024-12-07', 'Removed'),
+(6, 'TOTE BAG', 'SSITE', ' 4', 'Single', 0x365f313733333537363937362e6a7067, 200, 232, 1, 4, '2024-12-07', 'Removed');
 
 -- --------------------------------------------------------
 
@@ -485,7 +487,16 @@ INSERT INTO `user_login` (`userlogin_id`, `usercred_id`, `logindate`, `usertype_
 (130, 1, '2024-12-08 02:52:20', 2),
 (131, 1, '2024-12-08 03:04:15', 2),
 (132, 4, '2024-12-08 03:09:23', 1),
-(133, 1, '2024-12-08 03:18:18', 2);
+(133, 1, '2024-12-08 03:18:18', 2),
+(134, 1, '2024-12-08 23:29:34', 2),
+(135, 1, '2024-12-08 23:31:29', 1),
+(136, 1, '2024-12-08 23:31:54', 1),
+(137, 1, '2024-12-08 23:32:09', 2),
+(138, 4, '2024-12-08 23:32:41', 1),
+(139, 4, '2024-12-08 23:34:00', 1),
+(140, 1, '2024-12-08 23:36:38', 1),
+(141, 1, '2024-12-08 23:48:38', 2),
+(142, 1, '2024-12-08 23:53:34', 1);
 
 -- --------------------------------------------------------
 
@@ -685,7 +696,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `userlogin_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- Constraints for dumped tables
