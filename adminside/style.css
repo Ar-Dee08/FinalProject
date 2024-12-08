@@ -741,6 +741,7 @@ select.admin-sel {
     text-align: center;
     margin: 50px auto;
     padding: 20px;
+    width: 70%;
     max-width: 70%;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -758,4 +759,64 @@ select.admin-sel {
     font-size: 1rem;
     color: #666666;
     line-height: 1.5;
+}
+
+.display-cont li {
+    display: inline-block;
+}
+
+.display-item{
+    display: inline-block;
+    background-color: #dff;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5%;
+}
+
+.item-image {
+    width: 7em;
+    height: 7em;
+    max-width: 7em;
+    max-height: 7em;
+}
+
+.item-detail-image{
+    object-fit: contain;
+    width: 25em;
+    min-width: 25em;
+    /* height: auto; */
+    max-width: 50%;
+    max-height: 50em;
+    border-radius: 5px;
+    margin: 1%;
+    filter: drop-shadow(3px 1px 2px #92a3a5);
+}
+
+.item-detail-name {
+    margin: 2% 4%;
+    width: 100%;
+    max-width: 50%;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+    /* overflow: auto; */
+}
+
+.back-cont {
+    /* display: block; */
+    width: 100%;
+    align-items: left;
+    /* overflow-x: hidden; */
+    position: relative;
+    box-sizing: border-box; /* Includes padding in the width */
+
+    
+}
+
+.item-top-section {
+    display: flex;
+    margin: 2% 5%;
+    width: 90%;
+    flex-wrap:inherit;
+    /* max-width: 80%; */
 }

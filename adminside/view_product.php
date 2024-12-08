@@ -60,7 +60,7 @@ require "../vscode/dbcon.php";
                                             
                                             </td>
                                             <td><?=$item['item_spec']?> </td>
-                                            <td><?=$item['item_desc']?> </td>
+                                            <td><?=htmlspecialchars($item['item_desc'])?> </td>
                                             <td><?=$item['item_type']?> </td>
                                             <td><?=$item['item_price']?> </td>
                                             <td><?=$item['item_discprice']?> </td>

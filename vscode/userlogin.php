@@ -4,6 +4,7 @@ require "dbcon.php";
 
 session_start();
 //USERNAME MIGHT BE CHANGED TO EMAIL
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     function verify($data)
     {
@@ -66,7 +67,7 @@ if(mysqli_num_rows($uidres)===1){
             echo 'This is not admin';
             $usertype_id = 1; //customer id
             $_SESSION['uid'] = $uid;
-
+            echo "SESSION UID: " . $_SESSION['uid'];
             $SuccessInsert = InsertUserLog( $con,$ucred_id,$usertype_id);// USER TYPE ID WILL BE CHANGED IN DIFF PAGE FOR VERIFICATION
 
             header("Location: ../customerside/homecustomer.php");

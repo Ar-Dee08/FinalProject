@@ -72,18 +72,9 @@ if (!isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
                                             <td>
                                                 <div class="col-md-15 ms-auto me-auto" style="text-align:center">
                                                     <form action="mod_userinfo.php?uiidlabel=<?=$item['userinfo_id']?>" method="post">
-                                                    <?php            
-                                                    echo $_SESSION['admin_id'];                                            
-                                                        if($item['admin_id'] == $_SESSION['admin_id']){ ?>
-                                                            <button type="submit" disabled name="ui-edit-btn">Edit Records</button>
-                                                    <?php
-                                                        } else {
-                                                            ?>
+                                                    
                                                             <button type="submit" name="ui-edit-btn">Edit Records</button>
-                                                    <?php
-                                                        }
 
-                                                        ?>
                                                     </form>
                                                 </div>                                             
                                             </td>

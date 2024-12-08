@@ -3,9 +3,9 @@
 include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
-?>
 
-<body class="logo-bg-2">
+// echo $_SESSION['uid'];
+?>
     <div class="home-txt">
     
     <div>

@@ -15,7 +15,7 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
             $results = $stmt->get_result(); // Always return the result object        
             $post_row = mysqli_fetch_assoc($results);            
             $post_title = $post_row['title'];
-            $post_caption = $post_row['caption'];
+            $post_caption = htmlspecialchars($post_row['caption']);
             $post_img = $post_row['post_img'];
             $post_url = $post_row['post_url'];
             $post_stat = $post_row['record_status'];
@@ -70,7 +70,7 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
                                         <label for="">
                                             Post Caption
                                         </label>
-                                        <textarea name="post_caption" value="<?= $post_caption ?>" id="post_caption" placeholder="Enter Post Caption" class="form-control" required> <?= $post_caption ?></textarea>
+                                        <textarea name="post_caption" value="<?= htmlspecialchars($post_caption) ?>" id="post_caption" placeholder="Enter Post Caption" class="form-control" required> <?= $post_caption ?></textarea>
                                         
                                         <label for="">
                                             Post URL

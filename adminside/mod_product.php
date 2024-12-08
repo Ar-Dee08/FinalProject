@@ -16,7 +16,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
             $item_row = mysqli_fetch_assoc($results);            
             $item_name = $item_row['item_name'];
             $item_spec = $item_row['item_spec'];
-            $item_desc = $item_row['item_desc'];
+            $item_desc = htmlspecialchars($item_row['item_desc']);
             $item_type = $item_row['item_type'];
             $item_price = $item_row['item_price'];
             $item_discprice = $item_row['item_discprice'];
@@ -79,7 +79,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
                                         <label for="">
                                             Item Description
                                         </label>
-                                        <textarea name="item_desc" id="item_desc" placeholder="Enter Item Description" class="form-control" required> <?= $item_desc ?></textarea>
+                                        <textarea name="item_desc" id="item_desc" placeholder="Enter Item Description" class="form-control" required> <?=htmlspecialchars($item_desc) ?></textarea>
                                         
                                         <label for="">
                                             Item Price

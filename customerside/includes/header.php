@@ -3,7 +3,13 @@
 <!-- TESTING LANG ITOOOO -->
 <!-- TESTING LANG ITOOOO -->
 
-<?php session_start(); ?>
+<?php 
+
+
+session_start(); 
+include '../vscode/dbcon.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo dirname($_SERVER['SCRIPT_NAME']) . '/../adminside/style.css'; ?>">
     </head>
-<body>
+<body class="logo-bg-2">
 <div class="custom-nav">
 <?php 
 include 'navbar.php'; 
