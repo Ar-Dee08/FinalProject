@@ -783,10 +783,10 @@ select.admin-sel {
 
 .item-detail-image{
     object-fit: contain;
-    width: 25em;
-    min-width: 25em;
+    width: 20em;
+    min-width: 20em;
     height: 20em;
-    max-width: 30em;
+    max-width: 26em;
     max-height: 35em;
     border-radius: 5px;
     margin: 1%;
@@ -855,4 +855,10 @@ select.admin-sel {
 .form-cart {
     height: 25em;
     max-height: 30em;
+}
+
+.cbox input[type='checkbox']{
+    vertical-align: middle;
+    width: 50px;
+    font-size: larger;
 }

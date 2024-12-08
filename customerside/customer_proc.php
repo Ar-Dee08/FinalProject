@@ -46,7 +46,7 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
           $stmt = $con->prepare($query);
           $stmt->bind_param("iiisi", $cart_id, $item_id,$quantity,$cart_status,$userinfo_id);
           if ($stmt->execute()) {
-            // header("Location: view_cart.php");
+            header("Location: view_cart.php");
             exit();
         } else {
             echo "Error: " . $stmt->error;
@@ -54,17 +54,14 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
     }
     }
 
-    echo 'HELLO CART' . $_SESSION['admin_id'];
     header("Location: view_cart.php");
-exit();
-
-
-
+    exit();
 
 } else if(isset($_POST['item-order-btn'])) {
-    echo 'HELLO ORDER NOW';
+    $item_id = $_POST['item_id'];
 
-
+    header("Location: ordeR_confirm.php?item_id=$item_id");
+    exit();
 
 
 
