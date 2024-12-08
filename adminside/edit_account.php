@@ -122,8 +122,8 @@ try {
         </select>
         <br>
         <div>
-        <a href="view_account.php" class="button-back">Back</a>
-        <button type="submit">Update Profile</button>
+            <strong><a href="view_account.php" class="button-back" style="background-color: #458D9E; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Back</a></strong>
+            <button type="submit" class="button-update" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Update Profile</button>
         </div>
     </form>
 </div>
