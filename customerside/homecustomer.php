@@ -8,11 +8,11 @@ include '../vscode/dbcon.php';
 ?>
     <div class="home-txt">
     <?php
-        if (isset($_SESSION['customertype_id'])) {
+        if (isset($_SESSION['uid'])) {
 
-            $getnamequery = "SELECT * FROM customertype a LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id WHERE customertype_id = ?";
+            $getnamequery = "SELECT * FROM user_information WHERE userinfo_id = ?";
             $stmt = $con->prepare($getnamequery);
-            $stmt->bind_param("i",$_SESSION['customertype_id']);
+            $stmt->bind_param("i",$_SESSION['uid']);
 
             if ($stmt->execute()) {
                 $results = $stmt->get_result(); // Always return the result object        
