@@ -43,12 +43,19 @@ $userinfo_id = $_SESSION['uid'];
                                 $item_discprice = $item['item_discprice'];
                                 $item_img = $item['item_img'];
                                 $item_cat = $item['category_name'];
+                                $cart_id = $item['cart_id'];
+
+                                if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){
+                                    $finalprice = $item_price;
+                                } else if($item['memstatus_id']==2) {
+                                    $finalprice = $item_discprice;
+                                }
                         ?>
                         <form action="customer_proc.php" method="post" class="form-cart">
                             <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
                             <div class="item-top-section">
                                 <div class="cbox">
-                                    <input type="checkbox" id="cboxes<?=$cart_id?>" name="sel" onclick="cboxClick()">
+                                    <input type="checkbox" id="cboxes<?=$cart_id?>" name="sel" data-price="<?=$finalprice?>" data-quantity="<?=$quant?>" onclick="cboxClick(<?=$cart_id?>)">
                                 </div>
                                 <div class="item-detail-image">
                                     <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
@@ -56,20 +63,9 @@ $userinfo_id = $_SESSION['uid'];
 
                                 <div class="item-detail-name">
                                     <a href="">
-                                    <h1><?=$item_name?></h1>
+                                        <h1><?=$item_name?></h1>
                                     </a>
-                                    <?php
-                                    if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
-                                                ?>
-                                                 <h6>Price: ₱<?=$item_price?></h6>
-
-<?php
-                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
-                                                <h6>Price: ₱<?=$item_discprice?></h6>
-                                                
-<?php
-                                            }
-                                        ?>
+                                        <h6>Price: ₱<?=$finalprice?></h6>
 
                                     <br>
                                     <h6><?=$item_spec?></h6>
@@ -103,8 +99,8 @@ $userinfo_id = $_SESSION['uid'];
                         </form>
                         <hr>
                         <div class="bottom-float" id="item-selected" >
-            <p>Total (#  of Items) : P00.00</p>
-        </div>
+                            <p>Total (#  of Items) : P00.00</p>
+                        </div>
                         <?php
                             }//END OF LOOP ?>
                       <?php  } else {
@@ -134,16 +130,30 @@ $userinfo_id = $_SESSION['uid'];
         }
     });
 
-    function cboxClick() {
-    var checkBox = document.getElementById("cboxes");
-    var div = document.getElementById("item-selected");
+    function cboxClick(cart_id) {
+    // Get all checkboxes
+    let checkboxes = document.querySelectorAll('input[type="checkbox"][name="sel"]');
+    let totalDiv = document.getElementById("item-selected");
+    let totalItems = 0;
+    let totalPrice = 0;
+    let initquant = 1;
 
-    if (checkBox.checked == true){
-        div.style.visibility = "visible";
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            let price = parseFloat(checkbox.dataset.price);
+            let quant = parseFloat(checkbox.dataset.price);
+            totalPrice += (price*quant);
+            totalItems++;
+        }
+    });
+    if (totalItems > 0) {
+        totalDiv.style.visibility = "visible";
+        totalDiv.innerHTML = `<p>Total (${totalItems} item/s): Total Price: ₱${totalPrice.toFixed(2)}</p>`;
     } else {
-        div.style.visibility = "hidden";
+        totalDiv.style.visibility = "hidden";
     }
-    }
+}
+
 
 </script>
 

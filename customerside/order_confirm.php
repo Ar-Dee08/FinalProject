@@ -19,7 +19,7 @@ if (isset($_GET['item_id'])) {
     }
 
 
-echo 'HII';
+// echo 'HII';
 ?>
 <body class="logo-bg-2">
     <div class="product-container">
