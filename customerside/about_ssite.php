@@ -78,3 +78,9 @@ include '../vscode/dbcon.php';
             margin-bottom: 30px;
         }
     </style>
+
+<div class="footer-footer">
+    <?php
+        include 'includes/footer.php';
+    ?>
+</div>
