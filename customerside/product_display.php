@@ -108,8 +108,6 @@ $categoryResult = $con->query($categoryQuery);
         max-height: 7em;
     }
 
-
-
 </style>    
 
 

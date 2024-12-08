@@ -52,6 +52,30 @@
 
           </label>
         </li>
+        <li class="nav-item-2">
+          <a class="nav-link active" href="../vscode/view_cart.php"><i class="fa-solid fa-cart-shopping fa-1x"></i></a>
+        </li>
+        <style>
+          .nav-item-2 {
+              font-family: 'Inter', sans-serif;
+              font-weight: 500;
+              color: #F9F6F6;
+
+          }
+
+          .nav-item-2.active {
+              border-radius: 8px;
+              color: #F9F6F6;
+          }
+
+          .nav-item-2.active .nav-link {
+              color: #F9F6F6 !important;
+          }
+
+          .nav-item-2:hover .nav-link {
+              color: #5e9ba9 !important;
+}
+        </style>
         <li class="nav-item" id="admin-logout">
           <a class="nav-link active" href="../vscode/userlogout.php"><i class="fa-solid fa-right-from-bracket fa-1x"></i> Sign Out</a>
         </li>
