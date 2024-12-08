@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_number = htmlspecialchars(trim($_POST['student_number']));
     $email = htmlspecialchars(trim($_POST['email']));
     $contact_number = htmlspecialchars(trim($_POST['contact_number']));
-    $type = htmlspecialchars(trim($_POST['customertype_id']));
+    $type = htmlspecialchars(trim($_POST['type']));
 
     // Prepare the update query
     try {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Bind parameters
-        $stmt->bind_param("ssssssssi", $firstname, $lastname, $sex, $bday, $student_number, $email, $contact_number, $type, $user_id);
+        $stmt->bind_param("sssssssii", $firstname, $lastname, $sex, $bday, $student_number, $email, $contact_number, $type, $user_id);
         
         // Execute query
         if ($stmt->execute()) {
@@ -77,14 +77,6 @@ try {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body class="logo-bg-2">
 <div class="admin-container">
     <h1>My Profile</h1>
@@ -124,8 +116,9 @@ try {
 
         <label for="type">Type:</label>
         <select id="type" name="type" required>
-            <option value="Student" <?php echo ($user['customertype_id'] == 'Student') ? 'selected' : ''; ?>>Student</option>
-            <option value="Non-Student" <?php echo ($user['customertype_id'] == 'Teacher') ? 'selected' : ''; ?>>Non-Student</option>
+            <option value="1" >Student</option>
+            <option value="2" >Non-Student</option>
+
         </select>
 
         <button type="submit">Update Profile</button>
@@ -135,5 +128,3 @@ try {
 <div class="footer-footer">
     <?php include 'includes/footer.php'; ?>
 </div>
-</body>
-</html>
