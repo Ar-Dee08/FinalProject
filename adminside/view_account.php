@@ -55,12 +55,9 @@ try {
         <p><strong>Mobile Number:</strong> <?php echo htmlspecialchars($user['contact_number']); ?></p>
         <p><strong>Type:</strong> <?php echo htmlspecialchars($user['customer_type']); ?></p>
     </div>
-</div>
-
-
     <!-- Edit Button -->
-    <button onclick="location.href='edit_account.php'" class="edit-button">Edit Profile</button>
-
+    <button onclick="location.href='edit_account.php'" class="edit-button" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Edit Profile</button>
+    </div>
 </div>
 
 <div class="footer-footer">
