@@ -3,12 +3,11 @@ include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
 
+if (isset($_GET['item_id'])) {
+    $item_id = intval($_GET['item_id']); // Convert to integer for security
+    $userinfo_id = $_SESSION['uid'];
 
-
-$userinfo_id = $_SESSION['uid'];
-
-    // Fetch item details from the database
-    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ? AND cart_status = 'Active'";
+    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ?";
     $stmt = $con->prepare($cartquery);
     $stmt->bind_param("i", $userinfo_id);
 
@@ -18,13 +17,16 @@ $userinfo_id = $_SESSION['uid'];
             $item = $result->fetch_assoc();
         }
     }
+
+
+echo 'HII';
 ?>
 <body class="logo-bg-2">
     <div class="product-container">
         <div class="product-txt">
             <div class="back-cont">
                 <div>
-                    <h1>Your Cart</h1>
+                    <h1>Confirm your Order</h1>
                     <hr>
                 </div>
 
@@ -47,9 +49,7 @@ $userinfo_id = $_SESSION['uid'];
                         <form action="customer_proc.php" method="post" class="form-cart">
                             <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
                             <div class="item-top-section">
-                                <div class="cbox">
-                                    <input type="checkbox" id="cboxes<?=$cart_id?>" name="sel" onclick="cboxClick()">
-                                </div>
+                                
                                 <div class="item-detail-image">
                                     <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
                                 </div>
@@ -102,112 +102,19 @@ $userinfo_id = $_SESSION['uid'];
                             </div>
                         </form>
                         <hr>
-                        <div class="bottom-float" id="item-selected" >
-            <p>Total (#  of Items) : P00.00</p>
-        </div>
                         <?php
-                            }//END OF LOOP ?>
-                      <?php  } else {
+                            }
+                        } else {
                             echo "<p>Your cart is empty.</p>";
                         }
                         ?>
 
-                    </div>
+        </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
-    <script>
-    // JavaScript for handling the quantity increment and decrement
-    document.getElementById('plus').addEventListener('click', function() {
-        let quantityInput = document.getElementById('quantity');
-        let value = parseInt(quantityInput.value);
-        quantityInput.value = value + 1;
-    });
-
-    document.getElementById('minus').addEventListener('click', function() {
-        let quantityInput = document.getElementById('quantity');
-        let value = parseInt(quantityInput.value);
-        if (value > 1) {
-            quantityInput.value = value - 1;
-        }
-    });
-
-    function cboxClick() {
-    var checkBox = document.getElementById("cboxes");
-    var div = document.getElementById("item-selected");
-
-    if (checkBox.checked == true){
-        div.style.visibility = "visible";
-    } else {
-        div.style.visibility = "hidden";
-    }
-    }
-
-</script>
-
-<div class="footer-footer">
-    <?php
-        include 'includes/footer.php';
-    ?>
-</div>
-
-
-<style>
-    .quantity-container {
-    display: flex;
-    align-items: center;
-    }
-
-    .quantity-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    }
-
-    .quantity-btn:active {
-    background-color: #45a049;
-    }
-
-    input[type="number"] {
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    font-size: 18px;
-    margin: 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    }
-
-    .cbox input[type='checkbox']{
-    align-items: middle;
-    width: 30px;
-    height: 30px;
+<?php
 }
-
-.cbox {
-    align-items: middle;
-    margin: auto;
-}
-
-.bottom-float {
-    background-color: rosybrown;
-    width: 100%;
-    height: 5em;
-    position: fixed;
-    bottom: 0;
-    z-index: 1000;
-    align-items: center;
-    text-align: center;
-    padding: 2%;
-    visibility: hidden;
-    left: 0;
-}
-
-
-</style>
+?>
