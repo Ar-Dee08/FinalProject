@@ -855,3 +855,19 @@ select.admin-sel {
     height: 25em;
     max-height: 30em;
 }
+
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}

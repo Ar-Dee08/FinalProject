@@ -1,21 +1,21 @@
 <?php
 // session_start();
-require_once 'includes/header.php';
-require_once 'admin_middleware.php';
-require_once '../vscode/dbcon.php';
+include 'includes/header.php';
+include 'admin_middleware.php';
+require "../vscode/dbcon.php";
 
 // Redirect if the user is not logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['uid'])) {
+    header("Location: index.php");
     exit();
 }
 
 // Fetch user ID from session
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['uid'];
 
 try {
     // Prepare and execute query to fetch user details
-    $query = "SELECT firstname, lastname, sex, bday, student_number, email, contact_number, type FROM users WHERE id = ?";
+    $query = "SELECT ui.firstname, ui.lastname, ui.sex, ui.bday, ui.student_number, ui.email, ui.contact_number, t.customer_type, t.customertype_id FROM user_information ui LEFT JOIN customertype t ON ui.customertype_id = t.customertype_id WHERE ui.userinfo_id = ?";
     $stmt = $con->prepare($query);
     
     if (!$stmt) {
@@ -39,14 +39,6 @@ try {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body class="logo-bg-2">
 <div class="admin-container">
     <h1>My Profile</h1>
@@ -55,10 +47,15 @@ try {
     <p>Last Name: <?php echo htmlspecialchars($user['lastname']); ?></p>
     <p>Sex: <?php echo htmlspecialchars($user['sex']); ?></p>
     <p>Birthday: <?php echo htmlspecialchars($user['bday']); ?></p>
-    <p>Student Number: <?php echo htmlspecialchars($user['student_number']); ?></p>
+<?php
+    if($user['customertype_id'] == 1){  ?>
+        <p>Student Number: <?php echo htmlspecialchars($user['student_number']); ?></p>
+<?php    }
+?>
+
     <p>Email: <?php echo htmlspecialchars($user['email']); ?></p>
     <p>Mobile Number: <?php echo htmlspecialchars($user['contact_number']); ?></p>
-    <p>Type: <?php echo htmlspecialchars($user['type']); ?></p>
+    <p>Type: <?php echo htmlspecialchars($user['customer_type']); ?></p>
 
     <!-- Edit Button -->
     <a href="edit_account.php" class="edit-button">Edit Profile</a>
@@ -69,21 +66,3 @@ try {
 </div>
 </body>
 </html>
-
-<style>
-.edit-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.edit-button:hover {
-    background-color: #45a049;
-}
-</style>
