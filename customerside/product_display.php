@@ -91,8 +91,6 @@ $categoryResult = $con->query($categoryQuery);
 <style>
     
 
-
-
 </style>    
 
 
