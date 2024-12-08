@@ -1,18 +1,18 @@
 <?php
 // Start session and include necessary files
-session_start();
+// session_start();
 require_once 'includes/header.php';
 require_once 'admin_middleware.php';
 require_once '../vscode/dbcon.php';
 
 // Redirect if the user is not logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['uid'])) {
     header("Location: login.php");
     exit();
 }
 
 // Fetch user ID from session
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['uid'];
 
 // Initialize variables
 $update_success = false;
@@ -28,11 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_number = htmlspecialchars(trim($_POST['student_number']));
     $email = htmlspecialchars(trim($_POST['email']));
     $contact_number = htmlspecialchars(trim($_POST['contact_number']));
-    $type = htmlspecialchars(trim($_POST['type']));
+    $type = htmlspecialchars(trim($_POST['customertype_id']));
 
     // Prepare the update query
     try {
-        $query = "UPDATE users SET firstname = ?, lastname = ?, sex = ?, bday = ?, student_number = ?, email = ?, contact_number = ?, type = ? WHERE id = ?";
+        $query = "UPDATE user_information SET firstname = ?, lastname = ?, sex = ?, bday = ?, student_number = ?, email = ?, contact_number = ?, customertype_id = ? WHERE userinfo_id = ?";
         $stmt = $con->prepare($query);
         
         if (!$stmt) {
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Fetch user details
 try {
-    $query = "SELECT firstname, lastname, sex, bday, student_number, email, contact_number, type FROM users WHERE id = ?";
+    $query = "SELECT ui.firstname, ui.lastname, ui.sex, ui.bday, ui.student_number, ui.email, ui.contact_number, t.customer_type, t.customertype_id FROM user_information ui LEFT JOIN customertype t ON ui.customertype_id = t.customertype_id WHERE ui.userinfo_id = ?";
     $stmt = $con->prepare($query);
 
     if (!$stmt) {
@@ -124,8 +124,8 @@ try {
 
         <label for="type">Type:</label>
         <select id="type" name="type" required>
-            <option value="Student" <?php echo ($user['type'] == 'Student') ? 'selected' : ''; ?>>Student</option>
-            <option value="Teacher" <?php echo ($user['type'] == 'Teacher') ? 'selected' : ''; ?>>Teacher</option>
+            <option value="Student" <?php echo ($user['customertype_id'] == 'Student') ? 'selected' : ''; ?>>Student</option>
+            <option value="Non-Student" <?php echo ($user['customertype_id'] == 'Teacher') ? 'selected' : ''; ?>>Non-Student</option>
         </select>
 
         <button type="submit">Update Profile</button>

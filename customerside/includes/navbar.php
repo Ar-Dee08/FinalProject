@@ -24,6 +24,9 @@
           <a class="nav-link" href="#"><b>News & Update</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
+          <a class="nav-link" href="view_cart.php"><b>Cart</b> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" id="home-admin">
           <a class="nav-link" href="#"><b>About</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">

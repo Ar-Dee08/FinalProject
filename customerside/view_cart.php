@@ -36,18 +36,61 @@ if ($stmt->execute()) {
                                 $item_price = $item['item_price'];
                                 $item_img = $item['item_img'];
                         ?>
-                        <form action="customer_proc.php" method="post">
-                            <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>">
+
+                        <form action="customer_proc.php" method="post" class="form-cart">
+                            <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
 
                             <div class="item-top-section">
                                 <div class="item-detail-image">
                                     <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
                                 </div>
+
                                 <div class="item-detail-name">
+                                    <a href="">
                                     <h1><?=$item_name?></h1>
-                                    <h6>Price: ₱<?=$item_price?></h6>
-                                    <h6>Quantity: <?=$quant?></h6>
-                                    <hr>
+
+                                    </a>
+                                    <?php
+                                    if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
+                                                ?>
+                                                 <h6>Price: ₱<?=$item_price?></h6>
+
+<?php
+                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
+                                                <h6>Price: ₱<?=$item_discprice?></h6>
+                                                
+<?php
+                                            }
+                                        ?>
+
+                                    <br>
+                                    <h6><?=$item_spec?></h6>
+                                    <div>
+                                        <label for="quantity">Quantity:</label>
+                                        <input value="<?=$quant?>" type="number" min="1" step="1" name="quantity" placeholder="Quantity" class="form-control" required>
+                                    </div>
+                                    <div>
+                                        <?php
+                                            if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
+                                                ?>
+                                                 <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
+
+<?php
+                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
+                                                <h6>SSITE Member Price: ₱<?=$item_discprice?></h6>
+                                                
+<?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <div class="item-description">
+                                        <p>Description:</p>
+                                        <p><?=$item_desc?></p>
+                                    </div>
+                                    <button class="buy-btn" name="item-order-btn">
+                                        Buy Now
+                                    </button>
+
                                 </div>
                             </div>
                         </form>
@@ -62,6 +105,8 @@ if ($stmt->execute()) {
             </div>
         </div>
     </div>
+
+<!-- inline style conflict daw  -->
 
 <style>
     .display-cont li {
@@ -83,6 +128,7 @@ if ($stmt->execute()) {
         max-height: 7em;
     }
 </style>    
+
 
 <div class="footer-footer">
     <?php
