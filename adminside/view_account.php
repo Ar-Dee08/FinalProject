@@ -58,7 +58,8 @@ try {
     <p>Type: <?php echo htmlspecialchars($user['customer_type']); ?></p>
 
     <!-- Edit Button -->
-    <a href="edit_account.php" class="edit-button">Edit Profile</a>
+    <button onclick="location.href='edit_account.php'" class="edit-button">Edit Profile</button>
+
 </div>
 
 <div class="footer-footer">

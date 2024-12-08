@@ -25,7 +25,7 @@
     <div class="row">
       <ul>
         <!-- To change -->
-        <li><a href="#">Home</a></li>
+        <li><a href="homecustomer.php">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">News & Updates</a></li>
         <li><a href="#">Contact</a></li>

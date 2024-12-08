@@ -351,15 +351,14 @@ button:not(.disabled_ad-edit-btn):hover {
 }
 
 .btn-user {
-    display: inline-block;
-    align-items: right;
+    display: flex;
+    justify-content: flex-end;
     max-width: 100%;
+    margin: 0 auto;
 }
 
 .btn-user button {
-    /* align-items: right; */
     width: 15em;
-    
 }
 
 
@@ -569,7 +568,7 @@ select.admin-sel {
 
 .offcanvas a:hover {
     color: #458D9E;
-    text-decoration: underline;
+    text-decoration: none;
     border: none;
     background-color: transparent;
 }
@@ -578,6 +577,7 @@ select.admin-sel {
     display: block;
     margin: 0 auto;
 }
+
 
 /* Admin */
 .logossite {
@@ -821,3 +821,107 @@ select.admin-sel {
     flex-wrap:inherit;
     /* max-width: 80%; */
 }
+.button-back {
+    font-family: 'Inter', sans-serif;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #458D9E; /* Blue background */
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-back:hover {
+    background-color: #1E4A50;
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: #ffffff;
+
+}
+#sex {
+    padding: 12px;
+    border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#sex:focus {
+    border-color: #DCEEF2;
+    outline: none;
+    background-color: #163A3E;
+}
+#type {
+    padding: 12px;
+    border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#type:focus {
+    border-color: #DCEEF2;
+    outline: none;
+    background-color: #163A3E;
+}
+/* Form Control Styling */
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #F9F6F6;
+    border-radius: 8px;
+    background-color: #1E4A50;
+    color: #DCEEF2;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #DCEEF2;
+    outline: none;
+    background-color: #163A3E;
+}
+
+/* Card Styling */
+.card {
+    background-color: #F9F6F6;
+    border: 1px solid #285963;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: #285963;
+    color: #F9F6F6;
+    padding: 20px;
+    border-bottom: 1px solid #F9F6F6;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+    color: #285963;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+/* End of CSS file */

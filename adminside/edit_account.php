@@ -120,8 +120,11 @@ try {
             <option value="2" >Non-Student</option>
 
         </select>
-
+        <br>
+        <div>
+        <a href="view_account.php" class="button-back">Back</a>
         <button type="submit">Update Profile</button>
+        </div>
     </form>
 </div>
 
