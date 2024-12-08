@@ -38,7 +38,7 @@ if(isset($_POST['cat-edit-btn'])){ //IF EDITING RECORD
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
                         Modify Category
                     </h2>
                 </div>

@@ -21,7 +21,7 @@ if (isset($_SESSION['isPriv'])) { //CHECK IF USER IS ADMIN, will be updated
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
                         Admin Information Records
                     </h2>
                 </div>

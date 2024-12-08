@@ -2,7 +2,7 @@
 // Start session and include necessary files
 // session_start();
 require_once 'includes/header.php';
-require_once 'admin_middleware.php';
+require_once 'user_middleware.php';
 require_once '../vscode/dbcon.php';
 
 // Redirect if the user is not logged in
@@ -79,9 +79,7 @@ try {
 
 <body class="logo-bg-2">
 <div class="admin-container">
-    <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
-        My Profile
-    </h2>
+    <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">My Profile</h1>
     <h3>Manage and protect your account.</h3>
 
     <?php if ($update_success): ?>
@@ -124,7 +122,7 @@ try {
         </select>
         <br>
         <div>
-            <strong><a href="view_account.php" class="button-back" style="background-color: #458D9E; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Back</a></strong>
+            <strong><a href="view_profile.php" class="button-back" style="background-color: #458D9E; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Back</a></strong>
             <button type="submit" class="button-update" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Update Profile</button>
         </div>
     </form>

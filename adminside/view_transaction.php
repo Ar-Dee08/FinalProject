@@ -15,9 +15,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
-                        Transaction Records
-                    </h2>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
+                    Transaction Records
+                </h2>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered custom-table">
@@ -107,7 +107,7 @@
                         <!-- TEMPORARY, REMOVE THIS BUTTON AFTER -->
                             <div class="col-md-4 ms-auto">
                                 <form action="mod_transaction.php?tridlabel=1" method="post">
-                                    <button type="submit" name="tr-edit-btn">EDIT</button>
+                                    <button type="submit" name="tr-edit-btn">Edit</button>
                                 </form>
                             </div>
                             <br>

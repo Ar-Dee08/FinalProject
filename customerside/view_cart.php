@@ -24,7 +24,7 @@ $userinfo_id = $_SESSION['uid'];
         <div class="product-txt">
             <div class="back-cont">
                 <div>
-                    <h1>Your Cart</h1>
+                    <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">Your Cart</h1>
                     <hr>
                 </div>
 
@@ -219,5 +219,8 @@ $userinfo_id = $_SESSION['uid'];
     left: 0;
 }
 
+.item-detail-name {
+    color: black;
+}
 
 </style>
