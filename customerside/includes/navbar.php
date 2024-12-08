@@ -24,7 +24,7 @@
           <a class="nav-link" href="view_updates.php"><b>News & Update</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
-          <a class="nav-link" href="#"><b>About</b> <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="about_ssite.php"><b>About</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
           <a class="nav-link" href="../customerside/view_profile.php"><b>Account</b> <span class="sr-only">(current)</span></a>
