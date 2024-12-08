@@ -66,7 +66,7 @@ $result = $con->query($query);
         <?php endif; ?>
 
         <div class="back-link">
-            <a href="index.php" class="btn btn-secondary" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Back to Home</a>
+            <a href="homecustomer.php" class="btn btn-secondary" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Back to Home</a>
         </div>
     </div>
 

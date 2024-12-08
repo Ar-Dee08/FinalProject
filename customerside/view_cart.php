@@ -3,21 +3,19 @@ include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
 
-
-
 $userinfo_id = $_SESSION['uid'];
 
-    // Fetch item details from the database
-    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ? AND cart_status = 'Active'";
-    $stmt = $con->prepare($cartquery);
-    $stmt->bind_param("i", $userinfo_id);
+// Fetch item details from the database
+$cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ? AND cart_status = 'Active'";
+$stmt = $con->prepare($cartquery);
+$stmt->bind_param("i", $userinfo_id);
 
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $item = $result->fetch_assoc();
-        }
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $item = $result->fetch_assoc();
     }
+}
 ?>
 <body class="logo-bg-2">
     <div class="product-container">
@@ -27,7 +25,6 @@ $userinfo_id = $_SESSION['uid'];
                     <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">Your Cart</h1>
                     <hr>
                 </div>
-
 
                 <!-- Product Display -->
                 <div class="display-cont">
@@ -64,26 +61,17 @@ $userinfo_id = $_SESSION['uid'];
                                 </div>
 
                                 <div class="item-detail-name">
-                                    <a href="">
-                                        <h1><?=$item_name?></h1>
-                                    </a>
-                                        <h6>Price: ₱<?=$finalprice?></h6>
-
+                                    <h1><?=$item_name?></h1>
+                                    <h6>Price: ₱<?=$finalprice?></h6>
                                     <br>
                                     <h6><?=$item_spec?></h6>
                                     <div class="quantity-container">
-                                    <div class="quantity-container">
                                         <button type="button" class="quantity-btn" id="minus-<?php echo $counter; ?>"  data-cart_id="<?php echo $item['cart_id']; ?>">-</button>
                                         <input type="number" id="quantity-<?php echo $counter; ?>" name="quantity" value="<?php echo $quant; ?>" min="1" step="1" class="form-control" required>
-                                        <button type="button" class="quantity-btn" id="plus-<?php echo $counter; ?>" data-cart_id="<?php echo $item['cart_id']; ?>"
-                                        >+</button>
-                                    </div>
-
-
+                                        <button type="button" class="quantity-btn" id="plus-<?php echo $counter; ?>" data-cart_id="<?php echo $item['cart_id']; ?>">+</button>
                                     </div>
                                     <div>
                                         <?php
-                                        
                                             if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
                                                 ?>
                                                  <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
@@ -105,7 +93,8 @@ $userinfo_id = $_SESSION['uid'];
                             </div>
                         </form>
                         <hr>
-                        <div class="bottom-float" id="item-selected" >
+                              <p style="color: white;">Total (# of Items) : P00.00</p>
+                        <div class="bottom-float" id="item-selected" style="color: white;">
                             <p>Total (#  of Items) : P00.00</p>
                         </div>
                         <?php
@@ -281,7 +270,8 @@ $userinfo_id = $_SESSION['uid'];
 }
 
 .bottom-float {
-    background-color: rosybrown;
+    background-color: #a9cad0;
+    color: white !important;
     width: 100%;
     height: 5em;
     position: fixed;
