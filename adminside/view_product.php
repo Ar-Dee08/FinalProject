@@ -13,9 +13,9 @@ require "../vscode/dbcon.php";
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
-                        Products
-                    </h2>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
+                    Products
+                </h2>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">

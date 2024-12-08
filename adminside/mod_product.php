@@ -46,7 +46,7 @@ if(isset($_POST['item-edit-btn'])){ //IF EDITING RECORD
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
+                    <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
                         Modify Item
                     </h2>
                 </div>

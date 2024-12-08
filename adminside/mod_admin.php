@@ -49,7 +49,7 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
                         Admin Information Records
                     </h2>
                 </div>

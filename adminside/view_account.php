@@ -41,7 +41,9 @@ try {
 
 <body class="logo-bg-2">
 <div class="admin-container">
-    <h1>My Profile</h1>
+    <h1 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
+    My Profile
+    </h1>
     <h3>Manage and protect your account.</h3>
     <div class="profile-details">
         <p><strong>First Name:</strong> <?php echo htmlspecialchars($user['firstname']); ?></p>

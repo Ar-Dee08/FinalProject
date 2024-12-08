@@ -42,8 +42,8 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
-                        Modify News and Update Record
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
+                        Modify News & Updates Record
                     </h2>
                 </div>
                 <div class="card-body">

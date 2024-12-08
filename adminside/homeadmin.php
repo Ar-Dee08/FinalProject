@@ -21,7 +21,7 @@ include '../vscode/dbcon.php';
                 $admin_name = $ui_row['firstname'];
                 
             
-            echo "<h2>Hello, Admin " . htmlspecialchars($admin_name) . "!</h2>";
+            echo "<h2 style=\"font-family: 'Inter', sans-serif; font-size: 35px; font-weight: bold; color: black;\">Hello, Admin " . htmlspecialchars($admin_name) . "!</h2>";
             }
             
         } else {
@@ -71,6 +71,35 @@ include '../vscode/dbcon.php';
                 ?>
     </div>
     </div>
+    <style>
+        .home-txt {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .list-group {
+            margin: 20px auto;
+            width: 100%;
+            position: relative;
+            left: 0;
+        }
+
+        .list-group-item {
+            font-size: 18px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #333;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
     
 <div class="footer-footer">
     <?php

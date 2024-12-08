@@ -63,8 +63,8 @@ if ($stmt->execute()) {
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>
-                        Transaction Status Update
+                <h2 style="font-family: 'Inter', sans-serif; font-size: 40px; font-weight: bold;">
+                        Transaction Status Updates
                     </h2>
                 </div>
                 <div class="card-body">
