@@ -52,7 +52,7 @@
 
           </label>
         </li>
-        <li class="nav-item-2">
+        <li class="nav-item-2" id="admin-cart">
           <a class="nav-link active" href="../vscode/view_cart.php"><i class="fa-solid fa-cart-shopping fa-1x"></i></a>
         </li>
         <style>
