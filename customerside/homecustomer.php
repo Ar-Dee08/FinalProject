@@ -8,11 +8,11 @@ include '../vscode/dbcon.php';
 ?>
     <div class="home-txt">
     <?php
-        if (isset($_SESSION['customertype_id'])) {
+        if (isset($_SESSION['uid'])) {
 
-            $getnamequery = "SELECT * FROM customertype a LEFT JOIN user_information ui ON a.userinfo_id = ui.userinfo_id WHERE customertype_id = ?";
+            $getnamequery = "SELECT * FROM user_information WHERE userinfo_id = ?";
             $stmt = $con->prepare($getnamequery);
-            $stmt->bind_param("i",$_SESSION['customertype_id']);
+            $stmt->bind_param("i",$_SESSION['uid']);
 
             if ($stmt->execute()) {
                 $results = $stmt->get_result(); // Always return the result object        
@@ -39,11 +39,11 @@ include '../vscode/dbcon.php';
 
     <div>
     <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="homecustomer.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-house"></i> Home</a>
                 <a href="product_display.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-shirt"></i> Products</a>
                 <a href="view_updates.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
                 <a href="#" class="list-group-item list-group-item-action"><img src="images/SSITE-LOGO-WHITE.png" alt="Logo" style="width: 20px; height: 20px; filter: invert(1) brightness(0);"> About Us</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Profile Account</a>
+                <a href="view_profile.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Profile Account</a>
                    
                 </div>
     </div>
