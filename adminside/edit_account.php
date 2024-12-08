@@ -1,0 +1,139 @@
+<?php
+// Start session and include necessary files
+session_start();
+require_once 'includes/header.php';
+require_once 'admin_middleware.php';
+require_once '../vscode/dbcon.php';
+
+// Redirect if the user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch user ID from session
+$user_id = $_SESSION['user_id'];
+
+// Initialize variables
+$update_success = false;
+$error_message = "";
+
+// Handle form submission for updating user details
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitize and validate input
+    $firstname = htmlspecialchars(trim($_POST['firstname']));
+    $lastname = htmlspecialchars(trim($_POST['lastname']));
+    $sex = htmlspecialchars(trim($_POST['sex']));
+    $bday = htmlspecialchars(trim($_POST['bday']));
+    $student_number = htmlspecialchars(trim($_POST['student_number']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $contact_number = htmlspecialchars(trim($_POST['contact_number']));
+    $type = htmlspecialchars(trim($_POST['type']));
+
+    // Prepare the update query
+    try {
+        $query = "UPDATE users SET firstname = ?, lastname = ?, sex = ?, bday = ?, student_number = ?, email = ?, contact_number = ?, type = ? WHERE id = ?";
+        $stmt = $con->prepare($query);
+        
+        if (!$stmt) {
+            throw new Exception("Error preparing statement: " . $con->error);
+        }
+
+        // Bind parameters
+        $stmt->bind_param("ssssssssi", $firstname, $lastname, $sex, $bday, $student_number, $email, $contact_number, $type, $user_id);
+        
+        // Execute query
+        if ($stmt->execute()) {
+            $update_success = true;
+        } else {
+            throw new Exception("Error executing query: " . $stmt->error);
+        }
+    } catch (Exception $e) {
+        $error_message = "An error occurred: " . htmlspecialchars($e->getMessage());
+    }
+}
+
+// Fetch user details
+try {
+    $query = "SELECT firstname, lastname, sex, bday, student_number, email, contact_number, type FROM users WHERE id = ?";
+    $stmt = $con->prepare($query);
+
+    if (!$stmt) {
+        throw new Exception("Error preparing statement: " . $con->error);
+    }
+
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if user exists
+    if ($result && $result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
+        throw new Exception("User not found.");
+    }
+} catch (Exception $e) {
+    $error_message = "An error occurred: " . htmlspecialchars($e->getMessage());
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="logo-bg-2">
+<div class="admin-container">
+    <h1>My Profile</h1>
+    <h3>Manage and protect your account.</h3>
+
+    <?php if ($update_success): ?>
+        <p class="success-message">Your profile has been updated successfully.</p>
+    <?php elseif ($error_message): ?>
+        <p class="error-message"><?php echo $error_message; ?></p>
+    <?php endif; ?>
+
+    <form method="POST">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($user['firstname']); ?>" required>
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($user['lastname']); ?>" required>
+
+        <label for="sex">Sex:</label>
+        <select id="sex" name="sex" required>
+            <option value="Male" <?php echo ($user['sex'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+            <option value="Female" <?php echo ($user['sex'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+            <option value="Other" <?php echo ($user['sex'] == 'Other') ? 'selected' : ''; ?>>Other</option>
+        </select>
+
+        <label for="bday">Birthday:</label>
+        <input type="date" id="bday" name="bday" value="<?php echo htmlspecialchars($user['bday']); ?>" required>
+
+        <label for="student_number">Student Number:</label>
+        <input type="text" id="student_number" name="student_number" value="<?php echo htmlspecialchars($user['student_number']); ?>" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+
+        <label for="contact_number">Mobile Number:</label>
+        <input type="text" id="contact_number" name="contact_number" value="<?php echo htmlspecialchars($user['contact_number']); ?>" required>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="Student" <?php echo ($user['type'] == 'Student') ? 'selected' : ''; ?>>Student</option>
+            <option value="Teacher" <?php echo ($user['type'] == 'Teacher') ? 'selected' : ''; ?>>Teacher</option>
+        </select>
+
+        <button type="submit">Update Profile</button>
+    </form>
+</div>
+
+<div class="footer-footer">
+    <?php include 'includes/footer.php'; ?>
+</div>
+</body>
+</html>
