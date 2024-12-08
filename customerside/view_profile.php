@@ -41,7 +41,7 @@ try {
 
 <body class="logo-bg-2">
 <div class="admin-container">
-    <h1>My Profile</h1>
+    <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">My Profile</h1>
     <h3>Manage and protect your account.</h3>
     <div class="profile-details">
         <p><strong>First Name:</strong> <?php echo htmlspecialchars($user['firstname']); ?></p>
@@ -56,7 +56,7 @@ try {
         <p><strong>Type:</strong> <?php echo htmlspecialchars($user['customer_type']); ?></p>
     </div>
     <!-- Edit Button -->
-    <button onclick="location.href='edit_profile.php'" class="edit-button" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Edit Profile</button>
+    <button onclick="location.href='homecustomer.php'" class="edit-button" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Edit Profile</button>
     </div>
 </div>
 

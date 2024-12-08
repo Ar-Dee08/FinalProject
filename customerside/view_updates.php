@@ -20,7 +20,7 @@ $result = $con->query($query);
 </head>
 <body>
     <div class="customer-container">
-        <h1>News & Updates</h1><hr>
+        <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">News & Updates</h1><hr>
         <?php if ($result && $result->num_rows > 0): ?>
             <div class="news-list">
                 <?php while ($row = $result->fetch_assoc()): ?>
@@ -37,9 +37,14 @@ $result = $con->query($query);
                         <p><?= htmlspecialchars($row['caption']); ?></p>
 
                         <?php if (!empty($row['post_url'])): ?>
-                            <a href="<?= htmlspecialchars($row['post_url']); ?>" target="_blank" class="btn btn-primary">
+                            <a href="<?= htmlspecialchars($row['post_url']); ?>" target="_blank" class="btn btn-primary" style="color: black; text-decoration: underline;">
                                 Read More
                             </a>
+                            <style>
+                                .btn-primary:hover {
+                                    background-color: #1E4A50;
+                                }
+                            </style>
                         <?php endif; ?>
                     </div>
                 <?php endwhile; ?>
@@ -49,7 +54,7 @@ $result = $con->query($query);
         <?php endif; ?>
 
         <div class="back-link">
-            <a href="index.php" class="btn btn-secondary">Back to Home</a>
+            <a href="index.php" class="btn btn-secondary" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Back to Home</a>
         </div>
     </div>
 

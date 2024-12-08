@@ -9,30 +9,7 @@
             <a href="product_display.php" class="list-group-item list-group-item-action">Products</a>
             <a href="view_updates.php" class="list-group-item list-group-item-action">News & Updates</a>
             <a href="about_ssite.php" class="list-group-item list-group-item-action">About Us</a>
-            <a href="view_profile.php" class="list-group-item list-group-item-action">Account</a>
-            <!-- To edit -->
-            <!-- Collapsible Section -->
-            <?php if(isset($_SESSION['isPriv'])) { ?>
-                <a class="list-group-item list-group-item-action" 
-                   data-bs-toggle="collapse" 
-                   href="#collapseAccounts" 
-                   role="button" 
-                   aria-expanded="false" 
-                   aria-controls="collapseAccounts">
-                    Collapsible Title
-                </a>
-                <div class="collapse" id="collapseAccounts">
-                    <ul class="list-group mt-2">
-                        <a class="list-group-item list-group-item-action" href="view_userinfo.php">Asdfghjkl 1</a>
-                        <a class="list-group-item list-group-item-action" href="view_useracc.php">Asdfghjkl 2</a>
-                    </ul>
-                </div>
-                <style>
-                    .collapse {
-                        text-indent: 20px;
-                    }
-                </style>
-            <?php } ?>
+            <a href="view_profile.php" class="list-group-item list-group-item-action">Profile Account</a>
         </div>
     </div>
 </div>
