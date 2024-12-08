@@ -10,31 +10,48 @@ $result = $con->query($query);
 ?>
 
     <div class="customer-container">
-        <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">News & Updates</h1><hr>
+        <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black; text-align:center;">News & Updates</h1><hr>
         <?php if ($result && $result->num_rows > 0): ?>
             <div class="news-list">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="news-item">
                         <div>
-                        <h2><?= htmlspecialchars($row['title']); ?></h2>
+                        <h2 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;"><?= htmlspecialchars($row['title']); ?></h2>
                         <p class="date"><?= htmlspecialchars(date("F j, Y", strtotime($row['date_webposted']))); ?></p>
                         </div>
                         <div class="news-details">
                         <?php if (!empty($row['post_img'])): ?>
                             <div class="news-image">
-                                <img src="../adminside/record_images/post_images/<?= htmlspecialchars($row['post_img']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                                <img src="../adminside/record_images/post_images/<?= htmlspecialchars($row['post_img']); ?>" alt="<?= htmlspecialchars($row['title']); ?>" class="responsive-img">
                             </div>
                         <?php endif; ?>
                             <div>
                         <p><?= htmlspecialchars($row['caption']); ?></p>
 
                         <?php if (!empty($row['post_url'])): ?>
-                            <a href="<?= htmlspecialchars($row['post_url']); ?>" target="_blank" class="btn btn-primary" style="color: black; text-decoration: underline;">
+                            <a href="<?= htmlspecialchars($row['post_url']); ?>" target="_blank" class="btn btn-primary" style="color: black; text-decoration: underline; margin-left: 10px;">
                                 Read More
                             </a>
                             <style>
                                 .btn-primary:hover {
                                     background-color: #1E4A50;
+                                }
+                                .responsive-img {
+                                    width: 70%;
+                                    max-width: 100%;
+                                    height: auto;
+                                }
+                                .customer-container {
+                                    width: 70%;
+                                    padding: 50px 15px;
+                                    background-color: #CEDFE3;
+                                    padding: 30px;    
+                                    border-radius: 5px;
+                                    max-width: 95%;
+                                    margin: 3% auto;    
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                                    font-family: 'Inter', sans-serif;
+                                    transition: transform 0.3s ease, box-shadow 0.3s ease;
                                 }
                             </style>
                             </div>
