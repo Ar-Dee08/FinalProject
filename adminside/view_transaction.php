@@ -107,7 +107,7 @@
                         <!-- TEMPORARY, REMOVE THIS BUTTON AFTER -->
                             <div class="col-md-4 ms-auto">
                                 <form action="mod_transaction.php?tridlabel=1" method="post">
-                                    <button type="submit" name="tr-edit-btn">EDITEDIEDIT</button>
+                                    <button type="submit" name="tr-edit-btn">EDIT</button>
                                 </form>
                             </div>
                             <br>

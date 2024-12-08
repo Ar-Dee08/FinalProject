@@ -18,7 +18,7 @@
             <a class="nav-link" href="../adminside/homeadmin.php"><b>Home</b> <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active" id="home-admin">
-            <a class="nav-link" href="#"><b>Account</b> <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="view_account.php"><b>Account</b> <span class="sr-only">(current)</span></a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
