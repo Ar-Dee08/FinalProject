@@ -7,7 +7,7 @@ if (isset($_GET['item_id'])) {
     $item_id = intval($_GET['item_id']); // Convert to integer for security
 
     // Fetch item details from the database
-    $query = "SELECT * FROM items i LEFT JOIN categories c ON i.cat_id = c.cat_id WHERE item_id = ?";
+    $query = "SELECT * FROM items i LEFT JOIN categories c ON i.cat_id = c.cat_id WHERE item_id = ? AND i.record_status = 'Active'";
     $stmt = $con->prepare($query);
     $stmt->bind_param("i", $item_id);
 

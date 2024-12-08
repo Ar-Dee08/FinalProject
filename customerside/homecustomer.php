@@ -10,7 +10,7 @@ include '../vscode/dbcon.php';
     <?php
         if (isset($_SESSION['uid'])) {
 
-            $getnamequery = "SELECT * FROM user_information WHERE userinfo_id = ?";
+            $getnamequery = "SELECT * FROM user_information WHERE userinfo_id = ? AND account_status = 'Active'";
             $stmt = $con->prepare($getnamequery);
             $stmt->bind_param("i",$_SESSION['uid']);
 

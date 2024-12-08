@@ -63,9 +63,24 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
     header("Location: order_confirm.php?item_id=$item_id");
     exit();
 
-} 
+} else if (isset($_GET['cart_id']) && is_numeric($_GET['cart_id'])) {
 
+    $cart_id = $_GET['cart_id'];
 
+    // Prepare the SQL DELETE statement
+    $deleteQuery = "UPDATE cart SET cart_status = 'Removed' WHERE cart_id = ?";
+    $stmt = $con->prepare($deleteQuery);
+    $stmt->bind_param("i", $cart_id);
+
+    if ($stmt->execute()) {
+        // Success: Redirect back to the cart page with a success message
+        header("Location: view_cart.php?status=success");
+    } else {
+        // Failure: Redirect back with an error message
+        header("Location: view_cart.php?status=error");
+    }
+    $stmt->close();
+}
 
 
 

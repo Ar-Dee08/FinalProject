@@ -28,6 +28,7 @@ if ($stmt->execute()) {
 
                 <!-- Product Display -->
                 <div class="display-cont">
+                    
                 <div class="cart-cont">
                         <?php
                         if ($result->num_rows > 0) {

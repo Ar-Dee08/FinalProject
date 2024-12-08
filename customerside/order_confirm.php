@@ -11,7 +11,7 @@ if (isset($_GET['item_id'])) {
                   LEFT JOIN items i ON c.item_id = i.item_id 
                   LEFT JOIN categories cat ON i.cat_id = cat.cat_id 
                   LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id 
-                  WHERE ui.userinfo_id = ?";
+                  WHERE ui.userinfo_id = ? AND c.cart_status = 'Active'";
     $stmt = $con->prepare($cartquery);
     $stmt->bind_param("i", $userinfo_id);
 

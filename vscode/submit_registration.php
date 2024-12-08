@@ -100,7 +100,7 @@ function InsertRecord($query, $con)
 
 function CheckEmail($con, $email)
 {
-    $check_email = "SELECT * FROM user_information WHERE email='$email'";
+    $check_email = "SELECT * FROM user_information WHERE email='$email' AND account_status = 'Active'";
     $results = $con->query($check_email);
     if ($results->num_rows > 0) {
         echo "Email Address already Exists";
