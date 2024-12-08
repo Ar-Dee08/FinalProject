@@ -9,31 +9,23 @@ $result = $con->query($query);
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News & Updates</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
     <div class="customer-container">
         <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">News & Updates</h1><hr>
         <?php if ($result && $result->num_rows > 0): ?>
             <div class="news-list">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="news-item">
+                        <div>
                         <h2><?= htmlspecialchars($row['title']); ?></h2>
                         <p class="date"><?= htmlspecialchars(date("F j, Y", strtotime($row['date_webposted']))); ?></p>
-                        
+                        </div>
+                        <div class="news-details">
                         <?php if (!empty($row['post_img'])): ?>
                             <div class="news-image">
-                                <img src="record_images/post_images/<?= htmlspecialchars($row['post_img']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                                <img src="../adminside/record_images/post_images/<?= htmlspecialchars($row['post_img']); ?>" alt="<?= htmlspecialchars($row['title']); ?>">
                             </div>
                         <?php endif; ?>
-
+                            <div>
                         <p><?= htmlspecialchars($row['caption']); ?></p>
 
                         <?php if (!empty($row['post_url'])): ?>
@@ -45,6 +37,9 @@ $result = $con->query($query);
                                     background-color: #1E4A50;
                                 }
                             </style>
+                            </div>
+                            </div>
+                            <hr>
                         <?php endif; ?>
                     </div>
                 <?php endwhile; ?>

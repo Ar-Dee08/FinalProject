@@ -39,11 +39,11 @@ include '../vscode/dbcon.php';
 
     <div>
     <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="homecustomer.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-house"></i> Home</a>
                 <a href="product_display.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-shirt"></i> Products</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
+                <a href="view_updates.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-newspaper"></i> News & Updates</a>
                 <a href="#" class="list-group-item list-group-item-action"><img src="images/SSITE-LOGO-WHITE.png" alt="Logo" style="width: 20px; height: 20px; filter: invert(1) brightness(0);"> About Us</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Profile Account</a>
+                <a href="view_profile.php" class="list-group-item list-group-item-action"><i class="fa-solid fa-user"></i> Profile Account</a>
                    
                 </div>
     </div>
