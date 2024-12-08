@@ -18,6 +18,7 @@ if (isset($_GET['item_id'])) {
             $item_name = $item['item_name'];
             $item_spec = $item['item_spec'];
             $item_desc = $item['item_desc'];
+            $item_type = $item['item_type'];
             $item_price = $item['item_price'];
             $item_discprice = $item['item_discprice'];
             $item_img = $item['item_img'];
@@ -38,7 +39,7 @@ if (isset($_GET['item_id'])) {
                     <div class="item-detail-name">
                         <h1><?=$item_name?></h1>
                         <h5>Price: ₱<?=$item_discprice?> — ₱<?=$item_price?></h5>
-                        <h6><?=$item_spec?></h6>
+                        <h6>Specification : <?=$item_spec?></h6>
                         
                         <!-- Quantity section with buttons -->
                         <div class="quantity-container">
@@ -48,9 +49,11 @@ if (isset($_GET['item_id'])) {
                         </div>
                         
                         <div>
+                            <br>
                             <h6>SSITE Member Price : ₱<?=$item_discprice?></h6>
                             <h6>SSITE Non-Member Price : ₱<?=$item_price?></h6>
-                        </div>
+                            <p>Type: <?=$item_type?></p>
+                            </div>
                     </div>
                 </div>
                 

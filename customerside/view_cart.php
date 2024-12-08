@@ -40,6 +40,7 @@ $userinfo_id = $_SESSION['uid'];
                                 $item_name = $item['item_name'];
                                 $item_spec = $item['item_spec'];
                                 $item_desc = $item['item_desc'];
+                                $item_type = $item['item_type'];
                                 $quant = $item['quantity'];
                                 $item_price = $item['item_price'];
                                 $item_discprice = $item['item_discprice'];
@@ -64,13 +65,13 @@ $userinfo_id = $_SESSION['uid'];
                                 </div>
 
                                 <div class="item-detail-name">
-                                    <a href="">
+                                    <a href="item_detail.php?item_id=<?=$item['item_id']?>">
                                         <h1><?=$item_name?></h1>
                                     </a>
                                         <h6>Price: ₱<?=$finalprice?></h6>
 
                                     <br>
-                                    <h6><?=$item_spec?></h6>
+                                    <h6>Specification : <?=$item_spec?></h6>
                                     <div class="quantity-container">
                                     <div class="quantity-container">
                                         <button type="button" class="quantity-btn" id="minus-<?php echo $counter; ?>"  data-cart_id="<?php echo $item['cart_id']; ?>">-</button>
@@ -82,11 +83,14 @@ $userinfo_id = $_SESSION['uid'];
 
                                     </div>
                                     <div>
+                                        <br>
+
                                         <?php
                                         
                                             if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
                                                 ?>
-                                                 <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
+                                                <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
+                                                <p>Type: <?=$item_type?></p>
 <?php
                                             } else if($item['memstatus_id']==2) { ?> //NON MEMBER
                                                 <h6>SSITE Member Price: ₱<?=$item_discprice?></h6>                                           
@@ -105,9 +109,6 @@ $userinfo_id = $_SESSION['uid'];
                             </div>
                         </form>
                         <hr>
-                        <div class="bottom-float" id="item-selected" >
-                            <p>Total (#  of Items) : P00.00</p>
-                        </div>
                         <?php
                             }//END OF LOOP ?>
                       <?php  } else {

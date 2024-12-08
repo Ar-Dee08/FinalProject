@@ -7,35 +7,57 @@ if (isset($_GET['item_id'])) {
     $item_id = intval($_GET['item_id']); // Convert to integer for security
     $userinfo_id = $_SESSION['uid'];
 
-    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ?";
+    $cartquery = "SELECT * FROM cart c 
+                  LEFT JOIN items i ON c.item_id = i.item_id 
+                  LEFT JOIN categories cat ON i.cat_id = cat.cat_id 
+                  LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id 
+                  WHERE ui.userinfo_id = ?";
     $stmt = $con->prepare($cartquery);
     $stmt->bind_param("i", $userinfo_id);
 
     if ($stmt->execute()) {
         $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $item = $result->fetch_assoc();
-        }
     }
-
-
-// echo 'HII';
+}
 ?>
+
 <body class="logo-bg-2">
     <div class="product-container">
-        <div class="product-txt">
+        <div class="order-txt">
             <div class="back-cont">
-                <div>
-                    <h1>Confirm your Order</h1>
+                <div style="display: flex width:40%">
+                    <a href="view_cart.php">Back</a>
+                    <h1>Confirm Your Pre-Order</h1>
                     <hr>
                 </div>
 
-
                 <!-- Product Display -->
                 <div class="display-cont">
-                <div class="cart-cont">
+                    <div class="order-cont">
+                    <div class="order-item caption">
+                            <div class="order-item-image">
+                                <h5>IMAGE</h5>
+                            </div>
+                                <div class="order-detail-name">
+                                    <h5>Item</h5>
+                                </div>
+                                <div class="order-detail-spec">
+                                    <h5>Specification</h5>
+                                </div>
+                                <div class="order-unit-price">
+                                    <h5>Unit Price</h5>
+                                </div>
+                                <div class="order-unit-quantity">
+                                    <h5>Quantity</h5>
+                                </div>
+                                <div class="order-item-subtotal">
+                                    <h5>Subtotal</h5>
+                                </div>
+                                <hr>
+                        </div>
                         <?php
-                        if ($result->num_rows > 0) {
+                        if (isset($result) && $result->num_rows > 0) {
+                            $isFirst = true; // Track the first unique record
                             while ($item = $result->fetch_assoc()) {
                                 $item_name = $item['item_name'];
                                 $item_spec = $item['item_spec'];
@@ -45,62 +67,40 @@ if (isset($_GET['item_id'])) {
                                 $item_discprice = $item['item_discprice'];
                                 $item_img = $item['item_img'];
                                 $item_cat = $item['category_name'];
-                        ?>
-                        <form action="customer_proc.php" method="post" class="form-cart">
-                            <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
-                            <div class="item-top-section">
+                                $cart_id = $item['cart_id'];
                                 
-                                <div class="item-detail-image">
-                                    <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
-                                </div>
+                                if ($item['memstatus_id'] == 3 || $item['memstatus_id'] == 1) {
+                                    $finalprice = $item_price;
+                                } else if ($item['memstatus_id'] == 2) {
+                                    $finalprice = $item_discprice;
+                                }
 
-                                <div class="item-detail-name">
-                                    <a href="">
-                                    <h1><?=$item_name?></h1>
-                                    </a>
-                                    <?php
-                                    if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
-                                                ?>
-                                                 <h6>Price: ₱<?=$item_price?></h6>
+                                $subtotal = $finalprice * $quant;
 
-<?php
-                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
-                                                <h6>Price: ₱<?=$item_discprice?></h6>
-                                                
-<?php
-                                            }
-                                        ?>
-
-                                    <br>
-                                    <h6><?=$item_spec?></h6>
-                                    <div class="quantity-container">
-                                        <button type="button" class="quantity-btn" id="minus">-</button>
-                                        <input type="number" id="quantity" name="quantity" value="<?=$quant?>" min="1" step="1" class="form-control" required>
-                                        <button type="button" class="quantity-btn" id="plus">+</button>
-                                    </div>
-                                    <div>
-                                        <?php
-                                        
-                                            if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){ //NON MEMBER
-                                                ?>
-                                                 <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
-<?php
-                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
-                                                <h6>SSITE Member Price: ₱<?=$item_discprice?></h6>                                           
-<?php
-                                            }
-                                        ?>
-                                    </div>
-                                    <div class="item-description">
-                                        <p>Description:</p>
-                                        <p><?=$item_desc?></p>
-                                    </div>
-                                    <button type="submit" class="buy-btn" name="item-order-btn">
-                                        Buy Now
-                                    </button>
-                                </div>
+                        ?>
+                        <div class="order-item">
+                            <div class="order-item-image">
+                                <img src="../adminside/record_images/item_images/<?= $item_img ?>" 
+                                     alt="<?= $item_name ?>" 
+                                     class="order-detail-image">
                             </div>
-                        </form>
+                                <div class="order-detail-name">
+                                    <h6><?= $item_name ?></h6>
+                                </div>
+                                <div class="order-detail-spec">
+                                    <h6><?= $item_spec ?></h6>
+                                </div>
+                                <div class="order-unit-price">
+                                    <h6>₱<?= $finalprice ?></h6>
+                                </div>
+                                <div class="order-unit-quantity">
+                                    <h6><?= $quant ?></h6>
+                                </div>
+                                <div class="order-item-subtotal">
+                                    <h6>₱<?= $subtotal ?></h6>
+                                </div>
+
+                        </div>
                         <hr>
                         <?php
                             }
@@ -108,13 +108,10 @@ if (isset($_GET['item_id'])) {
                             echo "<p>Your cart is empty.</p>";
                         }
                         ?>
-
-        </div>
+                    </div>
+                    <button type="submit" class="buy-btn" name="complete-order-btn">Buy Now</button>
                 </div>
             </div>
         </div>
     </div>
-
-<?php
-}
-?>
+</body>

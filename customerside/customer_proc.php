@@ -60,12 +60,10 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
 } else if(isset($_POST['item-order-btn'])) {
     $item_id = $_POST['item_id'];
 
-    header("Location: ordeR_confirm.php?item_id=$item_id");
+    header("Location: order_confirm.php?item_id=$item_id");
     exit();
 
-
-
-}
+} 
 
 
 
