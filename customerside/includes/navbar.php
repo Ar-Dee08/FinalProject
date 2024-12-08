@@ -24,13 +24,13 @@
           <a class="nav-link" href="#"><b>News & Update</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
-          <a class="nav-link" href="view_cart.php"><b>Cart</b> <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item active" id="home-admin">
           <a class="nav-link" href="#"><b>About</b> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active" id="home-admin">
           <a class="nav-link" href="#"><b>Account</b> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active" id="home-admin">
+          <a class="nav-link" href="view_cart.php"><i class="fa-solid fa-cart-shopping fa-1x"></i> <b>Cart</b> <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
@@ -55,9 +55,7 @@
 
           </label>
         </li>
-        <li class="nav-item-2" id="admin-cart">
-          <a class="nav-link active" href="../vscode/view_cart.php"><i class="fa-solid fa-cart-shopping fa-1x"></i></a>
-        </li>
+
         <style>
           .nav-item-2 {
               font-family: 'Inter', sans-serif;

@@ -62,7 +62,6 @@ if ($stmt->execute()) {
 <?php
                                             }
                                         ?>
-
                                     <br>
                                     <h6><?=$item_spec?></h6>
                                     <div>
