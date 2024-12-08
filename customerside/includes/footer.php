@@ -18,14 +18,14 @@
       <a href="https://www.facebook.com/bpsu.ssite" target="_blank"><i class="fa fa-facebook"> </i></a>
       <a href="https://www.instagram.com/bpsu_ssite/" target="_blank"><i class="fa fa-instagram"> </i></a>
       <a href="mailto:mc_ssite@bpsu.edu.ph?subject=Subject%20Text" target="_blank"><i class="fa-solid fa-envelope"> </i></a>
-      <a href="#" target="_blank"><i class="fa-brands fa-discord"> </i></a>
+      <a href="https://discord.com/" target="_blank"><i class="fa-brands fa-discord"></i></a>
     </div>
 
     <!-- Links Row -->
     <div class="row">
       <ul>
         <!-- To change -->
-        <li><a href="#">Home</a></li>
+        <li><a href="homecustomer.php">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">News & Updates</a></li>
         <li><a href="#">Contact</a></li>

@@ -43,22 +43,24 @@ try {
 <div class="admin-container">
     <h1>My Profile</h1>
     <h3>Manage and protect your account.</h3>
-    <p>First Name: <?php echo htmlspecialchars($user['firstname']); ?></p>
-    <p>Last Name: <?php echo htmlspecialchars($user['lastname']); ?></p>
-    <p>Sex: <?php echo htmlspecialchars($user['sex']); ?></p>
-    <p>Birthday: <?php echo htmlspecialchars($user['bday']); ?></p>
-<?php
-    if($user['customertype_id'] == 1){  ?>
-        <p>Student Number: <?php echo htmlspecialchars($user['student_number']); ?></p>
-<?php    }
-?>
+    <div class="profile-details">
+        <p><strong>First Name:</strong> <?php echo htmlspecialchars($user['firstname']); ?></p>
+        <p><strong>Last Name:</strong> <?php echo htmlspecialchars($user['lastname']); ?></p>
+        <p><strong>Sex:</strong> <?php echo htmlspecialchars($user['sex']); ?></p>
+        <p><strong>Birthday:</strong> <?php echo htmlspecialchars($user['bday']); ?></p>
+        <?php if($user['customertype_id'] == 1){ ?>
+            <p><strong>Student Number:</strong> <?php echo htmlspecialchars($user['student_number']); ?></p>
+        <?php } ?>
+        <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+        <p><strong>Mobile Number:</strong> <?php echo htmlspecialchars($user['contact_number']); ?></p>
+        <p><strong>Type:</strong> <?php echo htmlspecialchars($user['customer_type']); ?></p>
+    </div>
+</div>
 
-    <p>Email: <?php echo htmlspecialchars($user['email']); ?></p>
-    <p>Mobile Number: <?php echo htmlspecialchars($user['contact_number']); ?></p>
-    <p>Type: <?php echo htmlspecialchars($user['customer_type']); ?></p>
 
     <!-- Edit Button -->
-    <a href="edit_account.php" class="edit-button">Edit Profile</a>
+    <button onclick="location.href='edit_account.php'" class="edit-button">Edit Profile</button>
+
 </div>
 
 <div class="footer-footer">

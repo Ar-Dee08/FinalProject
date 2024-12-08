@@ -178,7 +178,7 @@ body {
 
 .offcanvas a:hover {
     color: #458D9E;
-    text-decoration: underline;
+    text-decoration: none;
     border: none;
     background-color: transparent;
 }
