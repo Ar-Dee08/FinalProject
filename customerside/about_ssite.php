@@ -15,6 +15,7 @@ include '../vscode/dbcon.php';
         <div class="container">
             <!-- About Us Intro -->
             <div class="content-box text-center">
+                <img src="images/SSITE-GRID.png" alt="SSITE Photo" style="max-width: 100%; height: auto; margin-bottom: 13px;"><br>
                 <p style="text-align: left;">
                     The Student Society on Information Technology Education (𝗦𝗦𝗜𝗧𝗘) helps IT students grow and succeed by promoting quality education and offering support through seminars, workshops, and conferences. SSITE embraces technology as a key tool for learning and hosts events that provide real-world problem-solving experiences, while keeping members informed through its online presence.
                 </p>
@@ -55,14 +56,6 @@ include '../vscode/dbcon.php';
     </div>
 </div>
 
-    <!-- Footer -->
-    <div class="footer-footer">
-    <?php
-        include 'includes/footer.php';
-    ?>
-    </div>
-</body>
-
     <style>
         .customer-container {
             width: 70%;
@@ -83,11 +76,5 @@ include '../vscode/dbcon.php';
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
-        }
-        h2 {
-            color: #333333;
-        }
-        p, li {
-            color: #555555;
         }
     </style>

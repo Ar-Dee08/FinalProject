@@ -606,6 +606,7 @@ select.admin-sel {
 }
 
 .logo-bg-2::before {
+    height: 100%;
     content: '';
     position: absolute;
     top: 0;
