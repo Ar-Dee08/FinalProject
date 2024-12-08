@@ -783,11 +783,11 @@ select.admin-sel {
 
 .item-detail-image{
     object-fit: contain;
-    width: 25em;
-    min-width: 25em;
-    /* height: auto; */
-    max-width: 50%;
-    max-height: 50em;
+    width: 20em;
+    min-width: 20em;
+    height: 20em;
+    max-width: 26em;
+    max-height: 35em;
     border-radius: 5px;
     margin: 1%;
     filter: drop-shadow(3px 1px 2px #92a3a5);
@@ -933,4 +933,10 @@ select.admin-sel {
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cbox input[type='checkbox']{
+    vertical-align: middle;
+    width: 50px;
+    font-size: larger;
 }
