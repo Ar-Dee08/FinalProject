@@ -34,7 +34,9 @@ $userinfo_id = $_SESSION['uid'];
                 <div class="cart-cont">
                         <?php
                         if ($result->num_rows > 0) {
+                            $counter = 0;                             
                             while ($item = $result->fetch_assoc()) {
+                                $counter++;
                                 $item_name = $item['item_name'];
                                 $item_spec = $item['item_spec'];
                                 $item_desc = $item['item_desc'];
@@ -55,7 +57,7 @@ $userinfo_id = $_SESSION['uid'];
                             <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
                             <div class="item-top-section">
                                 <div class="cbox">
-                                    <input type="checkbox" id="cboxes<?=$cart_id?>" name="sel" data-price="<?=$finalprice?>" data-quantity="<?=$quant?>" onclick="cboxClick(<?=$cart_id?>)">
+                                    <input type="checkbox" id="cboxes<?=$cart_id?>" name="sel" data-price="<?=$finalprice?>" data-quantity="<?=$quant?>" data-counter="<?=$counter?>" onclick="cboxClick(<?=$cart_id?>)">
                                 </div>
                                 <div class="item-detail-image">
                                     <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
@@ -70,9 +72,14 @@ $userinfo_id = $_SESSION['uid'];
                                     <br>
                                     <h6><?=$item_spec?></h6>
                                     <div class="quantity-container">
-                                        <button type="button" class="quantity-btn" id="minus">-</button>
-                                        <input type="number" id="quantity" name="quantity" value="<?=$quant?>" min="1" step="1" class="form-control" required>
-                                        <button type="button" class="quantity-btn" id="plus">+</button>
+                                    <div class="quantity-container">
+                                        <button type="button" class="quantity-btn" id="minus-<?php echo $counter; ?>"  data-cart_id="<?php echo $item['cart_id']; ?>">-</button>
+                                        <input type="number" id="quantity-<?php echo $counter; ?>" name="quantity" value="<?php echo $quant; ?>" min="1" step="1" class="form-control" required>
+                                        <button type="button" class="quantity-btn" id="plus-<?php echo $counter; ?>" data-cart_id="<?php echo $item['cart_id']; ?>"
+                                        >+</button>
+                                    </div>
+
+
                                     </div>
                                     <div>
                                         <?php
@@ -115,44 +122,108 @@ $userinfo_id = $_SESSION['uid'];
     </div>
 
     <script>
-    // JavaScript for handling the quantity increment and decrement
-    document.getElementById('plus').addEventListener('click', function() {
-        let quantityInput = document.getElementById('quantity');
-        let value = parseInt(quantityInput.value);
-        quantityInput.value = value + 1;
-    });
+ document.addEventListener('DOMContentLoaded', function () {
+    // Select all "plus" and "minus" buttons
+    const plusButtons = document.querySelectorAll("button[id^='plus-']");
+    const minusButtons = document.querySelectorAll("button[id^='minus-']");
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="sel"]');
+    const totalDiv = document.getElementById("item-selected");
 
-    document.getElementById('minus').addEventListener('click', function() {
-        let quantityInput = document.getElementById('quantity');
-        let value = parseInt(quantityInput.value);
-        if (value > 1) {
-            quantityInput.value = value - 1;
-        }
-    });
-
-    function cboxClick(cart_id) {
-    // Get all checkboxes
-    let checkboxes = document.querySelectorAll('input[type="checkbox"][name="sel"]');
-    let totalDiv = document.getElementById("item-selected");
-    let totalItems = 0;
-    let totalPrice = 0;
-    let initquant = 1;
-
-    checkboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-            let price = parseFloat(checkbox.dataset.price);
-            let quant = parseFloat(checkbox.dataset.price);
-            totalPrice += (price*quant);
-            totalItems++;
-        }
-    });
-    if (totalItems > 0) {
-        totalDiv.style.visibility = "visible";
-        totalDiv.innerHTML = `<p>Total (${totalItems} item/s): Total Price: ₱${totalPrice.toFixed(2)}</p>`;
-    } else {
-        totalDiv.style.visibility = "hidden";
+    // Function to update quantity in the database
+    function updateQuantity(cartId, newQuantity) {
+        fetch('update_cart.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cart_id: cartId, quantity: newQuantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Quantity updated successfully!");
+            } else {
+                console.error("Failed to update quantity: ", data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error));
     }
-}
+
+    // Function to update the total items and price
+    function updateTotal() {
+        let totalItems = 0;
+        let totalPrice = 0;
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                const price = parseFloat(checkbox.dataset.price);
+                const quantity = parseInt(document.getElementById(`quantity-${checkbox.dataset.counter}`).value);
+                totalPrice += price * quantity;
+                totalItems++;
+            }
+        });
+
+        if (totalItems > 0) {
+            totalDiv.style.visibility = "visible";
+            totalDiv.innerHTML = `<p>Total (${totalItems} item/s): Total Price: ₱${totalPrice.toFixed(2)}</p>`;
+        } else {
+            totalDiv.style.visibility = "hidden";
+        }
+    }
+
+    // Add event listeners to "plus" buttons
+    plusButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const counter = this.id.split('-')[1];
+            const quantityInput = document.getElementById(`quantity-${counter}`);
+            const cartId = this.dataset.cart_id;
+            let value = parseInt(quantityInput.value);
+            value++;
+            quantityInput.value = value;
+            updateQuantity(cartId, value);
+            updateTotal(); // Update total on quantity change
+        });
+    });
+
+    // Add event listeners to "minus" buttons
+    minusButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const counter = this.id.split('-')[1];
+            const quantityInput = document.getElementById(`quantity-${counter}`);
+            const cartId = this.dataset.cart_id;
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                value--;
+                quantityInput.value = value;
+                updateQuantity(cartId, value);
+                updateTotal(); // Update total on quantity change
+            }
+        });
+    });
+
+    // Add event listeners to checkboxes
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function () {
+            const counter = this.dataset.counter;  // Get the counter for the current checkbox
+            const plusButton = document.getElementById(`plus-${counter}`);
+            const minusButton = document.getElementById(`minus-${counter}`);
+            const quantityInput = document.getElementById(`quantity-${counter}`);
+
+            if (!this.checked) {
+                plusButton.disabled = false;  // Enable the buttons
+                minusButton.disabled = false;
+                quantityInput.disabled = false;  // Enable the input
+            } else {
+                plusButton.disabled = true;  // Disable the buttons
+                minusButton.disabled = true;
+                quantityInput.disabled = true;  // Disable the input
+            }
+
+            updateTotal();  // Update total when checkbox is changed
+        });
+    });
+
+    // Initialize state on page load
+    updateTotal();
+});
 
 
 </script>
@@ -169,6 +240,10 @@ $userinfo_id = $_SESSION['uid'];
     display: flex;
     align-items: center;
     }
+
+    .quantity-container input[type="number"]:disabled {
+        color: #285963;
+    } 
 
     .quantity-btn {
     background-color: #4CAF50;
