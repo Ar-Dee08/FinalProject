@@ -80,7 +80,76 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
         header("Location: view_cart.php?status=error");
     }
     $stmt->close();
+} else
+
+if(isset($_POST['cancel-order-btn'])){     //CREATING CART RECORD
+    header("Location: view_cart.php");
+
+
+} else if (isset($_POST['complete-order-btn'])){ 
+    $cart_id =$_POST['cart_id'];
+
+    $cartQuery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id LEFT JOIN customertype ct ON ui.customertype_id = ct.customertype_id WHERE c.cart_id = ? AND c.cart_status = 'Active'";
+
+    $stmt = $con->prepare($cartQuery);
+    $stmt->bind_param('i', $cart_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $item = $result->fetch_assoc();
+    $quantity = $item['quantity'];
+
+    if($item['memstatus_id'] == 2){
+        $item_price = $item['item_discprice'];
+    } else {
+        $item_price = $item['item_price'];
+    }
+
+    $totalamount = $item_price * $quantity;
+    $payment = $_POST['payment'];
+    $transaction_status = 1;
+    $userinfo_id = $item['userinfo_id'];
+    $item_id = $item['item_id'];
+
+
+    $tr_id = TableRowCount("transactions",$con)+1;
+
+    $query = "INSERT INTO transactions(transaction_id, totalamount, payment_method, order_date, transaction_status_id, userinfo_id, item_id, quantity) 
+    VALUES(?,?,?,NOW(),?,?,?,?)";
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("idsiiii", $transaction_id, $totalamount, $payment, $transaction_status, $userinfo_id, $item_id, $quantity);
+    // echo $transaction_id . $totalamount . $payment . $transaction_status . $userinfo_id . $item_id . $quantity ;
+    if ($stmt->execute()) {
+        
+        $CompleteQuery = "UPDATE cart SET cart_status = 'Complete' WHERE cart_id = ?";
+        $stmt = $con->prepare($CompleteQuery);
+        $stmt->bind_param("i", $cart_id);
+
+        if ($stmt->execute()) {
+            header("Location: homecustomer.php?end=Transaction is now Pending.<br>Wait for your email.");
+            exit();
+        } else {
+            // Failure: Redirect back with an error message
+            header("Location: view_cart.php?status=error");
+        }
+
+
+
+
+      
+  } else {
+      echo "Error: " . $stmt->error;
+  }
+
+
+
 }
+
+
+
+
+
+
+
 
 
 

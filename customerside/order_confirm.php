@@ -3,22 +3,16 @@ include 'includes/header.php';
 include 'user_middleware.php';
 include '../vscode/dbcon.php';
 
-if (isset($_GET['item_id'])) {
-    $item_id = intval($_GET['item_id']); // Convert to integer for security
+if(isset($_POST['order-proceed-btn'])){     //CREATING CART RECORD
+    $cart_id = $_POST['cart_id'];
     $userinfo_id = $_SESSION['uid'];
+    $cartQuery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE c.cart_id = ? AND ui.userinfo_id = ? AND c.cart_status = 'Active'";
 
-    $cartquery = "SELECT * FROM cart c 
-                  LEFT JOIN items i ON c.item_id = i.item_id 
-                  LEFT JOIN categories cat ON i.cat_id = cat.cat_id 
-                  LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id 
-                  WHERE ui.userinfo_id = ? AND c.cart_status = 'Active'";
-    $stmt = $con->prepare($cartquery);
-    $stmt->bind_param("i", $userinfo_id);
+    $stmt = $con->prepare($cartQuery);
+    $stmt->bind_param('ii', $cart_id, $userinfo_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-    }
-}
 ?>
 
 <body class="logo-bg-2">
@@ -26,7 +20,6 @@ if (isset($_GET['item_id'])) {
         <div class="order-txt">
             <div class="back-cont">
                 <div style="display: flex width:40%">
-                    <a href="view_cart.php">Back</a>
                     <h1>Confirm Your Pre-Order</h1>
                     <hr>
                 </div>
@@ -34,6 +27,8 @@ if (isset($_GET['item_id'])) {
                 <!-- Product Display -->
                 <div class="display-cont">
                     <div class="order-cont">
+                    <form action="customer_proc.php" method="post">
+
                     <div class="order-item caption">
                             <div class="order-item-image">
                                 <h5>IMAGE</h5>
@@ -102,6 +97,17 @@ if (isset($_GET['item_id'])) {
 
                         </div>
                         <hr>
+
+                        <label style="color: #1E4A50">Payment Method:</label>
+                        <input type="hidden" name="cart_id" value="<?= $cart_id; ?>"> 
+
+                        <select id="payment" name="payment" required style="text-align: center;">
+                            <option value="GCash">GCash</option>
+                            <option value="Paymaya">Paymaya</option>
+                            <option value="Onsite Payment"> Onsite Payment</option>
+                        </select>
+
+
                         <?php
                             }
                         } else {
@@ -109,9 +115,21 @@ if (isset($_GET['item_id'])) {
                         }
                         ?>
                     </div>
-                    <button type="submit" class="buy-btn" name="complete-order-btn">Buy Now</button>
+                    <hr>
+                    <h6>NOTE: If you chose online, your transaction status will remain pending until payment.</h6>
+                    <button type="submit" class="buy-btn" name="complete-order-btn">Confirm</button>
+                    <button type="submit" class="buy-btn" name="cancel-order-btn">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<?php
+
+
+} else {
+    echo "No items selected.";
+}
+
+
+?>

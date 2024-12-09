@@ -35,7 +35,11 @@ include '../vscode/dbcon.php';
             if (isset($_GET['error'])) {
                 echo '<p style="color: #458D9E;" class="error-login" align="center">' . $_GET['error'] . '</p>';
             }            
-        ?> 
+        
+        if (isset($_GET['end'])) {
+            echo '<p style="color: #458D9E;" class="error-login" align="center">' . $_GET['end'] . '</p>';
+        }            
+    ?> 
 
     <div>
     <div class="list-group">
