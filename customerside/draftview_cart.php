@@ -28,6 +28,7 @@ if ($stmt->execute()) {
 
                 <!-- Product Display -->
                 <div class="display-cont">
+                <form action="customer_proc.php" method="post" id="form-cart" class="form-cart">
                     
                 <div class="cart-cont">
                         <?php
@@ -52,29 +53,27 @@ if ($stmt->execute()) {
                                     $finalprice = $item_discprice;
                                 }
                         ?>
-                        <form action="order_confirm.php" method="post" class="form-cart">
                             <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
                             <div class="item-top-section">
-                                
+                                <div class="cbox">
+                                    <input type="checkbox" value="<?=$cart_id?>" id="cboxes<?=$cart_id?>" name="sel" data-price="<?=$finalprice?>" data-quantity="<?=$quant?>" data-counter="<?=$counter?>">
+                                </div>
                                 <div class="item-detail-image">
                                     <img src="../adminside/record_images/item_images/<?=$item_img?>" alt="<?=$item_name?>" class="item-detail-image">
                                 </div>
 
-                                <div class="item-detail-name" >
+                                <div class="item-detail-name">
                                     
                                     <a href="item_detail.php?item_id=<?=$item['item_id']?>">
                                         <h1><?=$item_name?></h1>
                                     </a>
                                         <h6>Price: ₱<?=$finalprice?></h6>
-                                        <div id="total-amount<?=$cart_id?>" class="total-amount">
-                                            
-                                        </div>
 
                                     <br>
                                     <h6>Specification : <?=$item_spec?></h6>
                                     <div class="quantity-container">
                                         <button type="button" class="quantity-btn" id="minus-<?php echo $counter; ?>"  data-cart_id="<?php echo $item['cart_id']; ?>">-</button>
-                                        <input type="number" id="quantity-<?php echo $counter; ?>" name="quantity" value="<?php echo $quant; ?>" min="1" step="1" class="form-control" data-price="<?=$finalprice?>" data-quantity="<?=$quant?>" data-counter="<?=$counter?>" required>
+                                        <input type="number" id="quantity-<?php echo $counter; ?>" name="quantity" value="<?php echo $quant; ?>" min="1" step="1" class="form-control" required>
                                         <button type="button" class="quantity-btn" id="plus-<?php echo $counter; ?>" data-cart_id="<?php echo $item['cart_id']; ?>">+</button>
                                     </div>
                                     <div>
@@ -86,7 +85,7 @@ if ($stmt->execute()) {
                                                 <h6>SSITE Non-Member Price: ₱<?=$item_price?></h6>
                                                 <p>Type: <?=$item_type?></p>
 <?php
-                                            } else if($item['memstatus_id']==2) { ?> 
+                                            } else if($item['memstatus_id']==2) { ?> //NON MEMBER
                                                 <h6>SSITE Member Price: ₱<?=$item_discprice?></h6>                                           
 <?php
                                             }
@@ -95,29 +94,13 @@ if ($stmt->execute()) {
                                     <div class="item-description">
                                         <p>Description:</p>
                                         <p><?=$item_desc?></p>
+                                        <a href="customer_proc.php?cart_id=<?=$cart_id?>">Delete Item From Cart</a>
                                     </div>
-                                    <div class="float-bottom-button">
-                                    <input type="hidden" name="cart_id" value="<?= $item['cart_id'] ?>"> <!-- Pass the item ID -->
-
-                                    <button type="submit" id="order-proceed-btn" class="buy-btn" name="order-proceed-btn">
-                                        Buy Now
-                                    </button>
-                                </div>
+                                    
                                 </div>
                             </div>
-                        </form>
                         <hr>
-                              <div class="bottom-float" id="item-selected" style="color: white;">
-                                <div class="bottom-float-items">
-                              <h5 style="color: white;"><b>Total (# of Items) : P00.00</b></>
-                              <h5>Total (# of Items): P00.00</h5>
-                                </div>
-                                <div class="bottom-float-button">
-                                    <button type="submit" id="order-proceed-btn" class="buy-btn" name="order-proceed-btn">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
+                              
                         <?php
                             }//END OF LOOP ?>
                       <?php  } else {
@@ -125,19 +108,32 @@ if ($stmt->execute()) {
                         }
                         ?>
 
-                    </div>
+                        </div>
+                        <div class="bottom-float" id="item-selected" style="color: white;">
+                            <div class="bottom-float-items">
+                                <h5 style="color: white;"><b>Total (# of Items) : P00.00</b></h5>
+                                <h5>Total (# of Items): P00.00</h5>
+                            </div>
+                            
+                                
+                        </div>
+                        <button type="submit" id="order-proceed-btn" class="buy-btn" name="item-order-btn">
+                                    Buy Now
+                                </button>
+                    </form>
                 </div>
             </div>
         </div>        
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
+ document.addEventListener('DOMContentLoaded', function () {
     // Select all "plus" and "minus" buttons
     const plusButtons = document.querySelectorAll("button[id^='plus-']");
     const minusButtons = document.querySelectorAll("button[id^='minus-']");
     const checkboxes = document.querySelectorAll('input[type="checkbox"][name="sel"]');
     const totalDiv = document.getElementById("item-selected");
+    const form = document.getElementById("form-cart");
 
     // Function to update quantity in the database
     function updateQuantity(cartId, newQuantity) {
@@ -156,6 +152,47 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error("Error:", error));
     }
+
+    // Function to update the total items and price
+    function updateTotal() {
+        let totalItems = 0;
+        let totalPrice = 0;
+        const proceedButton = document.getElementById("order-proceed-btn");
+        let selectedIds = [];
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                const price = parseFloat(checkbox.dataset.price);
+                const quantity = parseInt(document.getElementById(`quantity-${checkbox.dataset.counter}`).value);
+                totalPrice += price * quantity;
+                totalItems++;
+                selectedIds.push(checkbox.value);
+            }
+        });
+
+        if (totalItems > 0) {
+            totalDiv.style.visibility = "visible";
+            proceedButton.style.visibility = "visible"; // Show the button
+            totalDiv.innerHTML = `<p>Total (${totalItems} item/s): Total Price: ₱${totalPrice.toFixed(2)}</p>`;
+        } else {
+            totalDiv.style.visibility = "hidden";
+            proceedButton.style.visibility = "hidden"; // Hide the button
+        }
+
+        // Update hidden input with selected IDs
+        const hiddenInput = form.querySelector('input[name="selected_cart_ids"]');
+        if (hiddenInput) {
+            hiddenInput.value = selectedIds.join(',');
+        } else {
+            const newInput = document.createElement('input');
+            newInput.type = 'hidden';
+            newInput.name = 'selected_cart_ids';
+            newInput.value = selectedIds.join(',');
+            form.appendChild(newInput);
+        }
+        console.log(`Total Items: ${totalItems}, Total Price: ${totalPrice}`);
+    }
+
     // Add event listeners to "plus" buttons
     plusButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -188,28 +225,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listeners to checkboxes
     checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', function () {
-            const counter = this.dataset.counter;  // Get the counter for the current checkbox
+        checkbox.addEventListener('click', function () {
+            const counter = this.dataset.counter;
             const plusButton = document.getElementById(`plus-${counter}`);
             const minusButton = document.getElementById(`minus-${counter}`);
             const quantityInput = document.getElementById(`quantity-${counter}`);
 
-            if (!this.checked) {
-                plusButton.disabled = false;  // Enable the buttons
-                minusButton.disabled = false;
-                quantityInput.disabled = false;  // Enable the input
-            } else {
-                plusButton.disabled = true;  // Disable the buttons
+            if (this.checked) {
+                plusButton.disabled = true;
                 minusButton.disabled = true;
-                quantityInput.disabled = true;  // Disable the input
+                quantityInput.disabled = true;
+            } else {
+                plusButton.disabled = false;
+                minusButton.disabled = false;
+                quantityInput.disabled = false;
             }
 
+            updateTotal();
         });
     });
 
-    // Initialize state on page load
-    updateTotal();
-});
+    form.addEventListener('submit', function () {
+        updateTotal(); // Update selected cart ids before form submission
+    });
+}); // Missing closing parenthesis added here
+
 
 
 </script>
@@ -222,6 +262,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 <style>
+    #order-proceed-btn {
+    visibility: hidden;
+}
+
     .quantity-container {
     display: flex;
     align-items: center;
@@ -283,9 +327,15 @@ document.addEventListener('DOMContentLoaded', function () {
     justify-content: space-between;
 }
 
+.bottom-float button {
+    bottom: 0;
+    width: 50%;
+    padding: 5em 15em;
+}
+
 .bottom-float-items p {
     flex: 1; /* Allow this div to take available space */
-    width: 50%;
+    /* width: 50%; */
     padding-left: 15em;
     align-items: right;
 }

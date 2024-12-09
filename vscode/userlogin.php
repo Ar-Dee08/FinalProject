@@ -111,7 +111,7 @@ if(mysqli_num_rows($uidres)===1){
 }
 
 function RetrieveUser($table, $con, $email, $conditionfield) {
-    $retrievefield = "SELECT * FROM $table WHERE $conditionfield = ?";
+    $retrievefield = "SELECT * FROM $table WHERE $conditionfield = ? ";
     $stmt = $con->prepare($retrievefield);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -119,7 +119,7 @@ function RetrieveUser($table, $con, $email, $conditionfield) {
 }
 
 function RetrieveAdmin($con, $uid) {
-    $retrievefield = "SELECT * FROM admin WHERE userinfo_id = ?";
+    $retrievefield = "SELECT * FROM admin WHERE userinfo_id = ? AND admin_status = 'Active'";
     $stmt = $con->prepare($retrievefield);
     $stmt->bind_param("i", $uid);
     $stmt->execute();

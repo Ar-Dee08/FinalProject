@@ -10,17 +10,19 @@ admin authorized
 - e...d@gmail.com 
 - ems
 
-admin unauthorized
-- abs@gmail.vom
--abs
-
 customer
-- ass@gmail.com	
-- ass
+- kmp@gmail.com
+-kmp
 
 * NEED :
 - ADD  DATE OF COMPLETED TRANSACTION
 - DI PA NAKA SETUP ADMIN_PROC NG TRANSACTIONS
+- FIX EDIT PART IN PRODUCTS SETUP DROPDOWN TO NOT BE DEFAULT CLOTHES
+- ADD REMOVE CONDITION IN RETRIEVING DISPLAYS FROM TABLE
+
+<a href="customer_proc.php?cart_id=<?=$cart_id?>" onclick="return confirm('Are you sure you want to remove this item from your cart?');">
+                                        Delete From Cart
+                                    </a>
 
 
 //USE WHEN THERE'S A HEADER ISSUE
