@@ -26,7 +26,7 @@
       <ul>
         <li><a href="homecustomer.php">Home</a></li>
         <li><a href="product_display.php">Products</a></li>
-        <li><a href="about_updates">News & Updates</a></li>
+        <li><a href="view_updates.php">News & Updates</a></li>
         <li><a href="about_ssite.php">About</a></li>
       </ul>
     </div>
