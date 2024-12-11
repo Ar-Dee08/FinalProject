@@ -10,7 +10,7 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
     $cart_status = 'Active';
     echo $quantity;
 
-    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ? AND i.item_id = ?";
+    $cartquery = "SELECT * FROM cart c LEFT JOIN items i ON c.item_id = i.item_id LEFT JOIN categories cat ON i.cat_id = cat.cat_id LEFT JOIN user_information ui ON c.userinfo_id = ui.userinfo_id WHERE ui.userinfo_id = ? AND i.item_id = ? AND c.cart_status = 'Active'";
     $stmt = $con->prepare($cartquery);
     echo $userinfo_id;
     echo $item_id;
@@ -18,44 +18,50 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
 
     if ($stmt->execute()) {
         $result = $stmt->get_result();
+        $item = $result->fetch_assoc();
+        
         if ($result->num_rows > 0) {
             echo 'SHOUDL UPDATE';
-            $item = $result->fetch_assoc();
-            $oldquant = $item['quantity'];
-            $oldcart_id = $item['cart_id'];
-            echo $oldquant;
-            $quantity += $oldquant;
-            echo $quantity;
-            echo $oldcart_id;
 
-            // ERROR WITH SQL SYNTAX AND LOGIC
+                echo 'SHOUDL ACTUALLY UPDATE';
+                $oldquant = $item['quantity'];
+                $oldcart_id = $item['cart_id'];
+                echo $oldquant;
+                $quantity += $oldquant;
+                echo $quantity;
+                echo $oldcart_id;
 
-            $query = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
-            $stmt = $con->prepare($query);
-            $stmt->bind_param("ii", $quantity, $oldcart_id );
-            $stmt->execute();
-            header("Location: view_cart.php");
-            exit();
-        
-    } else {
-        echo 'SHOUDL INSERT';
+                // ERROR WITH SQL SYNTAX AND LOGIC
 
-        $cart_id = TableRowCount("cart",$con)+1;
-          $query = "INSERT INTO cart(cart_id, item_id, quantity, cart_status, userinfo_id) 
-          VALUES(?,?,?,?,?)";
-          $stmt = $con->prepare($query);
-          $stmt->bind_param("iiisi", $cart_id, $item_id,$quantity,$cart_status,$userinfo_id);
-          if ($stmt->execute()) {
-            header("Location: view_cart.php");
-            exit();
-        } else {
-            echo "Error: " . $stmt->error;
+                $query = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
+                $stmt = $con->prepare($query);
+                $stmt->bind_param("ii", $quantity, $oldcart_id );
+                $stmt->execute();
+                header("Location: view_cart.php");
+                exit();
+            
+            } else if ($result->num_rows == 0) {
+                echo 'SHOUDL INSERT' . $cart_id . $item_id . $item['cart_status'];
+
+                $cart_id = TableRowCount("cart",$con)+1;
+                $query = "INSERT INTO cart(cart_id, item_id, quantity, cart_status, userinfo_id) 
+                VALUES(?,?,?,'Active',?)";
+                $stmt = $con->prepare($query);
+                $stmt->bind_param("iiii", $cart_id, $item_id,$quantity,$userinfo_id);
+                if ($stmt->execute()) {
+                    header("Location: view_cart.php");
+                    exit();
+                } else {
+                    echo "Error: " . $stmt->error;
+                }
+            
+
+            }
         }
-    }
-    }
+    echo "Error: " . $stmt->error;
 
-    header("Location: view_cart.php");
-    exit();
+    // header("Location: view_cart.php");
+    // exit();
 
 } else if(isset($_POST['item-order-btn'])) {
     $item_id = $_POST['item_id'];
@@ -63,23 +69,6 @@ if(isset($_POST['item-cart-btn'])){     //CREATING CART RECORD
     header("Location: order_confirm.php?item_id=$item_id");
     exit();
 
-} else if (isset($_GET['cart_id']) && is_numeric($_GET['cart_id'])) {
-
-    $cart_id = $_GET['cart_id'];
-
-    // Prepare the SQL DELETE statement
-    $deleteQuery = "UPDATE cart SET cart_status = 'Removed' WHERE cart_id = ?";
-    $stmt = $con->prepare($deleteQuery);
-    $stmt->bind_param("i", $cart_id);
-
-    if ($stmt->execute()) {
-        // Success: Redirect back to the cart page with a success message
-        header("Location: view_cart.php?status=success");
-    } else {
-        // Failure: Redirect back with an error message
-        header("Location: view_cart.php?status=error");
-    }
-    $stmt->close();
 } else
 
 if(isset($_POST['cancel-order-btn'])){     //CREATING CART RECORD
@@ -130,16 +119,26 @@ if(isset($_POST['cancel-order-btn'])){     //CREATING CART RECORD
         } else {
             // Failure: Redirect back with an error message
             header("Location: view_cart.php?status=error");
-        }
-
-
-
-
-      
+        }   
   } else {
       echo "Error: " . $stmt->error;
   }
+} else if (isset($_GET['cart_id'])){
+    $cart_id = $_GET['cart_id'];
 
+    // Prepare the SQL DELETE statement
+    $deleteQuery = "UPDATE cart SET cart_status = 'Removed' WHERE cart_id = ?";
+    $stmt = $con->prepare($deleteQuery);
+    $stmt->bind_param("i", $cart_id);
+
+    if ($stmt->execute()) {
+        // Success: Redirect back to the cart page with a success message
+        header("Location: view_cart.php?status=Successfully deleted");
+    } else {
+        // Failure: Redirect back with an error message
+        header("Location: view_cart.php?status=error");
+    }
+    $stmt->close();
 
 
 }

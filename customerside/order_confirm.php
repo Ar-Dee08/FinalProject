@@ -109,7 +109,7 @@ if(isset($_POST['order-proceed-btn'])){     //CREATING CART RECORD
 
 
                         <?php
-                            }
+                            }   
                         } else {
                             echo "<p>Your cart is empty.</p>";
                         }

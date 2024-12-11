@@ -1,8 +1,6 @@
 <?php
-
-
     include 'includes/header.php';
-    include 'admin_middleware.php';
+    include 'user_middleware.php';
 
 ?>
 
@@ -44,7 +42,7 @@
                                 $start = ($page - 1) * $limit;
                                 
                                 // Fetch records for the current page
-                                $records = RetrieveAll("admin", $con, $start, $limit);
+                                $records = RetrieveAll($item['userinfo_id'], $con, $start, $limit);
 
                                 if (mysqli_num_rows($records) > 0) {
                                     foreach ($records as $item) :
@@ -139,7 +137,7 @@ include 'includes/footer.php';
 
 
 
-function RetrieveAll($table, $con, $start, $limit)
+function RetrieveAll($uid, $con, $start, $limit)
 {
     
     $query = "SELECT 
@@ -154,11 +152,12 @@ function RetrieveAll($table, $con, $start, $limit)
  FROM  transactions tr
  LEFT JOIN items i ON tr.item_id = i.item_id
  LEFT JOIN user_information ui ON tr.userinfo_id = ui.userinfo_id
- LEFT JOIN transactionstatus trs ON tr.transaction_status_id = trs.transaction_status_id
+ LEFT JOIN transactionstatus trs ON tr.transaction_status_id = trs.transaction_status_id 
+ WHERE tr.userinfo_id = ?
         LIMIT ?, ?;"; // Use LIMIT with placeholders for pagination
 
     $stmt = $con->prepare($query);
-    $stmt->bind_param("ii", $start, $limit);
+    $stmt->bind_param("iii",$uid, $start, $limit);
     $stmt->execute();
     return $stmt->get_result();
 }
