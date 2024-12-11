@@ -418,10 +418,11 @@ else if(isset($_POST['ad-confirm-btn'])){   //FOR ADMin
 else if(isset($_POST['tr-confirm-btn'])){   //FOR TRANSACTION
     $isEdit = $_POST['tr-confirm-btn']; 
            
-        if($isEdit === "1"){
             $tr_id = $_POST['tr_id'];
             $tr_stat = $_POST['tr_stat'];
-            
+            echo $tr_id;
+            echo $tr_stat;
+
             $query = "UPDATE transactions SET
                     transaction_status_id = ?
                     WHERE transaction_id = ?;";
@@ -435,33 +436,6 @@ else if(isset($_POST['tr-confirm-btn'])){   //FOR TRANSACTION
             } else {
                 echo "Error: " . $stmt->error;
             }
-
-        // } else if($isEdit === "0") {
-        //     $admin_id = TableRowCount("admin",$con)+1;
-        //     $uid = $_POST['ad_uid'];
-
-        //     $query = "INSERT INTO admin(
-        //             admin_id,
-        //             userinfo_id,
-        //             user_privilege,
-        //             granting_date,
-        //             admin_status
-        //             )
-        //     VALUES(?,?,?,NOW(),'Active');";
-
-        //     $stmt = $con->prepare($query);
-        //     $stmt->bind_param("iis", $admin_id, $uid, $ad_priv );
-            
-        //     if ($stmt->execute()) {
-        //         header("Location: view_admin.php");
-        //         exit();
-        //     } else {
-        //         echo "Error: " . $stmt->error;
-        //     }
-
-        } else {
-            echo "Invalid action.";
-        } 
     
 } else if (isset($_POST['tr-cancel-btn'])){
     header("Location: view_transaction.php");

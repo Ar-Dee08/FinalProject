@@ -12,9 +12,6 @@ $stmt->bind_param("i", $userinfo_id);
 
 if ($stmt->execute()) {
     $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $item = $result->fetch_assoc();
-    }
 }
 ?>
 <body class="logo-bg-2">
@@ -22,7 +19,13 @@ if ($stmt->execute()) {
         <div class="product-txt">
             <div class="back-cont">
                 <div>
-                    <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">Your Cart</h1>
+                    <h1 style="font-family: 'Inter', sans-serif; font-weight: bold; color: black;">Your Cart </h1>
+                    <?php
+                        if(isset($_GET['status'])){
+                            echo '<p>' . $_GET['status'] .'</p>';
+
+                        }
+                    ?>
                     <hr>
                 </div>
 
@@ -32,9 +35,11 @@ if ($stmt->execute()) {
                 <div class="cart-cont">
                         <?php
                         if ($result->num_rows > 0) {
-                            $counter = 0;                             
+                            $counter = 0;               
+
                             while ($item = $result->fetch_assoc()) {
                                 $counter++;
+                                
                                 $item_name = $item['item_name'];
                                 $item_spec = $item['item_spec'];
                                 $item_desc = $item['item_desc'];
@@ -46,11 +51,11 @@ if ($stmt->execute()) {
                                 $item_cat = $item['category_name'];
                                 $cart_id = $item['cart_id'];
 
-                                if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){
+                                if($item['memstatus_id']==3 ||  $item['memstatus_id']==1 ){  //USERS R AUTOMATICALLY UNIDENTIFIED / 1, SO THEY DONT GET THE DISCOUNT YET
                                     $finalprice = $item_price;
                                 } else if($item['memstatus_id']==2) {
                                     $finalprice = $item_discprice;
-                                }
+                                }   
                         ?>
                         <form action="order_confirm.php" method="post" class="form-cart">
                             <input type="hidden" name="item_id" value="<?= $item['item_id']; ?>"> <!-- Pass the item ID -->
@@ -102,22 +107,16 @@ if ($stmt->execute()) {
                                     <button type="submit" id="order-proceed-btn" class="buy-btn" name="order-proceed-btn">
                                         Buy Now
                                     </button>
+                                    <br>
+                                    <br>
+                                    <a href="customer_proc.php?cart_id=<?=$cart_id?>" class="buy-btn">
+                                        Delete
+                                        </a>
                                 </div>
                                 </div>
                             </div>
                         </form>
-                        <hr>
-                              <div class="bottom-float" id="item-selected" style="color: white;">
-                                <div class="bottom-float-items">
-                              <h5 style="color: white;"><b>Total (# of Items) : P00.00</b></>
-                              <h5>Total (# of Items): P00.00</h5>
-                                </div>
-                                <div class="bottom-float-button">
-                                    <button type="submit" id="order-proceed-btn" class="buy-btn" name="order-proceed-btn">
-                                        Buy Now
-                                    </button>
-                                </div>
-                            </div>
+                        <hr>                               
                         <?php
                             }//END OF LOOP ?>
                       <?php  } else {

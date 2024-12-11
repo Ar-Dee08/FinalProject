@@ -57,6 +57,7 @@ try {
     </div>
     <!-- Edit Button -->
     <button onclick="location.href='homecustomer.php'" class="edit-button" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Edit Profile</button>
+    <button onclick="location.href='view_tranhist.php'" class="edit-button" style="background-color: #458D9E; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Check Transaction History</button>
     </div>
 </div>
 
