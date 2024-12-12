@@ -969,10 +969,15 @@ select.admin-sel {
     border: 1px solid #F9F6F6;
     border-radius: 8px;
     background-color: #1E4A50;
-    color: #DCEEF2;
+    color: #163A3E !important;
+    /* color: #DCEEF2; */
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-control:disabled {
+    color: #163A3E !important;
 }
 
 .form-control:focus {

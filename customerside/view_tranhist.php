@@ -30,7 +30,6 @@
                                 <!-- authorized / unauthorized -->
                                 <th>Payment Method</th>
                                 <th>Status</th>                                
-                                <th style="text-align : center">Edit</th>
                             </tr>
                         </thead>
                         <tbody class="record-img">
@@ -56,13 +55,6 @@
                                             <td><?=$item['user_full']?> </td>
                                             <td><?=$item['payment_method']?> </td>
                                             <td><?=$item['transaction_status']?> </td>
-                                            <td>
-                                                <div class="col-md-15 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_transaction.php?tridlabel=<?=$item['transaction_id']?>" method="post">
-                                                        <button type="submit" name="tr-edit-btn">Edit Records</button>
-                                                    </form>
-                                                </div>                                             
-                                            </td>
                                         </tr>
 
                                     <?php

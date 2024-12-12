@@ -11,7 +11,7 @@ $selectedCategory = isset($_GET['category']) ? (int)$_GET['category'] : null;
 // Query to fetch items, filter by category if selected
 $query = "SELECT * FROM items WHERE record_status = 'Active'";
 if ($selectedCategory) {
-    $query .= " WHERE cat_id = $selectedCategory"; // Assuming `items` has a `category_id` column
+    $query = "SELECT * FROM items WHERE cat_id = $selectedCategory AND record_status = 'Active'"; // Assuming `items` has a `category_id` column
 }
 $result = $con->query($query);
 
