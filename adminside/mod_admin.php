@@ -198,7 +198,11 @@ LEFT JOIN user_information ui ON a.admin_id = ui.userinfo_id WHERE a.admin_id = 
         </div>
     </div>
 
-
+    <style>
+    input:disabled {
+        color: #285963;    
+    }
+</style>
 
 <!-- END OF CONTENTS -->
 </div>

@@ -28,6 +28,7 @@
                                 <th>Item Name</th>
                                 <th>Quantity</th>
                                 <th>Total Amt</th>
+                                <th>Order Date</th> 
                                 <th>User</th> 
                                 <!-- authorized / unauthorized -->
                                 <th>Payment Method</th>
@@ -55,6 +56,7 @@
                                             <td><?=$item['item_name']?> </td>
                                             <td><?=$item['quantity']?> </td>
                                             <td><?=$item['totalamount']?> </td>
+                                            <td><?=$item['order_date']?> </td>
                                             <td><?=$item['user_full']?> </td>
                                             <td><?=$item['payment_method']?> </td>
                                             <td><?=$item['transaction_status']?> </td>
@@ -148,6 +150,7 @@ function RetrieveAll($table, $con, $start, $limit)
     i.item_name,
     tr.quantity,
     tr.totalamount,
+    tr.order_date,
     CONCAT(ui.firstname, ' ', ui.lastname) AS user_full,
     tr.payment_method, trs.transaction_status
 

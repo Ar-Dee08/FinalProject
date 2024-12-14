@@ -153,7 +153,11 @@ if(isset($_POST['post-edit-btn'])){ //IF EDITING RECORD
         </div>
     </div>
 
-
+    <style>
+    input:disabled {
+        color: #285963;    
+    }
+</style>
 
 
 

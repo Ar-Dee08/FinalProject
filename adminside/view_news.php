@@ -57,7 +57,7 @@ require "../vscode/dbcon.php";
                                             </td>
                                             <td><?=htmlspecialchars($item['caption'])?> </td>
                                             <td>
-                                                <a href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
+                                                <a target="_blank" href="<?=$item['post_url']?>"><?=$item['post_url']?></a>
                                             </td>
                                             <td><?=$item['date_webposted']?> </td>
                                             <td><?=$item['admin_creator']?> </td>
