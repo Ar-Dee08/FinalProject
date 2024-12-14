@@ -10,10 +10,13 @@ admin authorized
 - e...d@gmail.com 
 - ems
 
-customer
+admin unauthorized
 - kmp@gmail.com
 -kmp
 
+customer
+- jeram@gmail.com
+- 123
 
 
 
