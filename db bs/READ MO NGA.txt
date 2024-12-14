@@ -14,6 +14,35 @@ customer
 - kmp@gmail.com
 -kmp
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * NEED :
 - ADD  DATE OF COMPLETED TRANSACTION
 - DI PA NAKA SETUP ADMIN_PROC NG TRANSACTIONS

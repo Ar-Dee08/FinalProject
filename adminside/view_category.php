@@ -77,52 +77,6 @@ require "../vscode/dbcon.php";
                                     <td colspan="15" class="text-center">No records found</td>
                                 </tr>
                             <?php
-                                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                                $page = max($page, 1); // Ensure page is at least 1
-                                [$limit, $totalPages] = pagination($con);
-                                $start = ($page - 1) * $limit;
-                                
-                                // Fetch records for the current page
-                                $categoryrecords = RetrieveAll("categories", $con, $start, $limit);
-                                // $categoryrecords = RetrieveAll("categories", $con);
-                                // $totalPages = pagination($con);
-
-                                // function RetrieveAll($table, $con)
-                                // {
-                                //     $query = 'SELECT cat.cat_id, cat.category_name,cat.date_created, CONCAT("admin",cat.admin_creator," : ",us.firstname) AS admin_creator,cat.record_status FROM categories cat LEFT JOIN admin a ON cat.admin_creator = a.admin_id LEFT JOIN user_information us ON a.userinfo_id = us.userinfo_id;';
-                                //     $stmt = $con->prepare($query);
-                                //     $stmt->execute();
-                                //     return $stmt->get_result(); // Always return the result object
-                                // }
-
-                                if (mysqli_num_rows($categoryrecords) > 0) {
-                                    foreach ($categoryrecords as $item) :
-                            ?>
-                                        <tr>
-                                            <td><?=$item['cat_id']?> </td>
-                                            <td><?=$item['category_name']?> </td>
-                                            <td><?=$item['date_created']?> </td>
-                                            <td><?=$item['admin_creator']?> </td>
-                                            <td><?=$item['record_status']?> </td>
-                                            <td>
-                                                <!-- <a href="mod_category.php" class="btn">Edit Record</a> -->
-                                                <div class="col-md-9 ms-auto me-auto" style="text-align:center">
-                                                    <form action="mod_category.php?catidlabel=<?=$item['cat_id']?>" method="post">
-                                                        <button type="submit" name="cat-edit-btn">Edit Records</button>
-                                                    </form>
-                                                </div>                                             
-                                            </td>
-                                        </tr>
-
-                                    <?php
-                                    endforeach;                                                                 
-                                } else {
-                                    ?>
-                                    <tr>
-                                        <td colspan="15" class="text-center">No records found</td>
-                                    </tr>
-                                <?php
-                                }
                             }
                             ?>
                         </tbody>

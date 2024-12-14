@@ -119,7 +119,12 @@ if(isset($_POST['cat-edit-btn'])){ //IF EDITING RECORD
 
 
 
-
+<style>
+    input:disabled {
+        color: #285963;    
+    }
+</style>
+   
 
 
 
